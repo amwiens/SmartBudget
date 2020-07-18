@@ -40,5 +40,4 @@
     <FontFamily x:Key="RubikMedium">./Resources/Fonts/Rubik-Medium.ttf</FontFamily>
     <FontFamily x:Key="RubikMediumItalic">./Resources/Fonts/Rubik-MediumItalic.ttf</FontFamily>
     <FontFamily x:Key="RubikRegular">./Resources/Fonts/Rubik-Regular.ttf</FontFamily>
-
 </ResourceDictionary>

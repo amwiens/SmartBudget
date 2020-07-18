@@ -202,5 +202,4 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="{StaticResource BrushSecondaryDark2}" />
     </Style>
-
 </ResourceDictionary>
