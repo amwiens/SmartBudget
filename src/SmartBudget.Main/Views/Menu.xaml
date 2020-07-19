@@ -1,7 +1,20 @@
 ﻿<UserControl x:Class="SmartBudget.Main.Views.Menu"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
-        <TextBlock Text="Menu" />
-    </Grid>
+    <StackPanel x:Name="leftMenu" Width="150">
+        <Grid Height="90">
+
+        </Grid>
+        <Grid RenderOptions.EdgeMode="Aliased">
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Padding="10 5"
+                           Style="{StaticResource H3PrimaryDark}"
+                           Text="DASHBOARD" />
+                <TextBlock Padding="10 5"
+                           Style="{StaticResource H3PrimaryDark}"
+                           Text="ACCOUNTS" />
+            </StackPanel>
+        </Grid>
+    </StackPanel>
 </UserControl>

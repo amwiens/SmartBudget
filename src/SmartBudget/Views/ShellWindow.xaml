@@ -6,12 +6,15 @@
         Title="{Binding Title}" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <ContentControl Grid.Column="0"
-                        prism:RegionManager.RegionName="Sidebar" />
+        <StackPanel Grid.Column="0"
+                    Orientation="Vertical">
+            <TextBlock Text="SmartBudget" />
+            <ContentControl prism:RegionManager.RegionName="Sidebar" />
+        </StackPanel>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>

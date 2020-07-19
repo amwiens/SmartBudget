@@ -14,4 +14,8 @@
     <ProjectReference Include="..\SmartBudget.Main\SmartBudget.Main.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\Icons\" />
+  </ItemGroup>
+
 </Project>
