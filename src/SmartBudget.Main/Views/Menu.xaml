@@ -19,7 +19,7 @@
                                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                                             Background="{TemplateBinding Background}">
                                         <ContentPresenter HorizontalAlignment="Center"
-                                                          VerticalAlignment="Center"/>
+                                                          VerticalAlignment="Center" />
                                     </Border>
                                 </ControlTemplate>
                             </Setter.Value>
