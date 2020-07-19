@@ -3,17 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel x:Name="leftMenu" Width="150">
         <Grid Height="90">
-
+            <ToggleButton VerticalAlignment="Center"
+                          HorizontalAlignment="Left"
+                          Height="30"
+                          Width="30"
+                          BorderThickness="0">
+                <ToggleButton.Background>
+                    <ImageBrush ImageSource="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/menu.png"
+                                Stretch="None" />
+                </ToggleButton.Background>
+                <ToggleButton.Triggers>
+                    <EventTrigger RoutedEvent="ToggleButton.Checked">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="leftMenu"
+                                                 Storyboard.TargetProperty="Width"
+                                                 From="150" To="30"
+                                                 Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetName="leftMenu"
+                                                 Storyboard.TargetProperty="Width"
+                                                 From="30" To="150"
+                                                 Duration="0:0:0.5" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </ToggleButton.Triggers>
+            </ToggleButton>
         </Grid>
         <Grid RenderOptions.EdgeMode="Aliased">
 
             <StackPanel Orientation="Vertical">
-                <TextBlock Padding="10 5"
-                           Style="{StaticResource H3PrimaryDark}"
-                           Text="DASHBOARD" />
-                <TextBlock Padding="10 5"
-                           Style="{StaticResource H3PrimaryDark}"
-                           Text="ACCOUNTS" />
+                <RadioButton Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/home.png"
+                                   Height="20"
+                                   VerticalAlignment="Center" />
+                            <TextBlock Padding="10 5"
+                                       Style="{StaticResource H3PrimaryDark}"
+                                       Text="DASHBOARD" />
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
+                <RadioButton Command="{Binding NavigateCommand}" CommandParameter="Accounts">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/accounts.png"
+                                   Height="20"
+                                   VerticalAlignment="Center" />
+                            <TextBlock Padding="10 5"
+                                       Style="{StaticResource H3PrimaryDark}"
+                                       Text="ACCOUNTS" />
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
             </StackPanel>
         </Grid>
     </StackPanel>

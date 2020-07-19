@@ -12,7 +12,7 @@
 
         <StackPanel Grid.Column="0"
                     Orientation="Vertical">
-            <TextBlock Text="SmartBudget" />
+            <!--<TextBlock Text="SmartBudget" />-->
             <ContentControl prism:RegionManager.RegionName="Sidebar" />
         </StackPanel>
 

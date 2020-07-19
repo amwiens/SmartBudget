@@ -6,11 +6,41 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Icons\accounts.png" />
+    <None Remove="Resources\Icons\add.png" />
+    <None Remove="Resources\Icons\expense.png" />
+    <None Remove="Resources\Icons\home.png" />
+    <None Remove="Resources\Icons\income.png" />
+    <None Remove="Resources\Icons\menu.png" />
+    <None Remove="Resources\Icons\messages.png" />
+    <None Remove="Resources\Icons\notification.png" />
+    <None Remove="Resources\Icons\profile.png" />
+    <None Remove="Resources\Icons\reports.png" />
+    <None Remove="Resources\Icons\search.png" />
+    <None Remove="Resources\Icons\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\accounts.png" />
+    <Resource Include="Resources\Icons\add.png" />
+    <Resource Include="Resources\Icons\expense.png" />
+    <Resource Include="Resources\Icons\home.png" />
+    <Resource Include="Resources\Icons\income.png" />
+    <Resource Include="Resources\Icons\menu.png" />
+    <Resource Include="Resources\Icons\messages.png" />
+    <Resource Include="Resources\Icons\notification.png" />
+    <Resource Include="Resources\Icons\profile.png" />
+    <Resource Include="Resources\Icons\reports.png" />
+    <Resource Include="Resources\Icons\search.png" />
+    <Resource Include="Resources\Icons\settings.png" />
   </ItemGroup>
 
 </Project>
