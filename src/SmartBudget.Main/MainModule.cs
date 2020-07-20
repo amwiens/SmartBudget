@@ -8,11 +8,11 @@ namespace SmartBudget.Main
 {
     public class MainModule : IModule
     {
+        private IRegionManager _regionManager;
+
         public MainModule(IRegionManager regionManager)
         {
-            regionManager.RegisterViewWithRegion("Sidebar", typeof(Menu));
-            regionManager.RegisterViewWithRegion("Topbar", typeof(TopBar));
-            regionManager.RegisterViewWithRegion("Content", typeof(Dashboard));
+            _regionManager = regionManager;
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
@@ -21,6 +21,10 @@ namespace SmartBudget.Main
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<Menu>();
+            containerRegistry.RegisterForNavigation<TopBar>();
+            containerRegistry.RegisterForNavigation<Dashboard>();
+            _regionManager.RequestNavigate("Sidebar", "Menu");
         }
     }
 }

@@ -8,8 +8,8 @@
   <ItemGroup>
     <None Remove="Resources\Icons\accounts.png" />
     <None Remove="Resources\Icons\add.png" />
+    <None Remove="Resources\Icons\dashboard.png" />
     <None Remove="Resources\Icons\expense.png" />
-    <None Remove="Resources\Icons\home.png" />
     <None Remove="Resources\Icons\income.png" />
     <None Remove="Resources\Icons\menu.png" />
     <None Remove="Resources\Icons\messages.png" />
@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="3.1.3" />
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
   </ItemGroup>
 
@@ -28,7 +29,7 @@
     <Resource Include="Resources\Icons\accounts.png" />
     <Resource Include="Resources\Icons\add.png" />
     <Resource Include="Resources\Icons\expense.png" />
-    <Resource Include="Resources\Icons\home.png" />
+    <Resource Include="Resources\Icons\dashboard.png" />
     <Resource Include="Resources\Icons\income.png" />
     <Resource Include="Resources\Icons\menu.png" />
     <Resource Include="Resources\Icons\messages.png" />

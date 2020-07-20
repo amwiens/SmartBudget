@@ -10,20 +10,24 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0"
-                    Orientation="Vertical">
+        <Border Grid.Column="0"
+                BorderBrush="{StaticResource BrushOutline}"
+                BorderThickness="0 0 1 0">
             <!--<TextBlock Text="SmartBudget" />-->
             <ContentControl prism:RegionManager.RegionName="Sidebar" />
-        </StackPanel>
+        </Border>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <ContentControl Grid.Row="0"
-                            prism:RegionManager.RegionName="Topbar" />
+            <Border Grid.Row="0"
+                    BorderBrush="{StaticResource BrushOutline}"
+                    BorderThickness="0 0 0 1">
+                <ContentControl prism:RegionManager.RegionName="Topbar" />
+            </Border>
 
             <ContentControl Grid.Row="1"
                             prism:RegionManager.RegionName="Content" />

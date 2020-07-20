@@ -65,10 +65,10 @@
             </Grid.Resources>
 
             <StackPanel Orientation="Vertical">
-                <RadioButton Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
+                <RadioButton IsChecked="{Binding DashboardChecked}" Command="{Binding NavigateCommand}" CommandParameter="Dashboard">
                     <RadioButton.Content>
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/home.png"
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/dashboard.png"
                                    Height="20"
                                    VerticalAlignment="Center"
                                    ToolTip="Dashboard" />
@@ -78,7 +78,7 @@
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
-                <RadioButton Command="{Binding NavigateCommand}" CommandParameter="Accounts">
+                <RadioButton IsChecked="{Binding AccountsChecked}" Command="{Binding NavigateCommand}" CommandParameter="Accounts">
                     <RadioButton.Content>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/accounts.png"
