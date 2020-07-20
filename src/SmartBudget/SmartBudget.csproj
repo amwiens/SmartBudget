@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SmartBudget.Accounts\SmartBudget.Accounts.csproj" />
     <ProjectReference Include="..\SmartBudget.Main\SmartBudget.Main.csproj" />
   </ItemGroup>
 

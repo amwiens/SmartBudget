@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget", "src\SmartBudget\SmartBudget.csproj", "{DA8084CF-1D11-4052-A095-D4C92577F8F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget", "src\SmartBudget\SmartBudget.csproj", "{DA8084CF-1D11-4052-A095-D4C92577F8F0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{7A0547CA-9B82-4065-84AE-7A07D79857CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget.Main", "src\SmartBudget.Main\SmartBudget.Main.csproj", "{29AC1EB4-BEBE-47CB-9DFD-1218C712D343}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.Main", "src\SmartBudget.Main\SmartBudget.Main.csproj", "{29AC1EB4-BEBE-47CB-9DFD-1218C712D343}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget.Accounts", "src\SmartBudget.Accounts\SmartBudget.Accounts.csproj", "{2077A825-0080-418D-BB14-CFD83CC2AF2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +25,17 @@ Global
 		{29AC1EB4-BEBE-47CB-9DFD-1218C712D343}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29AC1EB4-BEBE-47CB-9DFD-1218C712D343}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29AC1EB4-BEBE-47CB-9DFD-1218C712D343}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2077A825-0080-418D-BB14-CFD83CC2AF2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2077A825-0080-418D-BB14-CFD83CC2AF2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2077A825-0080-418D-BB14-CFD83CC2AF2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2077A825-0080-418D-BB14-CFD83CC2AF2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{29AC1EB4-BEBE-47CB-9DFD-1218C712D343} = {7A0547CA-9B82-4065-84AE-7A07D79857CD}
+		{2077A825-0080-418D-BB14-CFD83CC2AF2B} = {7A0547CA-9B82-4065-84AE-7A07D79857CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {170C2A8A-F24A-4E93-AA03-E9690C1B9838}

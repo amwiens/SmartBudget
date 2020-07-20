@@ -2,6 +2,7 @@
 using Prism.Ioc;
 using Prism.Modularity;
 
+using SmartBudget.Accounts;
 using SmartBudget.Main;
 using SmartBudget.Views;
 
@@ -26,6 +27,7 @@ namespace SmartBudget
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<MainModule>();
+            moduleCatalog.AddModule<AccountsModule>();
         }
     }
 }
