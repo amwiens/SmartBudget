@@ -2,23 +2,23 @@
 using Prism.Modularity;
 using Prism.Regions;
 
+using SmartBudget.Accounts.Views;
+
 namespace SmartBudget.Accounts
 {
     public class AccountsModule : IModule
     {
         public AccountsModule(IRegionManager regionManager)
         {
-
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.RegisterForNavigation<AccountsView>("Accounts");
         }
     }
 }
