@@ -3,7 +3,53 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <TextBlock Text="Accounts" />
+    <Grid Background="{StaticResource BrushBackground2}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Cards balance" />
+
+                <TextBlock Grid.Column="2"
+                           Text="Deposit" />
+
+                <TextBlock Grid.Column="4"
+                           Text="Pending credit" />
+            </Grid>
+
+            <TextBlock Grid.Row="1"
+                       Text="Your cards"
+                       Style="{StaticResource H3SecondaryDark2}" />
+
+
+
+            <TextBlock Grid.Row="3"
+                       Text="Open deposit"
+                       Style="{StaticResource H3SecondaryDark2}" />
+
+
+
+            <TextBlock Grid.Row="5"
+                       Text="Your credits"
+                       Style="{StaticResource H3SecondaryDark2}" />
+
+        </Grid>
     </Grid>
 </UserControl>
