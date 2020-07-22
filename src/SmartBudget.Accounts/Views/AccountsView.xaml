@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf">
     <Grid Background="{StaticResource BrushBackground2}">
-        <Grid>
+        <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -26,40 +26,93 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0"
-                            Orientation="Horizontal">
-                    <TextBlock Text="Cards balance" />
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <TextBlock Style="{StaticResource H4PrimaryDark}"
+                                   Text="$200.00"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
+                                   Text="Cards balance" />
+                    </StackPanel>
                     <lvc:CartesianChart Series="{Binding CardsBalanceCollection}">
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis MinValue="0"
+                                      ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                         <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                     </lvc:CartesianChart>
                 </StackPanel>
 
                 <StackPanel Grid.Column="2"
-                            Orientation="Horizontal">
-                    <TextBlock Text="Deposit" />
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <TextBlock Style="{StaticResource H4PrimaryDark}"
+                                   Text="$200.00"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
+                                   Text="Deposit"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
                     <lvc:CartesianChart Series="{Binding DepositBalanceCollection}">
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis MinValue="0"
+                                      ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                         <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                     </lvc:CartesianChart>
                 </StackPanel>
 
                 <StackPanel Grid.Column="4"
-                            Orientation="Horizontal">
-                    <TextBlock Text="Pending credit" />
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <TextBlock Style="{StaticResource H4PrimaryDark}"
+                                   Text="$200.00"
+                                   HorizontalAlignment="Center" />
+                        <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
+                                   Text="Pending credit"
+                                   HorizontalAlignment="Center" />
+                    </StackPanel>
                     <lvc:CartesianChart Series="{Binding CreditBalanceCollection}">
                         <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis MinValue="0"
+                                      ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                         <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Visibility="Collapsed" />
+                            <lvc:Axis ShowLabels="False">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                     </lvc:CartesianChart>
                 </StackPanel>
@@ -67,19 +120,19 @@
 
             <TextBlock Grid.Row="1"
                        Text="Your cards"
-                       Style="{StaticResource H3SecondaryDark2}" />
+                       Style="{StaticResource H4SecondaryDark2}" />
 
 
 
             <TextBlock Grid.Row="3"
                        Text="Open deposit"
-                       Style="{StaticResource H3SecondaryDark2}" />
+                       Style="{StaticResource H4SecondaryDark2}" />
 
 
 
             <TextBlock Grid.Row="5"
                        Text="Your credits"
-                       Style="{StaticResource H3SecondaryDark2}" />
+                       Style="{StaticResource H4SecondaryDark2}" />
 
         </Grid>
     </Grid>
