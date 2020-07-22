@@ -65,7 +65,7 @@
                                    HorizontalAlignment="Center" />
                         <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
                                    Text="Deposit"
-                                   HorizontalAlignment="Center"/>
+                                   HorizontalAlignment="Center" />
                     </StackPanel>
                     <lvc:CartesianChart Series="{Binding DepositBalanceCollection}">
                         <lvc:CartesianChart.AxisY>
@@ -122,18 +122,13 @@
                        Text="Your cards"
                        Style="{StaticResource H4SecondaryDark2}" />
 
-
-
             <TextBlock Grid.Row="3"
                        Text="Open deposit"
                        Style="{StaticResource H4SecondaryDark2}" />
 
-
-
             <TextBlock Grid.Row="5"
                        Text="Your credits"
                        Style="{StaticResource H4SecondaryDark2}" />
-
         </Grid>
     </Grid>
 </UserControl>

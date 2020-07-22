@@ -11,6 +11,7 @@ namespace SmartBudget.Accounts.ViewModels
     public class AccountsViewModel : BindableBase, INavigationAware
     {
         private SeriesCollection _cardsBalanceCollection;
+
         public SeriesCollection CardsBalanceCollection
         {
             get { return _cardsBalanceCollection; }
@@ -18,6 +19,7 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         private SeriesCollection _depositBalanceCollection;
+
         public SeriesCollection DepositBalanceCollection
         {
             get { return _depositBalanceCollection; }
@@ -25,6 +27,7 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         private SeriesCollection _creditBalanceCollection;
+
         public SeriesCollection CreditBalanceCollection
         {
             get { return _creditBalanceCollection; }
