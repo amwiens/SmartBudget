@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="SmartBudget.Main.Controls.BlankStatistics"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
+    <UserControl.Resources>
+        <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
+    </UserControl.Resources>
+
+    <Grid x:Name="Image" Grid.Row="1" Background="{StaticResource BrushPrimary2}">
+        <StackPanel Orientation="Vertical"
+                                    VerticalAlignment="Center">
+            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Images/blank_statistics.png"
+                                   Width="{Binding ActualHeight, ElementName=Image}"
+                                   MaxWidth="420">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="{Binding ActualHeight, ElementName=Image}" />
+                        <Setter Property="Height" Value="Auto" />
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource GreaterThanMultiConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding Path="Height" ElementName="Image" />
+                                            <Binding Path="Width" ElementName="Image" />
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <DataTrigger.Setters>
+                                    <Setter Property="Height" Value="{Binding ActualWidth, ElementName=Image}" />
+                                    <Setter Property="Width" Value="Auto" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <TextBlock Text="Your statistics will appear here"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Style="{StaticResource H5SecondaryDark1}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

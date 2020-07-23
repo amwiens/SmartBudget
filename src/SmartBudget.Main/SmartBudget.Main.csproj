@@ -18,6 +18,8 @@
     <None Remove="Resources\Icons\reports.png" />
     <None Remove="Resources\Icons\search.png" />
     <None Remove="Resources\Icons\settings.png" />
+    <None Remove="Resources\Images\blank_statistics.png" />
+    <None Remove="Resources\Images\blank_transactions.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +44,8 @@
     <Resource Include="Resources\Icons\reports.png" />
     <Resource Include="Resources\Icons\search.png" />
     <Resource Include="Resources\Icons\settings.png" />
+    <Resource Include="Resources\Images\blank_statistics.png" />
+    <Resource Include="Resources\Images\blank_transactions.png" />
   </ItemGroup>
 
 </Project>

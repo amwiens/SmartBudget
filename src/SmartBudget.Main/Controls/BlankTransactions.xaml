@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="SmartBudget.Main.Controls.BlankTransactions"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
+    <UserControl.Resources>
+        <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
+    </UserControl.Resources>
+    <Grid x:Name="Image2" Background="{StaticResource BrushPrimary2}">
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center">
+            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Images/blank_transactions.png"
+                   Width="{Binding Height, ElementName=Image2}"
+                   MaxWidth="283">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="{Binding Height, ElementName=Image2}" />
+                        <Setter Property="Height" Value="Auto" />
+                        <Style.Triggers>
+                            <DataTrigger Value="True">
+                                <DataTrigger.Binding>
+                                    <MultiBinding Converter="{StaticResource GreaterThanMultiConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding Path="Height" ElementName="Image2" />
+                                            <Binding Path="Width" ElementName="Image2" />
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </DataTrigger.Binding>
+                                <DataTrigger.Setters>
+                                    <Setter Property="Height" Value="{Binding Width, ElementName=Image2}" />
+                                    <Setter Property="Width" Value="Auto" />
+                                </DataTrigger.Setters>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+            <TextBlock Text="Your transactions will appear here"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource H5SecondaryDark1}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

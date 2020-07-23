@@ -3,13 +3,18 @@
 
     <!-- Colors -->
     <Color x:Key="ColorPrimary">#FFAB2B</Color>
+    <Color x:Key="ColorPrimary2">#FFFFFF</Color>
     <Color x:Key="ColorPrimaryDark">#252631</Color>
     <Color x:Key="ColorSecondaryDark1">#778CA2</Color>
     <Color x:Key="ColorSecondaryDark2">#98A9BC</Color>
-    <Color x:Key="ColorSecondary1">#4D7DFE</Color> <!-- Blue -->
-    <Color x:Key="ColorSecondary2">#6DD230</Color> <!-- Green -->
-    <Color x:Key="ColorSecondary3">#FE4D97</Color> <!-- Pink -->
-    <Color x:Key="ColorSecondary4">#2CE5F6</Color> <!-- Teal -->
+    <Color x:Key="ColorSecondary1">#4D7DFE</Color>
+    <!-- Blue -->
+    <Color x:Key="ColorSecondary2">#6DD230</Color>
+    <!-- Green -->
+    <Color x:Key="ColorSecondary3">#FE4D97</Color>
+    <!-- Pink -->
+    <Color x:Key="ColorSecondary4">#2CE5F6</Color>
+    <!-- Teal -->
     <Color x:Key="ColorOutline">#E8ECEF</Color>
     <Color x:Key="ColorBackground1">#F2F4F6</Color>
     <Color x:Key="ColorBackground2">#F8FAFB</Color>
@@ -17,6 +22,7 @@
 
     <!-- Brushes -->
     <SolidColorBrush x:Key="BrushPrimary" Color="{StaticResource ColorPrimary}" />
+    <SolidColorBrush x:Key="BrushPrimary2" Color="{StaticResource ColorPrimary2}" />
     <SolidColorBrush x:Key="BrushPrimaryDark" Color="{StaticResource ColorPrimaryDark}" />
     <SolidColorBrush x:Key="BrushSecondaryDark1" Color="{StaticResource ColorSecondaryDark1}" />
     <SolidColorBrush x:Key="BrushSecondaryDark2" Color="{StaticResource ColorSecondaryDark2}" />

@@ -2,8 +2,105 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
-             prism:ViewModelLocator.AutoWireViewModel="True">
-    <Grid>
-        <TextBlock Text="Dashboard" />
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
+             xmlns:controls="clr-namespace:SmartBudget.Main.Controls">
+    <UserControl.Resources>
+        <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
+    </UserControl.Resources>
+    <Grid Background="{StaticResource BrushBackground2}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                BorderThickness="0 0 1 0"
+                BorderBrush="{StaticResource BrushOutline}"
+                Padding="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="Funds overview"
+                                   Style="{StaticResource H4SecondaryDark2}"
+                                   VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="1"
+                                   Text="ALL REPORTS"
+                                   Cursor="Hand"
+                                   Style="{StaticResource TextLinkPrimaryDark}"
+                                   VerticalAlignment="Center" />
+                    </Grid>
+
+                    <controls:BlankStatistics Grid.Row="1" />
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                           Text="Your cards"
+                           Style="{StaticResource H4SecondaryDark1}"
+                           VerticalAlignment="Center" />
+
+                        <TextBlock Grid.Column="1"
+                           Text="ALL ACCOUNTS"
+                           Style="{StaticResource TextLinkPrimaryDark}"
+                           VerticalAlignment="Center" />
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Text="Transactions"
+                           Style="{StaticResource H4SecondaryDark1}"
+                           VerticalAlignment="Center" />
+
+                <TextBlock Grid.Column="1"
+                           Text="ALL ACCOUNTS"
+                           Style="{StaticResource TextLinkPrimaryDark}"
+                           VerticalAlignment="Center" />
+            </Grid>
+
+            <controls:BlankTransactions Grid.Row="1" />
+        </Grid>
     </Grid>
 </UserControl>
