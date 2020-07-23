@@ -23,7 +23,7 @@ namespace SmartBudget
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<ISmartBudgetService, SmartBudgetService>();
+            containerRegistry.RegisterSingleton<ISmartBudgetService, SmartBudgetService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

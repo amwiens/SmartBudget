@@ -25,6 +25,7 @@ namespace SmartBudget.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            var accounts = _smartBudgetService.GetAccounts();
         }
     }
 }
