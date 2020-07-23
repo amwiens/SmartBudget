@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SmartBudget.Core\SmartBudget.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Icons\accounts.png" />
     <Resource Include="Resources\Icons\add.png" />
     <Resource Include="Resources\Icons\expense.png" />

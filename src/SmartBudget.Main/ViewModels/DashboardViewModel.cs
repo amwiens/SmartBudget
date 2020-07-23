@@ -1,12 +1,17 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core.Services;
+
 namespace SmartBudget.Main.ViewModels
 {
     public class DashboardViewModel : BindableBase, INavigationAware
     {
-        public DashboardViewModel()
+        private ISmartBudgetService _smartBudgetService;
+
+        public DashboardViewModel(ISmartBudgetService smartBudgetService)
         {
+            _smartBudgetService = smartBudgetService;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
