@@ -1,15 +1,16 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace SmartBudget.Core
 {
     public class App
     {
-        public static DataAccess.SmartBudgetContext CreateDatabase()
+        public static DataAccess.SmartBudgetDbContext CreateDatabase()
         {
             // Database
-            string dbLocation = Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().CodeBase, "smartBudget.db");
+            string dbLocation = Path.Combine(Environment.CurrentDirectory, "smartBudget.db");
             System.Diagnostics.Debug.WriteLine($"Database location: {dbLocation}");
-            DataAccess.SmartBudgetContext ctx = DataAccess.SmartBudgetContext.Create(dbLocation);
+            DataAccess.SmartBudgetDbContext ctx = DataAccess.SmartBudgetDbContext.Create(dbLocation);
             return ctx;
         }
     }

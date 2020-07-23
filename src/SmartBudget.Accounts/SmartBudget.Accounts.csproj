@@ -15,4 +15,8 @@
     <Folder Include="Resources\Images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SmartBudget.Core\SmartBudget.Core.csproj" />
+  </ItemGroup>
+
 </Project>

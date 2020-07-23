@@ -4,13 +4,18 @@ using LiveCharts.Wpf;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core.Services;
+
 using System.Windows.Media;
 
 namespace SmartBudget.Accounts.ViewModels
 {
     public class AccountsViewModel : BindableBase, INavigationAware
     {
+        private ISmartBudgetService _smartBudgetService;
         private SeriesCollection _cardsBalanceCollection;
+        private SeriesCollection _depositBalanceCollection;
+        private SeriesCollection _creditBalanceCollection;
 
         public SeriesCollection CardsBalanceCollection
         {
@@ -18,15 +23,11 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _cardsBalanceCollection, value); }
         }
 
-        private SeriesCollection _depositBalanceCollection;
-
         public SeriesCollection DepositBalanceCollection
         {
             get { return _depositBalanceCollection; }
             set { SetProperty(ref _depositBalanceCollection, value); }
         }
-
-        private SeriesCollection _creditBalanceCollection;
 
         public SeriesCollection CreditBalanceCollection
         {
@@ -34,7 +35,7 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _creditBalanceCollection, value); }
         }
 
-        public AccountsViewModel()
+        public AccountsViewModel(ISmartBudgetService smartBudgetService)
         {
         }
 
