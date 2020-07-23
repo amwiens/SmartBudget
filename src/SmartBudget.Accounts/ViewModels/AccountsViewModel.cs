@@ -36,7 +36,6 @@ namespace SmartBudget.Accounts.ViewModels
 
         public AccountsViewModel()
         {
-            GetCardsBalance();
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -50,6 +49,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            GetCardsBalance();
         }
 
         private void GetCardsBalance()
@@ -61,7 +61,8 @@ namespace SmartBudget.Accounts.ViewModels
                     Title = "Balance",
                     Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
                     PointGeometry = null,
-                    PointForeground = Brushes.Green
+                    Fill = new SolidColorBrush(Color.FromRgb(223, 245, 210)), // fill color
+                    Stroke = new SolidColorBrush(Color.FromRgb(109, 210, 48)) // line color
                 }
             };
 
@@ -72,7 +73,8 @@ namespace SmartBudget.Accounts.ViewModels
                     Title = "Balance",
                     Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
                     PointGeometry = null,
-                    PointForeground = Brushes.Yellow
+                    Fill = new SolidColorBrush(Color.FromRgb(255, 239, 215)), // fill color
+                    Stroke = new SolidColorBrush(Color.FromRgb(255, 171, 43)) // line color
                 }
             };
 
@@ -83,7 +85,8 @@ namespace SmartBudget.Accounts.ViewModels
                     Title = "Balance",
                     Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
                     PointGeometry = null,
-                    PointForeground = Brushes.Pink
+                    Fill = new SolidColorBrush(Color.FromRgb(255, 218, 233)), // fill color
+                    Stroke = new SolidColorBrush(Color.FromRgb(254, 77, 151)) // line color
                 }
             };
         }
