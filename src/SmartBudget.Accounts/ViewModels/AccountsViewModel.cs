@@ -4,8 +4,10 @@ using LiveCharts.Wpf;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System.Collections.ObjectModel;
 using System.Windows.Media;
 
 namespace SmartBudget.Accounts.ViewModels
@@ -16,6 +18,30 @@ namespace SmartBudget.Accounts.ViewModels
         private SeriesCollection _cardsBalanceCollection;
         private SeriesCollection _depositBalanceCollection;
         private SeriesCollection _creditBalanceCollection;
+        private ObservableCollection<Account> _cardAccounts;
+        private ObservableCollection<Account> _bankAccounts;
+        private ObservableCollection<Account> _creditAccounts;
+
+        public ObservableCollection<Account> CardAccounts
+        {
+            get { return _cardAccounts; }
+            set { SetProperty(ref _cardAccounts, value); }
+        }
+
+        public ObservableCollection<Account> BankAccounts
+        {
+            get { return _bankAccounts; }
+            set { SetProperty(ref _bankAccounts, value); }
+        }
+
+        public ObservableCollection<Account> CreditAccounts
+        {
+            get { return _creditAccounts; }
+            set { SetProperty(ref _creditAccounts, value); }
+        }
+
+        public bool AreAccounts => CardAccounts?.Count > 0 || BankAccounts?.Count > 0 || CreditAccounts?.Count > 0;
+        public bool NoAccounts => CardAccounts?.Count == 0 || BankAccounts?.Count == 0 || CreditAccounts?.Count == 0;
 
         public SeriesCollection CardsBalanceCollection
         {
@@ -37,6 +63,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         public AccountsViewModel(ISmartBudgetService smartBudgetService)
         {
+            _smartBudgetService = smartBudgetService;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -51,6 +78,7 @@ namespace SmartBudget.Accounts.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetCardsBalance();
+            GetAccounts();
         }
 
         private void GetCardsBalance()
@@ -90,6 +118,23 @@ namespace SmartBudget.Accounts.ViewModels
                     Stroke = new SolidColorBrush(Color.FromRgb(254, 77, 151)) // line color
                 }
             };
+        }
+
+        private void GetAccounts()
+        {
+            var favoriteAccounts = new ObservableCollection<Account>();
+            var accounts = _smartBudgetService.GetAccounts();
+
+            foreach (var account in accounts)
+            {
+                favoriteAccounts.Add(account);
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                favoriteAccounts.Add(new Account { Name = $"Test {i}" });
+            }
+            CardAccounts = favoriteAccounts;
         }
     }
 }

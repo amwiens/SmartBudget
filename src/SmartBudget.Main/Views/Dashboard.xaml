@@ -57,7 +57,7 @@
                     </Grid>
 
                     <controls:BlankStatistics Grid.Row="1"
-                                            Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                              Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </Grid>
 
                 <Grid Grid.Row="1" Margin="0 10 0 0 ">
@@ -102,8 +102,7 @@
                         </i:Interaction.Triggers>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:FavoriteAccounts Grid.Row="1"
-                                                           Visibility="{Binding AreAccounts, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                <controls:FavoriteAccounts Visibility="{Binding AreAccounts, Converter={StaticResource BoolToVisibilityConverter}}" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

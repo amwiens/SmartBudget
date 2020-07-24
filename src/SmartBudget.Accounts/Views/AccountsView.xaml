@@ -1,11 +1,16 @@
 ﻿<UserControl x:Class="SmartBudget.Accounts.Views.AccountsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SmartBudget.Accounts.Views"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </UserControl.Resources>
     <Grid Background="{StaticResource BrushBackground2}">
-        <Grid Margin="10">
+        <local:BlankAccounts Visibility="{Binding NoAccounts, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <Grid Margin="10" Visibility="{Binding AreAccounts, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
