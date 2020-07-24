@@ -19,6 +19,7 @@ namespace SmartBudget.Accounts
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<AccountsView>("Accounts");
+            containerRegistry.RegisterForNavigation<AccountView>("Account");
         }
     }
 }

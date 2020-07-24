@@ -2,6 +2,8 @@
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core.Models;
+
 namespace SmartBudget.Main.ViewModels
 {
     public class MenuViewModel : BindableBase, INavigationAware
@@ -61,17 +63,46 @@ namespace SmartBudget.Main.ViewModels
             }
         }
 
+        private void Navigate(string navigatePath, NavigationParameters navigationParameters)
+        {
+            if (navigatePath != null)
+            {
+                if (navigationParameters.ContainsKey("account"))
+                {
+                    var p = new NavigationParameters();
+                    p.Add("Title", navigatePath);
+
+                    _regionManager.RequestNavigate("Content", "Account", navigationParameters);
+                    _regionManager.RequestNavigate("Topbar", "TopBar", p);
+
+                    DashboardChecked = false;
+                    AccountsChecked = true;
+                }
+            }
+        }
+
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            string area = string.Empty;
+            var area = string.Empty;
+            var account = new Account();
+            var p = new NavigationParameters();
 
             if (navigationContext.Parameters.ContainsKey("area"))
                 area = navigationContext.Parameters.GetValue<string>("area");
+            if (navigationContext.Parameters.ContainsKey("account"))
+            {
+                account = navigationContext.Parameters.GetValue<Account>("account");
+                p.Add("account", account);
+            }
+
 
             switch (area)
             {
                 case "Accounts":
-                    Navigate("Accounts");
+                    if (p.Count > 0)
+                        Navigate("Accounts", p);
+                    else
+                        Navigate("Accounts");
                     break;
 
                 default:
