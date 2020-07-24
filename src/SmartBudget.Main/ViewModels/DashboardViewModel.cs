@@ -5,7 +5,6 @@ using Prism.Regions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
-using System;
 using System.Collections.ObjectModel;
 
 namespace SmartBudget.Main.ViewModels
@@ -25,21 +24,40 @@ namespace SmartBudget.Main.ViewModels
         public bool AreStatistics => false;
         public bool NoStatistics => true;
 
-        public bool AreAccounts => true; // FavoriteAccounts.Count > 0;
-        public bool NoAccounts => false; // FavoriteAccounts.Count == 0;
+        public bool AreAccounts => FavoriteAccounts?.Count > 0;
+        public bool NoAccounts => FavoriteAccounts?.Count == 0;
 
         public bool AreTransactions => false;
         public bool NoTransactions => true;
 
         public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
+        public DelegateCommand AllReportsCommand { get; private set; }
+        public DelegateCommand AllAccountsCommand { get; private set; }
 
         public DashboardViewModel(IRegionManager regionManager,
             ISmartBudgetService smartBudgetService)
         {
             _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
+            AllReportsCommand = new DelegateCommand(AllReports);
+            AllAccountsCommand = new DelegateCommand(AllAccounts);
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
-            GetFavoriteAccounts();
+        }
+
+        private void AllReports()
+        {
+            var p = new NavigationParameters();
+            p.Add("area", "Reports");
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+        }
+
+        private void AllAccounts()
+        {
+            var p = new NavigationParameters();
+            p.Add("area", "Accounts");
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AccountSelected(Account account)
@@ -66,6 +84,7 @@ namespace SmartBudget.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            GetFavoriteAccounts();
         }
 
         private void GetFavoriteAccounts()

@@ -48,7 +48,12 @@
                                    Text="ALL REPORTS"
                                    Cursor="Hand"
                                    Style="{StaticResource TextLinkPrimaryDark}"
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center">
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding AllReportsCommand}"
+                                              MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
+                        </TextBlock>
                     </Grid>
 
                     <controls:BlankStatistics Grid.Row="1"
@@ -68,14 +73,20 @@
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0"
-                           Text="Favorite accounts"
-                           Style="{StaticResource H4SecondaryDark1}"
-                           VerticalAlignment="Center" />
+                                   Text="Favorite accounts"
+                                   Style="{StaticResource H4SecondaryDark1}"
+                                   VerticalAlignment="Center" />
 
                         <TextBlock Grid.Column="1"
-                           Text="ALL ACCOUNTS"
-                           Style="{StaticResource TextLinkPrimaryDark}"
-                           VerticalAlignment="Center" />
+                                   Text="ALL ACCOUNTS"
+                                   Style="{StaticResource TextLinkPrimaryDark}"
+                                   Cursor="Hand"
+                                   VerticalAlignment="Center">
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding AllAccountsCommand}"
+                                              MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
+                        </TextBlock>
                     </Grid>
 
                     <controls:BlankAccounts Grid.Row="1"
