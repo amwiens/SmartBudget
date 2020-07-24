@@ -1,6 +1,7 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
 
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -15,7 +16,8 @@ namespace SmartBudget.Accounts.ViewModels
 {
     public class AccountsViewModel : BindableBase, INavigationAware
     {
-        private ISmartBudgetService _smartBudgetService;
+        private readonly IRegionManager _regionManager;
+        private readonly ISmartBudgetService _smartBudgetService;
         private SeriesCollection _cardsBalanceCollection;
         private SeriesCollection _depositBalanceCollection;
         private SeriesCollection _creditBalanceCollection;
@@ -23,6 +25,8 @@ namespace SmartBudget.Accounts.ViewModels
         private ObservableCollection<Account> _cardAccounts;
         private ObservableCollection<Account> _bankAccounts;
         private ObservableCollection<Account> _creditAccounts;
+
+        public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
 
         private bool _areAccounts;
         private bool _noAccounts;
@@ -75,13 +79,29 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _creditBalanceCollection, value); }
         }
 
-        public AccountsViewModel(ISmartBudgetService smartBudgetService)
+        public AccountsViewModel(IRegionManager regionManager,
+            ISmartBudgetService smartBudgetService)
         {
             CardAccounts = new ObservableCollection<Account>();
             BankAccounts = new ObservableCollection<Account>();
             CreditAccounts = new ObservableCollection<Account>();
 
+            _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
+            AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
+        }
+
+        private void AccountSelected(Account account)
+        {
+            if (account == null)
+                return;
+
+            var p = new NavigationParameters();
+            p.Add("area", "Accounts");
+            p.Add("account", account);
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            //_regionManager.RequestNavigate("Content", "Accounts");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

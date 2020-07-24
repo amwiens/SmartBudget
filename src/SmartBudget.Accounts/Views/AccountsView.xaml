@@ -189,7 +189,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
         </Grid>
     </Grid>
 </UserControl>
