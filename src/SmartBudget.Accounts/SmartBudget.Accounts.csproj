@@ -16,15 +16,20 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SmartBudget.Core\SmartBudget.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Resources\Images\blank_accounts.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Controls\BankAccounts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Controls\CreditAccounts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>

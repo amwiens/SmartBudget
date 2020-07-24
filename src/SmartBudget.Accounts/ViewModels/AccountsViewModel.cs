@@ -8,6 +8,7 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Media;
 
 namespace SmartBudget.Accounts.ViewModels
@@ -18,9 +19,13 @@ namespace SmartBudget.Accounts.ViewModels
         private SeriesCollection _cardsBalanceCollection;
         private SeriesCollection _depositBalanceCollection;
         private SeriesCollection _creditBalanceCollection;
+
         private ObservableCollection<Account> _cardAccounts;
         private ObservableCollection<Account> _bankAccounts;
         private ObservableCollection<Account> _creditAccounts;
+
+        private bool _areAccounts;
+        private bool _noAccounts;
 
         public ObservableCollection<Account> CardAccounts
         {
@@ -40,8 +45,17 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _creditAccounts, value); }
         }
 
-        public bool AreAccounts => CardAccounts?.Count > 0 || BankAccounts?.Count > 0 || CreditAccounts?.Count > 0;
-        public bool NoAccounts => CardAccounts?.Count == 0 || BankAccounts?.Count == 0 || CreditAccounts?.Count == 0;
+        public bool AreAccounts
+        {
+            get { return _areAccounts; }
+            set { SetProperty(ref _areAccounts, value); }
+        }
+
+        public bool NoAccounts
+        {
+            get { return _noAccounts; }
+            set { SetProperty(ref _noAccounts, value); }
+        }
 
         public SeriesCollection CardsBalanceCollection
         {
@@ -63,6 +77,10 @@ namespace SmartBudget.Accounts.ViewModels
 
         public AccountsViewModel(ISmartBudgetService smartBudgetService)
         {
+            CardAccounts = new ObservableCollection<Account>();
+            BankAccounts = new ObservableCollection<Account>();
+            CreditAccounts = new ObservableCollection<Account>();
+
             _smartBudgetService = smartBudgetService;
         }
 
@@ -122,19 +140,31 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void GetAccounts()
         {
-            var favoriteAccounts = new ObservableCollection<Account>();
             var accounts = _smartBudgetService.GetAccounts();
 
-            foreach (var account in accounts)
+            foreach (var account in accounts.Where(a => a.AccountType == AccountType.Card))
             {
-                favoriteAccounts.Add(account);
+                CardAccounts.Add(account);
+            }
+            foreach (var account in accounts.Where(a => a.AccountType == AccountType.Bank))
+            {
+                BankAccounts.Add(account);
+            }
+            foreach (var account in accounts.Where(a => a.AccountType == AccountType.Credit))
+            {
+                CreditAccounts.Add(account);
             }
 
-            for (int i = 0; i < 10; i++)
+            if (CardAccounts.Count > 0 || BankAccounts.Count > 0 || CreditAccounts.Count > 0)
             {
-                favoriteAccounts.Add(new Account { Name = $"Test {i}" });
+                NoAccounts = false;
+                AreAccounts = true;
             }
-            CardAccounts = favoriteAccounts;
+            else
+            {
+                NoAccounts = true;
+                AreAccounts = false;
+            }
         }
     }
 }

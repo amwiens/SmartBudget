@@ -6,6 +6,7 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -90,17 +91,13 @@ namespace SmartBudget.Main.ViewModels
         private void GetFavoriteAccounts()
         {
             var favoriteAccounts = new ObservableCollection<Account>();
-            var accounts = _smartBudgetService.GetAccounts();
+            var accounts = _smartBudgetService.GetAccounts().Where(a => a.Favorite == true);
 
             foreach (var account in accounts)
             {
                 favoriteAccounts.Add(account);
             }
 
-            for (int i = 0; i < 10; i++)
-            {
-                favoriteAccounts.Add(new Account { Name = $"Test {i}" });
-            }
             FavoriteAccounts = favoriteAccounts;
         }
     }

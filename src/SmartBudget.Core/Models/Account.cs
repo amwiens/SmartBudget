@@ -3,6 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
 {
+    public enum AccountType
+    {
+        Card,
+        Bank,
+        Credit
+    }
+
     public class Account
     {
         [Key]
@@ -11,5 +18,9 @@ namespace SmartBudget.Core.Models
 
         [Required]
         public string Name { get; set; }
+
+        public AccountType AccountType { get; set; }
+
+        public bool Favorite { get; set; }
     }
 }
