@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 
@@ -63,7 +65,20 @@ namespace SmartBudget.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            Navigate("Dashboard");
+            string area = string.Empty;
+
+            if (navigationContext.Parameters.ContainsKey("area"))
+                area = navigationContext.Parameters.GetValue<string>("area");
+
+            switch (area)
+            {
+                case "Accounts":
+                    Navigate("Accounts");
+                    break;
+                default:
+                    Navigate("Dashboard");
+                    break;
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
