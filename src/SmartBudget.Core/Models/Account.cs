@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
@@ -22,5 +23,19 @@ namespace SmartBudget.Core.Models
         public AccountType AccountType { get; set; }
 
         public bool Favorite { get; set; }
+
+        public string AccountNumber { get; set; }
+
+        public string CardNumber { get; set; }
+
+        public decimal Rate { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public decimal StartingAmount { get; set; }
+
+        public decimal PaidAmount { get; set; }
     }
 }

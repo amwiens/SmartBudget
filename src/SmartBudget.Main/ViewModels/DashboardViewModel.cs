@@ -32,12 +32,14 @@ namespace SmartBudget.Main.ViewModels
             get { return _areAccounts; }
             set { SetProperty(ref _areAccounts, value); }
         }
-            //=> FavoriteAccounts?.Count > 0;
+
+        //=> FavoriteAccounts?.Count > 0;
         public bool NoAccounts
         {
             get { return _noAccounts; }
             set { SetProperty(ref _noAccounts, value); }
         }
+
         //=> FavoriteAccounts?.Count == 0;
 
         public bool AreTransactions => false;

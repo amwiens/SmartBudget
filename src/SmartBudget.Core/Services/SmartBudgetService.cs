@@ -15,7 +15,7 @@ namespace SmartBudget.Core.Services
             this.context = App.CreateDatabase();
         }
 
-        private SmartBudgetDbContext context;
+        private readonly SmartBudgetDbContext context;
         public static string ActionAdd => "add";
         public static string ActionUpdate => "update";
         public static string ActionDelete => "delete";

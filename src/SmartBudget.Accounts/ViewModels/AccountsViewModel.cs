@@ -95,9 +95,11 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void AddAccount()
         {
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
-            p.Add("page", "AddAccount");
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "page", "AddAccount" }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
@@ -107,12 +109,13 @@ namespace SmartBudget.Accounts.ViewModels
             if (account == null)
                 return;
 
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
-            p.Add("account", account);
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "account", account }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
-            //_regionManager.RequestNavigate("Content", "Accounts");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
