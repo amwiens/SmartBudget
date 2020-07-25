@@ -69,6 +69,16 @@
                                   MouseAction="LeftClick" />
                 </Rectangle.InputBindings>
             </Rectangle>
+            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/add_primary.png"
+                   Height="20"
+                   Margin="10"
+                   VerticalAlignment="Center"
+                   Cursor="Hand">
+                <Image.InputBindings>
+                    <MouseBinding Command="{Binding AddCardAccountCommand}"
+                                  MouseAction="LeftClick" />
+                </Image.InputBindings>
+            </Image>
 
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"
@@ -129,6 +139,16 @@
                                   MouseAction="LeftClick" />
                 </Rectangle.InputBindings>
             </Rectangle>
+            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/add_primary.png"
+                   Height="20"
+                   Margin="10"
+                   VerticalAlignment="Center"
+                   Cursor="Hand">
+                <Image.InputBindings>
+                    <MouseBinding Command="{Binding AddBankAccountCommand}"
+                                  MouseAction="LeftClick" />
+                </Image.InputBindings>
+            </Image>
 
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"

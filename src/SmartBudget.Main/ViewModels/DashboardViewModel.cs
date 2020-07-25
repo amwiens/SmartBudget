@@ -71,7 +71,6 @@ namespace SmartBudget.Main.ViewModels
             p.Add("account", account);
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
-            //_regionManager.RequestNavigate("Content", "Accounts");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

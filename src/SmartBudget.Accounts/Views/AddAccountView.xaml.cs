@@ -3,11 +3,11 @@
 namespace SmartBudget.Accounts.Views
 {
     /// <summary>
-    /// Interaction logic for AccountView.xaml
+    /// Interaction logic for AddAccountView.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class AddAccountView : UserControl
     {
-        public AccountView()
+        public AddAccountView()
         {
             InitializeComponent();
         }

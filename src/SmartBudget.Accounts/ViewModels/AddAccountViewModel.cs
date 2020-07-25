@@ -3,11 +3,11 @@ using Prism.Regions;
 
 namespace SmartBudget.Accounts.ViewModels
 {
-    public class AccountViewModel : BindableBase, INavigationAware
+    public class AddAccountViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
 
-        public AccountViewModel(IRegionManager regionManager)
+        public AddAccountViewModel(IRegionManager regionManager)
         {
             _regionManager = regionManager;
         }

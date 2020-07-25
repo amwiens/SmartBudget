@@ -20,6 +20,7 @@ namespace SmartBudget.Accounts
         {
             containerRegistry.RegisterForNavigation<AccountsView>("Accounts");
             containerRegistry.RegisterForNavigation<AccountView>("Account");
+            containerRegistry.RegisterForNavigation<AddAccountView>("AddAccount");
         }
     }
 }

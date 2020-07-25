@@ -27,6 +27,7 @@ namespace SmartBudget.Accounts.ViewModels
         private ObservableCollection<Account> _creditAccounts;
 
         public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
+        public DelegateCommand AddAccountCommand { get; private set; }
 
         private bool _areAccounts;
         private bool _noAccounts;
@@ -89,6 +90,16 @@ namespace SmartBudget.Accounts.ViewModels
             _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
+            AddAccountCommand = new DelegateCommand(AddAccount);
+        }
+
+        private void AddAccount()
+        {
+            var p = new NavigationParameters();
+            p.Add("area", "Accounts");
+            p.Add("page", "AddAccount");
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AccountSelected(Account account)

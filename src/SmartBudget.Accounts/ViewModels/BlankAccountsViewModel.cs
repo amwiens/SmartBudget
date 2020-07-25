@@ -2,8 +2,6 @@
 using Prism.Mvvm;
 using Prism.Regions;
 
-using System;
-
 namespace SmartBudget.Accounts.ViewModels
 {
     public class BlankAccountsViewModel : BindableBase
@@ -22,12 +20,20 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void AddCardAccount()
         {
-            throw new NotImplementedException();
+            var p = new NavigationParameters();
+            p.Add("area", "Accounts");
+            p.Add("page", "AddAccount");
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AddBankAccount()
         {
-            throw new NotImplementedException();
+            var p = new NavigationParameters();
+            p.Add("area", "Accounts");
+            p.Add("page", "AddAccount");
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
     }
 }

@@ -78,12 +78,24 @@ namespace SmartBudget.Main.ViewModels
                     DashboardChecked = false;
                     AccountsChecked = true;
                 }
+                if (navigationParameters.ContainsKey("page"))
+                {
+                    var p = new NavigationParameters();
+                    p.Add("Title", navigatePath);
+
+                    _regionManager.RequestNavigate("Content", "AddAccount");
+                    _regionManager.RequestNavigate("Topbar", "TopBar", p);
+
+                    DashboardChecked = false;
+                    AccountsChecked = true;
+                }
             }
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var area = string.Empty;
+            var page = string.Empty;
             var account = new Account();
             var p = new NavigationParameters();
 
@@ -94,7 +106,11 @@ namespace SmartBudget.Main.ViewModels
                 account = navigationContext.Parameters.GetValue<Account>("account");
                 p.Add("account", account);
             }
-
+            if (navigationContext.Parameters.ContainsKey("page"))
+            {
+                page = navigationContext.Parameters.GetValue<string>("page");
+                p.Add("page", page);
+            }
 
             switch (area)
             {
