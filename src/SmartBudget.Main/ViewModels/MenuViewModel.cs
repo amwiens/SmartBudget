@@ -95,20 +95,20 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var area = string.Empty;
-            var page = string.Empty;
-            var account = new Account();
             var p = new NavigationParameters();
 
             if (navigationContext.Parameters.ContainsKey("area"))
+            {
                 area = navigationContext.Parameters.GetValue<string>("area");
+            }
             if (navigationContext.Parameters.ContainsKey("account"))
             {
-                account = navigationContext.Parameters.GetValue<Account>("account");
+                Account account = navigationContext.Parameters.GetValue<Account>("account");
                 p.Add("account", account);
             }
             if (navigationContext.Parameters.ContainsKey("page"))
             {
-                page = navigationContext.Parameters.GetValue<string>("page");
+                string page = navigationContext.Parameters.GetValue<string>("page");
                 p.Add("page", page);
             }
 

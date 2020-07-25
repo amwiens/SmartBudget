@@ -15,6 +15,8 @@ namespace SmartBudget.Main.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly ISmartBudgetService _smartBudgetService;
         private ObservableCollection<Account> _favoriteAccounts;
+        private bool _areAccounts;
+        private bool _noAccounts;
 
         public ObservableCollection<Account> FavoriteAccounts
         {
@@ -25,8 +27,18 @@ namespace SmartBudget.Main.ViewModels
         public bool AreStatistics => false;
         public bool NoStatistics => true;
 
-        public bool AreAccounts => FavoriteAccounts?.Count > 0;
-        public bool NoAccounts => FavoriteAccounts?.Count == 0;
+        public bool AreAccounts
+        {
+            get { return _areAccounts; }
+            set { SetProperty(ref _areAccounts, value); }
+        }
+            //=> FavoriteAccounts?.Count > 0;
+        public bool NoAccounts
+        {
+            get { return _noAccounts; }
+            set { SetProperty(ref _noAccounts, value); }
+        }
+        //=> FavoriteAccounts?.Count == 0;
 
         public bool AreTransactions => false;
         public bool NoTransactions => true;
@@ -98,6 +110,17 @@ namespace SmartBudget.Main.ViewModels
             }
 
             FavoriteAccounts = favoriteAccounts;
+
+            if (FavoriteAccounts.Count > 0)
+            {
+                NoAccounts = false;
+                AreAccounts = true;
+            }
+            else
+            {
+                NoAccounts = true;
+                AreAccounts = false;
+            }
         }
     }
 }
