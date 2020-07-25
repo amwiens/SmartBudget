@@ -32,7 +32,7 @@ namespace SmartBudget.Core.DataAccess
         {
         }
 
-        private string _dbPath;
+        private readonly string _dbPath;
 
         public DbSet<Account> Accounts { get; set; }
 

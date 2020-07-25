@@ -61,16 +61,20 @@ namespace SmartBudget.Main.ViewModels
 
         private void AllReports()
         {
-            var p = new NavigationParameters();
-            p.Add("area", "Reports");
+            var p = new NavigationParameters
+            {
+                { "area", "Reports" }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AllAccounts()
         {
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
@@ -80,9 +84,11 @@ namespace SmartBudget.Main.ViewModels
             if (account == null)
                 return;
 
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
-            p.Add("account", account);
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "account", account }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }

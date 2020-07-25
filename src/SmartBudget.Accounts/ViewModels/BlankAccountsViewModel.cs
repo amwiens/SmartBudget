@@ -20,18 +20,22 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void AddCardAccount()
         {
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
-            p.Add("page", "AddAccount");
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "page", "AddAccount" }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AddBankAccount()
         {
-            var p = new NavigationParameters();
-            p.Add("area", "Accounts");
-            p.Add("page", "AddAccount");
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "page", "AddAccount" }
+            };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }

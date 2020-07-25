@@ -8,8 +8,8 @@ using SmartBudget.Core.DataAccess;
 namespace SmartBudget.Core.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200723165205_initial")]
-    partial class initial
+    [Migration("20200723165205_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

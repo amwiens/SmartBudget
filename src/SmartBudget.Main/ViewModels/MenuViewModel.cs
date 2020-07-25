@@ -39,8 +39,10 @@ namespace SmartBudget.Main.ViewModels
         {
             if (navigatePath != null)
             {
-                var p = new NavigationParameters();
-                p.Add("Title", navigatePath);
+                var p = new NavigationParameters
+                {
+                    { "Title", navigatePath }
+                };
 
                 _regionManager.RequestNavigate("Content", navigatePath);
                 _regionManager.RequestNavigate("Topbar", "TopBar", p);
@@ -69,8 +71,10 @@ namespace SmartBudget.Main.ViewModels
             {
                 if (navigationParameters.ContainsKey("account"))
                 {
-                    var p = new NavigationParameters();
-                    p.Add("Title", navigatePath);
+                    var p = new NavigationParameters
+                    {
+                        { "Title", navigatePath }
+                    };
 
                     _regionManager.RequestNavigate("Content", "Account", navigationParameters);
                     _regionManager.RequestNavigate("Topbar", "TopBar", p);
@@ -80,8 +84,10 @@ namespace SmartBudget.Main.ViewModels
                 }
                 if (navigationParameters.ContainsKey("page"))
                 {
-                    var p = new NavigationParameters();
-                    p.Add("Title", navigatePath);
+                    var p = new NavigationParameters
+                    {
+                        { "Title", navigatePath }
+                    };
 
                     _regionManager.RequestNavigate("Content", "AddAccount");
                     _regionManager.RequestNavigate("Topbar", "TopBar", p);
