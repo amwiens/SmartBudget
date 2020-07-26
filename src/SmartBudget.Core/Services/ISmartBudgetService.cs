@@ -7,6 +7,8 @@ namespace SmartBudget.Core.Services
 {
     public interface ISmartBudgetService
     {
+        Account GetAccountItem(int id);
+
         Task<Account> AddAccountAsync(Account account);
 
         Task<Account> UpdateAccountAsync(Account account);

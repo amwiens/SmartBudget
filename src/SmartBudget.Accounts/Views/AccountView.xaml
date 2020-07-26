@@ -40,33 +40,15 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="1"
-                           Text="{Binding Name}"
+                           Text="{Binding Account.Name}"
                            Style="{StaticResource H4PrimaryDark}" />
 
                 <TextBlock Grid.Column="2"
-                           Text="$0.00"
+                           Text="{Binding Balance, StringFormat={}{0:C}}"
                            Style="{StaticResource H4SecondaryDark2}" />
             </Grid>
 
-            <!--<Grid Grid.Row="2"
-                  Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
-                           Text="Account type"
-                           Style="{StaticResource H5SecondaryDark2}" />
-                <ComboBox Grid.Column="1"
-                          ItemsSource="{Binding Path=AccountTypeCaptions}"
-                          DisplayMemberPath="Value"
-                          SelectedValuePath="Key"
-                          SelectedValue="{Binding Path=AccountType, Mode=TwoWay}"
-                          Width="200"
-                          FontFamily="{StaticResource RubikRegular}" />
-            </Grid>-->
-
-            <Grid Grid.Row="3"
+            <Grid Grid.Row="2"
                   Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -76,7 +58,21 @@
                            Text="Name"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBlock Grid.Column="1"
-                           Text="{Binding Name}"
+                           Text="{Binding Account.Name}"
+                           Style="{StaticResource H5PrimaryDark}" />
+            </Grid>
+
+            <Grid Grid.Row="3"
+                  Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Account number"
+                           Style="{StaticResource H5SecondaryDark2}" />
+                <TextBlock Grid.Column="1"
+                           Text="{Binding Account.AccountNumber}"
                            Style="{StaticResource H5PrimaryDark}" />
             </Grid>
 
@@ -87,10 +83,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Account number"
+                           Text="Rate"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBlock Grid.Column="1"
-                           Text="{Binding AccountNumber}"
+                           Text="{Binding Account.Rate, StringFormat={}{0:P2}}"
                            Style="{StaticResource H5PrimaryDark}" />
             </Grid>
 
@@ -101,10 +97,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Rate"
+                           Text="Start date"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBlock Grid.Column="1"
-                           Text="{Binding Rate}"
+                           Text="{Binding Account.StartDate, StringFormat={}{0:M/d/yyyy}}"
                            Style="{StaticResource H5PrimaryDark}" />
             </Grid>
 
@@ -115,10 +111,10 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Start date"
+                           Text="End date"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBlock Grid.Column="1"
-                           Text="{Binding StartDate}"
+                           Text="{Binding Account.EndDate, StringFormat={}{0:M/d/yyyy}}"
                            Style="{StaticResource H5PrimaryDark}" />
             </Grid>
 
@@ -129,28 +125,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="End date"
-                           Style="{StaticResource H5SecondaryDark2}" />
-                <TextBlock Grid.Column="1"
-                           Text="{Binding EndDate}"
-                           Style="{StaticResource H5PrimaryDark}" />
-            </Grid>
-
-            <Grid Grid.Row="8"
-                  Margin="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0"
                            Text="Starting balance"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBlock Grid.Column="1"
-                           Text="{Binding StartingAmount}"
+                           Text="{Binding Account.StartingAmount, StringFormat={}{0:C}}"
                            Style="{StaticResource H5PrimaryDark}" />
             </Grid>
 
-            <!--<Grid Grid.Row="9"
+            <!--<Grid Grid.Row="8"
                   Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
