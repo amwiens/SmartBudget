@@ -37,7 +37,7 @@
             <StackPanel Grid.Column="2"
                         Orientation="Vertical"
                         Margin="10">
-                <TextBlock Text="{Binding Balance}"
+                <TextBlock Text="{Binding Balance, StringFormat={}{0:C}}"
                            Style="{StaticResource H4PrimaryDark}" />
                 <TextBlock Text="Balance"
                            Style="{StaticResource H5SecondaryDark1}" />
@@ -46,7 +46,7 @@
             <StackPanel Grid.Column="3"
                         Orientation="Vertical"
                         Margin="10">
-                <TextBlock Text="{Binding Accured}"
+                <TextBlock Text="{Binding Accured, StringFormat={}{0:C}}"
                            Style="{StaticResource H4PrimaryDark}" />
                 <TextBlock Text="Accured"
                            Style="{StaticResource H5SecondaryDark1}" />
@@ -55,7 +55,7 @@
             <StackPanel Grid.Column="4"
                         Orientation="Vertical"
                         Margin="10">
-                <TextBlock Text="{Binding Rate}"
+                <TextBlock Text="{Binding Rate, StringFormat={}{0:P2}}"
                            Style="{StaticResource H4PrimaryDark}" />
                 <TextBlock Text="Rate"
                            Style="{StaticResource H5SecondaryDark1}" />
@@ -64,7 +64,7 @@
             <StackPanel Grid.Column="5"
                         Orientation="Vertical"
                         Margin="10">
-                <TextBlock Text="{Binding EndDate}"
+                <TextBlock Text="{Binding EndDate, StringFormat={}{0:M/d/yyyy}}"
                            Style="{StaticResource H4PrimaryDark}" />
                 <TextBlock Text="End date"
                            Style="{StaticResource H5SecondaryDark1}" />

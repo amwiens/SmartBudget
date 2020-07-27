@@ -60,7 +60,9 @@
                                               Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />
                 </Grid>
 
-                <Grid Grid.Row="1" Margin="0 10 0 0 ">
+                <Grid x:Name="favoriteAccountsGrid"
+                      Grid.Row="1"
+                      Margin="0 10 0 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
@@ -103,6 +105,11 @@
                                 <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfAccounts}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <controls:FavoriteAccounts />

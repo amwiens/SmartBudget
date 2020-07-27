@@ -173,6 +173,11 @@
                         <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfCardAccounts}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <controls:CardAccounts />
@@ -194,6 +199,11 @@
                         <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfDepositAccounts}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <controls:BankAccounts />
@@ -215,6 +225,11 @@
                         <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfCreditAccounts}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <controls:CreditAccounts />
