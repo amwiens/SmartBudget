@@ -16,13 +16,7 @@
                        Width="80"
                        Height="40"
                        Fill="{StaticResource BrushBackground3}"
-                       Margin="10"
-                       Cursor="Hand">
-                <Rectangle.InputBindings>
-                    <MouseBinding Command="{Binding AddCardAccountCommand}"
-                                  MouseAction="LeftClick" />
-                </Rectangle.InputBindings>
-            </Rectangle>
+                       Margin="10" />
 
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"
@@ -58,7 +52,13 @@
                     <materialdesign:PackIcon Kind="DotsHorizontal" />
                 </materialdesign:PopupBox.ToggleContent>
                 <StackPanel Orientation="Vertical">
-                    <TextBlock Text="EDIT" />
+                    <TextBlock Text="EDIT"
+                               Cursor="Hand">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding EditAccountCommand}"
+                                          MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
                     <TextBlock Text="DELETE" />
                 </StackPanel>
             </materialdesign:PopupBox>

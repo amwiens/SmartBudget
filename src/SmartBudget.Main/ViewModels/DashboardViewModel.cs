@@ -5,6 +5,7 @@ using Prism.Regions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -33,14 +34,11 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _areAccounts, value); }
         }
 
-        //=> FavoriteAccounts?.Count > 0;
         public bool NoAccounts
         {
             get { return _noAccounts; }
             set { SetProperty(ref _noAccounts, value); }
         }
-
-        //=> FavoriteAccounts?.Count == 0;
 
         public bool AreTransactions => false;
         public bool NoTransactions => true;
@@ -48,6 +46,8 @@ namespace SmartBudget.Main.ViewModels
         public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
         public DelegateCommand AllReportsCommand { get; private set; }
         public DelegateCommand AllAccountsCommand { get; private set; }
+        public DelegateCommand<Account> EditAccountCommand { get; private set; }
+
 
         public DashboardViewModel(IRegionManager regionManager,
             ISmartBudgetService smartBudgetService)
@@ -57,6 +57,21 @@ namespace SmartBudget.Main.ViewModels
             AllReportsCommand = new DelegateCommand(AllReports);
             AllAccountsCommand = new DelegateCommand(AllAccounts);
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
+            EditAccountCommand = new DelegateCommand<Account>(EditAccount);
+        }
+
+        private void EditAccount(Account account)
+        {
+            if (account == null)
+                return;
+
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "account", account }
+            };
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
         private void AllReports()
