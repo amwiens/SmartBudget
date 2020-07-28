@@ -5,7 +5,6 @@ using Prism.Regions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
-using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -46,8 +45,8 @@ namespace SmartBudget.Main.ViewModels
         public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
         public DelegateCommand AllReportsCommand { get; private set; }
         public DelegateCommand AllAccountsCommand { get; private set; }
-        public DelegateCommand<Account> EditAccountCommand { get; private set; }
-
+        public DelegateCommand EditAccountCommand { get; private set; }
+        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
         public DashboardViewModel(IRegionManager regionManager,
             ISmartBudgetService smartBudgetService)
@@ -57,10 +56,25 @@ namespace SmartBudget.Main.ViewModels
             AllReportsCommand = new DelegateCommand(AllReports);
             AllAccountsCommand = new DelegateCommand(AllAccounts);
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
-            EditAccountCommand = new DelegateCommand<Account>(EditAccount);
+            EditAccountCommand = new DelegateCommand(EditAccount);
+            DeleteAccountCommand = new DelegateCommand<Account>(DeleteAccount);
         }
 
-        private void EditAccount(Account account)
+        private void EditAccount()
+        {
+            //if (account == null)
+            //    return;
+
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                //{ "account", account }
+            };
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+        }
+
+        private void DeleteAccount(Account account)
         {
             if (account == null)
                 return;

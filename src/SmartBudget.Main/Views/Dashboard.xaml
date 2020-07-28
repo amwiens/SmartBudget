@@ -6,7 +6,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
-             xmlns:controls="clr-namespace:SmartBudget.Main.Controls">
+             xmlns:controls="clr-namespace:SmartBudget.Main.Controls"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -112,7 +113,68 @@
                         </ListView.ItemContainerStyle>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:FavoriteAccounts />
+                                <Grid Background="{StaticResource BrushPrimary2}">
+                                    <Grid Margin="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="2*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Rectangle Grid.Column="0"
+                                                   Width="80"
+                                                   Height="40"
+                                                   Fill="{StaticResource BrushBackground3}"
+                                                   Margin="10" />
+
+                                        <StackPanel Grid.Column="1"
+                                                    Orientation="Vertical"
+                                                    Margin="10">
+                                            <TextBlock Text="{Binding Name}"
+                                                       Style="{StaticResource H4PrimaryDark}" />
+                                            <TextBlock Text="Name"
+                                                       Style="{StaticResource H5SecondaryDark1}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="2"
+                                                    Orientation="Vertical"
+                                                    Margin="10">
+                                            <TextBlock Text="{Binding Balance, StringFormat={}{0:C}}"
+                                                       Style="{StaticResource H4PrimaryDark}" />
+                                            <TextBlock Text="Balance"
+                                                       Style="{StaticResource H5SecondaryDark1}" />
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="3"
+                                                    Orientation="Vertical"
+                                                    Margin="10">
+                                            <TextBlock Text="{Binding Status}"
+                                                       Style="{StaticResource H4PrimaryDark}" />
+                                            <TextBlock Text="Status"
+                                                       Style="{StaticResource H5SecondaryDark1}" />
+                                        </StackPanel>
+
+                                        <materialdesign:PopupBox PlacementMode="TopAndAlignLeftEdges"
+                                                                 VerticalAlignment="Center"
+                                                                 Grid.Column="4">
+                                            <materialdesign:PopupBox.ToggleContent>
+                                                <materialdesign:PackIcon Kind="DotsHorizontal" />
+                                            </materialdesign:PopupBox.ToggleContent>
+                                            <StackPanel Orientation="Vertical">
+                                                <TextBlock Text="EDIT"
+                                                           Cursor="Hand">
+                                                    <TextBlock.InputBindings>
+                                                        <MouseBinding Command="{Binding EditAccountCommand}"
+                                                                      MouseAction="LeftClick" />
+                                                    </TextBlock.InputBindings>
+                                                </TextBlock>
+                                                <TextBlock Text="DELETE" />
+                                            </StackPanel>
+                                        </materialdesign:PopupBox>
+                                    </Grid>
+                                </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
