@@ -60,8 +60,7 @@
                           DisplayMemberPath="Value"
                           SelectedValuePath="Key"
                           SelectedValue="{Binding Path=AccountType, Mode=TwoWay}"
-                          Width="200"
-                          FontFamily="{StaticResource RubikRegular}" />
+                          Width="200" />
             </Grid>
 
             <Grid Grid.Row="3"
@@ -72,11 +71,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="Name"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding Name}"
-                         Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         Width="200" />
             </Grid>
 
             <Grid Grid.Row="4"
@@ -87,11 +86,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="Account number"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding AccountNumber}"
-                         Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         Width="200" />
             </Grid>
 
             <Grid Grid.Row="5"
@@ -102,11 +101,12 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="Rate"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding Rate}"
                          Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         TextAlignment="Right" />
             </Grid>
 
             <Grid Grid.Row="6"
@@ -117,11 +117,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="Start date"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding StartDate}"
-                         Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         Width="200" />
             </Grid>
 
             <Grid Grid.Row="7"
@@ -132,11 +132,11 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="End date"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding EndDate}"
-                         Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         Width="200" />
             </Grid>
 
             <Grid Grid.Row="8"
@@ -147,11 +147,12 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
                            Text="Starting balance"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding StartingAmount}"
                          Width="200"
-                         FontFamily="{StaticResource RubikRegular}" />
+                         TextAlignment="Right" />
             </Grid>
 
             <Grid Grid.Row="9"
@@ -163,10 +164,11 @@
                             Orientation="Horizontal"
                             HorizontalAlignment="Right">
                     <Button Grid.Column="0"
-                            Content="Save"
-                            Command="{Binding SaveAccountCommand}" />
+                            Content="SAVE"
+                            Command="{Binding SaveAccountCommand}"
+                            Style="{StaticResource PrimaryButton}" />
                     <Button Margin="10 0 0 0"
-                            Content="Cancel" />
+                            Content="CANCEL" />
                 </StackPanel>
             </Grid>
         </Grid>
