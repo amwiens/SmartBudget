@@ -8,7 +8,7 @@ namespace SmartBudget.Main
 {
     public class MainModule : IModule
     {
-        private IRegionManager _regionManager;
+        private readonly IRegionManager _regionManager;
 
         public MainModule(IRegionManager regionManager)
         {
