@@ -1,6 +1,8 @@
-﻿<UserControl x:Class="SmartBudget.Main.Controls.BlankAccounts"
+﻿<UserControl x:Class="SmartBudget.Main.Views.BlankAccounts"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid Background="{StaticResource BrushPrimary2}">
         <TextBlock Text="Your favorite accounts will appear here"
                    HorizontalAlignment="Center"

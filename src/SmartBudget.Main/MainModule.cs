@@ -24,6 +24,9 @@ namespace SmartBudget.Main
             containerRegistry.RegisterForNavigation<Menu>();
             containerRegistry.RegisterForNavigation<TopBar>();
             containerRegistry.RegisterForNavigation<Dashboard>();
+            containerRegistry.RegisterForNavigation<BlankTransactions>();
+            containerRegistry.RegisterForNavigation<BlankAccounts>();
+            containerRegistry.RegisterForNavigation<BlankStatistics>();
             _regionManager.RequestNavigate("Sidebar", "Menu");
         }
     }

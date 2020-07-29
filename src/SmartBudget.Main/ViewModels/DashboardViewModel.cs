@@ -53,6 +53,7 @@ namespace SmartBudget.Main.ViewModels
         {
             _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
+
             AllReportsCommand = new DelegateCommand(AllReports);
             AllAccountsCommand = new DelegateCommand(AllAccounts);
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
@@ -134,6 +135,10 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetFavoriteAccounts();
+
+            _regionManager.RequestNavigate("DashboardStatistics", "BlankStatistics");
+            _regionManager.RequestNavigate("DashboardTransactions", "BlankTransactions");
+            _regionManager.RequestNavigate("DashboardFavoriteAccounts", "BlankAccounts");
         }
 
         private void GetFavoriteAccounts()

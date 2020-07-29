@@ -6,7 +6,6 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
-             xmlns:controls="clr-namespace:SmartBudget.Main.Controls"
              xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
@@ -57,8 +56,10 @@
                         </TextBlock>
                     </Grid>
 
-                    <controls:BlankStatistics Grid.Row="1"
-                                              Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />
+                    <!--<controls:BlankStatistics Grid.Row="1"
+                                              Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />-->
+                    <ContentControl Grid.Row="1"
+                                    prism:RegionManager.RegionName="DashboardStatistics" />
                 </Grid>
 
                 <Grid x:Name="favoriteAccountsGrid"
@@ -92,7 +93,10 @@
                         </TextBlock>
                     </Grid>
 
-                    <Grid Grid.Row="1"
+                    <ContentControl Grid.Row="1"
+                                    prism:RegionManager.RegionName="DashboardFavoriteAccounts" />
+
+                    <!--<Grid Grid.Row="1"
                           Visibility="{Binding NoAccounts, Converter={StaticResource BoolToVisibilityConverter}}">
                         <controls:BlankAccounts />
                     </Grid>
@@ -177,7 +181,7 @@
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
+                    </ListView>-->
                 </Grid>
             </Grid>
         </Border>
@@ -206,8 +210,8 @@
                                VerticalAlignment="Center" />
                 </Grid>
 
-                <controls:BlankTransactions Grid.Row="1"
-                                            Visibility="{Binding NoTransactions, Converter={StaticResource BoolToVisibilityConverter}}" />
+                <ContentControl Grid.Row="1"
+                                prism:RegionManager.RegionName="DashboardTransactions" />
             </Grid>
         </Border>
     </Grid>

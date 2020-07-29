@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace SmartBudget.Main.Controls
+namespace SmartBudget.Main.Views
 {
     /// <summary>
     /// Interaction logic for BlankTransactions.xaml
