@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace SmartBudget.Main.ViewModels
 {
-    public class DashboardViewModel : BindableBase, INavigationAware
+    public class FavoriteAccountsViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
         private readonly ISmartBudgetService _smartBudgetService;
@@ -22,34 +22,58 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _favoriteAccounts, value); }
         }
 
-        public DelegateCommand AllReportsCommand { get; private set; }
-        public DelegateCommand AllAccountsCommand { get; private set; }
+        public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
+        public DelegateCommand EditAccountCommand { get; private set; }
+        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
-        public DashboardViewModel(IRegionManager regionManager,
+        public FavoriteAccountsViewModel(IRegionManager regionManager,
             ISmartBudgetService smartBudgetService)
         {
             _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
 
-            AllReportsCommand = new DelegateCommand(AllReports);
-            AllAccountsCommand = new DelegateCommand(AllAccounts);
+            AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
+            EditAccountCommand = new DelegateCommand(EditAccount);
+            DeleteAccountCommand = new DelegateCommand<Account>(DeleteAccount);
         }
 
-        private void AllReports()
+        private void AccountSelected(Account account)
         {
+            if (account == null)
+                return;
+
             var p = new NavigationParameters
             {
-                { "area", "Reports" }
+                { "area", "Accounts" },
+                { "account", account }
             };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
         }
 
-        private void AllAccounts()
+        private void EditAccount()
         {
+            //if (account == null)
+            //    return;
+
             var p = new NavigationParameters
             {
-                { "area", "Accounts" }
+                { "area", "Accounts" },
+                //{ "account", account }
+            };
+
+            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+        }
+
+        private void DeleteAccount(Account account)
+        {
+            if (account == null)
+                return;
+
+            var p = new NavigationParameters
+            {
+                { "area", "Accounts" },
+                { "account", account }
             };
 
             _regionManager.RequestNavigate("Sidebar", "Menu", p);
@@ -67,13 +91,6 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetFavoriteAccounts();
-
-            _regionManager.RequestNavigate("DashboardStatistics", "BlankStatistics");
-            _regionManager.RequestNavigate("DashboardTransactions", "BlankTransactions");
-            if (FavoriteAccounts.Count > 0)
-                _regionManager.RequestNavigate("DashboardFavoriteAccounts", "FavoriteAccounts");
-            else
-                _regionManager.RequestNavigate("DashboardFavoriteAccounts", "BlankAccounts");
         }
 
         private void GetFavoriteAccounts()

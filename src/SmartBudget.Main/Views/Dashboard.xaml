@@ -3,10 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:SmartBudget.Main.Views"
              xmlns:prism="http://prismlibrary.com/"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
@@ -56,8 +54,6 @@
                         </TextBlock>
                     </Grid>
 
-                    <!--<controls:BlankStatistics Grid.Row="1"
-                                              Visibility="{Binding NoStatistics, Converter={StaticResource BoolToVisibilityConverter}}" />-->
                     <ContentControl Grid.Row="1"
                                     prism:RegionManager.RegionName="DashboardStatistics" />
                 </Grid>
@@ -95,93 +91,6 @@
 
                     <ContentControl Grid.Row="1"
                                     prism:RegionManager.RegionName="DashboardFavoriteAccounts" />
-
-                    <!--<Grid Grid.Row="1"
-                          Visibility="{Binding NoAccounts, Converter={StaticResource BoolToVisibilityConverter}}">
-                        <controls:BlankAccounts />
-                    </Grid>
-                    <ListView x:Name="_listOfAccounts"
-                              Grid.Row="1"
-                              ItemsSource="{Binding FavoriteAccounts}"
-                              BorderThickness="0"
-                              Visibility="{Binding AreAccounts, Converter={StaticResource BoolToVisibilityConverter}}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfAccounts}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Background="{StaticResource BrushPrimary2}">
-                                    <Grid Margin="10">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="2*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-
-                                        <Rectangle Grid.Column="0"
-                                                   Width="80"
-                                                   Height="40"
-                                                   Fill="{StaticResource BrushBackground3}"
-                                                   Margin="10" />
-
-                                        <StackPanel Grid.Column="1"
-                                                    Orientation="Vertical"
-                                                    Margin="10">
-                                            <TextBlock Text="{Binding Name}"
-                                                       Style="{StaticResource H4PrimaryDark}" />
-                                            <TextBlock Text="Name"
-                                                       Style="{StaticResource H5SecondaryDark1}" />
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="2"
-                                                    Orientation="Vertical"
-                                                    Margin="10">
-                                            <TextBlock Text="{Binding Balance, StringFormat={}{0:C}}"
-                                                       Style="{StaticResource H4PrimaryDark}" />
-                                            <TextBlock Text="Balance"
-                                                       Style="{StaticResource H5SecondaryDark1}" />
-                                        </StackPanel>
-
-                                        <StackPanel Grid.Column="3"
-                                                    Orientation="Vertical"
-                                                    Margin="10">
-                                            <TextBlock Text="{Binding Status}"
-                                                       Style="{StaticResource H4PrimaryDark}" />
-                                            <TextBlock Text="Status"
-                                                       Style="{StaticResource H5SecondaryDark1}" />
-                                        </StackPanel>
-
-                                        <materialdesign:PopupBox PlacementMode="TopAndAlignLeftEdges"
-                                                                 VerticalAlignment="Center"
-                                                                 Grid.Column="4">
-                                            <materialdesign:PopupBox.ToggleContent>
-                                                <materialdesign:PackIcon Kind="DotsHorizontal" />
-                                            </materialdesign:PopupBox.ToggleContent>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock Text="EDIT"
-                                                           Cursor="Hand">
-                                                    <TextBlock.InputBindings>
-                                                        <MouseBinding Command="{Binding EditAccountCommand}"
-                                                                      MouseAction="LeftClick" />
-                                                    </TextBlock.InputBindings>
-                                                </TextBlock>
-                                                <TextBlock Text="DELETE" />
-                                            </StackPanel>
-                                        </materialdesign:PopupBox>
-                                    </Grid>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>-->
                 </Grid>
             </Grid>
         </Border>
