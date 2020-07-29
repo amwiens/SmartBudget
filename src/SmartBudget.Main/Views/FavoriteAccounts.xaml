@@ -72,14 +72,27 @@
                                     <materialdesign:PackIcon Kind="DotsHorizontal" />
                                 </materialdesign:PopupBox.ToggleContent>
                                 <StackPanel Orientation="Vertical">
-                                    <TextBlock Text="EDIT"
-                                               Cursor="Hand">
+                                    <Button Content="EDIT"
+                                            Command="{Binding EditAccountCommand}" />
+                                    <!--CommandParameter="{Binding Id}" />-->
+                                    <!--<TextBlock Text="EDIT"
+                                               Cursor="Hand"
+                                               Padding="3">
                                         <TextBlock.InputBindings>
                                             <MouseBinding Command="{Binding EditAccountCommand}"
+                                                          CommandParameter="{Binding Id}"
+                                                          MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>-->
+                                    <TextBlock Text="DELETE"
+                                               Cursor="Hand"
+                                               Padding="3">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding DeleteAccountCommand}"
+                                                          CommandParameter="{Binding Id}"
                                                           MouseAction="LeftClick" />
                                         </TextBlock.InputBindings>
                                     </TextBlock>
-                                    <TextBlock Text="DELETE" />
                                 </StackPanel>
                             </materialdesign:PopupBox>
                         </Grid>
