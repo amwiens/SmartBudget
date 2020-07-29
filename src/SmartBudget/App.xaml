@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/Styles/TextBlocks.xaml" />
                 <ResourceDictionary Source="Resources/Styles/TextBoxes.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Buttons.xaml" />
+                <ResourceDictionary Source="Resources/Styles/DatePicker.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Menu.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

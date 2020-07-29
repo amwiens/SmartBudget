@@ -119,9 +119,9 @@
                            Text="Start date"
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
-                <TextBox Grid.Column="1"
-                         Text="{Binding StartDate}"
-                         Width="200" />
+                <DatePicker Grid.Column="1"
+                            Text="{Binding StartDate}"
+                            Width="200" />
             </Grid>
 
             <Grid Grid.Row="7"
@@ -134,9 +134,9 @@
                            Text="End date"
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
-                <TextBox Grid.Column="1"
-                         Text="{Binding EndDate}"
-                         Width="200" />
+                <DatePicker Grid.Column="1"
+                            Text="{Binding EndDate}"
+                            Width="200" />
             </Grid>
 
             <Grid Grid.Row="8"
