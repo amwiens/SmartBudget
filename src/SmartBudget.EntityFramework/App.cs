@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace SmartBudget.Core
+namespace SmartBudget.EntityFramework
 {
     public class App
     {

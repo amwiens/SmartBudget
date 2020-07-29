@@ -4,6 +4,7 @@ using Prism.Modularity;
 
 using SmartBudget.Accounts;
 using SmartBudget.Core.Services;
+using SmartBudget.EntityFramework.Services;
 using SmartBudget.Main;
 using SmartBudget.Views;
 

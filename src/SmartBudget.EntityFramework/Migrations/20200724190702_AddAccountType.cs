@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SmartBudget.Core.Migrations
+namespace SmartBudget.EntityFramework.Migrations
 {
     public partial class AddAccountType : Migration
     {

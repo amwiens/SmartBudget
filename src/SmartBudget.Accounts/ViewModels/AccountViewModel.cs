@@ -12,6 +12,7 @@ namespace SmartBudget.Accounts.ViewModels
         private readonly ISmartBudgetService _smartBudgetService;
 
         private Account _account;
+
         public Account Account
         {
             get { return _account; }
@@ -19,6 +20,7 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         private decimal _balance = 0.00M;
+
         public decimal Balance
         {
             get { return _balance; }

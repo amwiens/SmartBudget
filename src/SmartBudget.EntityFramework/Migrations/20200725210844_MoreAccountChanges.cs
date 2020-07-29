@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SmartBudget.Core.Migrations
+namespace SmartBudget.EntityFramework.Migrations
 {
     public partial class MoreAccountChanges : Migration
     {

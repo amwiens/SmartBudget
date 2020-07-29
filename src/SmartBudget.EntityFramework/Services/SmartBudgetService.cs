@@ -1,12 +1,13 @@
-﻿using SmartBudget.Core.DataAccess;
-using SmartBudget.Core.Models;
+﻿using SmartBudget.Core.Models;
+using SmartBudget.Core.Services;
+using SmartBudget.EntityFramework.DataAccess;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SmartBudget.Core.Services
+namespace SmartBudget.EntityFramework.Services
 {
     public class SmartBudgetService : ISmartBudgetService
     {

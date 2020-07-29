@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SmartBudget.Core.DataAccess;
+using SmartBudget.EntityFramework.DataAccess;
 
-namespace SmartBudget.Core.Migrations
+namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200723165205_Initial")]
-    partial class Initial
+    [Migration("20200724190702_AddAccountType")]
+    partial class AddAccountType
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,12 @@ namespace SmartBudget.Core.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("Favorite")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")

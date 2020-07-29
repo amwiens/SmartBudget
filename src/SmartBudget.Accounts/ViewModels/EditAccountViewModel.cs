@@ -30,7 +30,6 @@ namespace SmartBudget.Accounts.ViewModels
                 { AccountType.Credit, "Credit Account" }
             };
 
-
         public DelegateCommand UpdateAccountCommand { get; private set; }
         public DelegateCommand CancelCommand { get; private set; }
 

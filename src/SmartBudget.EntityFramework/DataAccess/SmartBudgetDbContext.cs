@@ -4,7 +4,7 @@ using SmartBudget.Core.Models;
 
 using System.IO;
 
-namespace SmartBudget.Core.DataAccess
+namespace SmartBudget.EntityFramework.DataAccess
 {
     public class SmartBudgetDbContext : DbContext
     {
@@ -15,7 +15,7 @@ namespace SmartBudget.Core.DataAccess
                 var fs = File.Create(dbPath);
                 fs.Close();
             }
-            SmartBudgetDbContext ctx = new DataAccess.SmartBudgetDbContext(dbPath);
+            SmartBudgetDbContext ctx = new SmartBudgetDbContext(dbPath);
             //if (!ctx.Database.EnsureCreated())
             ctx.Database.Migrate();
             //SeedData.AddSampleData(ctx);
