@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
 {
@@ -11,12 +10,8 @@ namespace SmartBudget.Core.Models
         Credit
     }
 
-    public class Account
+    public class Account : DomainObject
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
-
         [Required]
         public string Name { get; set; }
 

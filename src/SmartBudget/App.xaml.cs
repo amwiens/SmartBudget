@@ -3,6 +3,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 
 using SmartBudget.Accounts;
+using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 using SmartBudget.EntityFramework.Services;
 using SmartBudget.Main;
@@ -25,6 +26,7 @@ namespace SmartBudget
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ISmartBudgetService, SmartBudgetService>();
+            containerRegistry.RegisterSingleton<IDataService<Account>, AccountDataService>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

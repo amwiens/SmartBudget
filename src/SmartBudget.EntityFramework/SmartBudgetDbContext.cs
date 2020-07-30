@@ -27,9 +27,10 @@ namespace SmartBudget.EntityFramework
             _dbPath = dbPath;
         }
 
-        public SmartBudgetDbContext(DbContextOptions<SmartBudgetDbContext> options)
+        public SmartBudgetDbContext(DbContextOptions<SmartBudgetDbContext> options, string dbPath)
             : base(options)
         {
+            _dbPath = dbPath;
         }
 
         private readonly string _dbPath;

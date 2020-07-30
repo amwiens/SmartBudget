@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
+using System;
 using System.IO;
 
 namespace SmartBudget.EntityFramework
@@ -10,9 +11,10 @@ namespace SmartBudget.EntityFramework
         public SmartBudgetDbContext CreateDbContext(string[] args = null)
         {
             var options = new DbContextOptionsBuilder<SmartBudgetDbContext>();
-            options.UseSqlite(Path.Combine(System.Reflection.Assembly.GetExecutingAssembly().CodeBase, "smartBudget.db"));
+            var dbPath = Path.Combine(Environment.CurrentDirectory, "smartBudget.db");
+            options.UseSqlite(dbPath);
 
-            return new SmartBudgetDbContext(options.Options);
+            return new SmartBudgetDbContext(options.Options, dbPath);
         }
     }
 }

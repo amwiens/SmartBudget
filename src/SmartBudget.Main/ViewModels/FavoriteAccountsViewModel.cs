@@ -14,6 +14,7 @@ namespace SmartBudget.Main.ViewModels
     {
         private readonly IRegionManager _regionManager;
         private readonly ISmartBudgetService _smartBudgetService;
+        private readonly IDataService<Account> _accountService;
         private ObservableCollection<Account> _favoriteAccounts;
 
         public ObservableCollection<Account> FavoriteAccounts
@@ -27,10 +28,12 @@ namespace SmartBudget.Main.ViewModels
         public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
         public FavoriteAccountsViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService)
+            ISmartBudgetService smartBudgetService,
+            IDataService<Account> accountService)
         {
             _regionManager = regionManager;
             _smartBudgetService = smartBudgetService;
+            _accountService = accountService;
 
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
             EditAccountCommand = new DelegateCommand(EditAccount);
@@ -93,12 +96,12 @@ namespace SmartBudget.Main.ViewModels
             GetFavoriteAccounts();
         }
 
-        private void GetFavoriteAccounts()
+        private async void GetFavoriteAccounts()
         {
             var favoriteAccounts = new ObservableCollection<Account>();
-            var accounts = _smartBudgetService.GetAccounts().Where(a => a.Favorite == true);
+            var accounts = await _accountService.GetAll();
 
-            foreach (var account in accounts)
+            foreach (var account in accounts.Where(a => a.Favorite == true))
             {
                 favoriteAccounts.Add(account);
             }
