@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <None Remove="Controls\**" />
+    <Page Remove="Controls\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Icons\accounts.png" />
     <None Remove="Resources\Icons\add.png" />
     <None Remove="Resources\Icons\add_primary.png" />
@@ -48,10 +55,6 @@
     <Resource Include="Resources\Icons\settings.png" />
     <Resource Include="Resources\Images\blank_statistics.png" />
     <Resource Include="Resources\Images\blank_transactions.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controls\" />
   </ItemGroup>
 
 </Project>
