@@ -4,7 +4,7 @@ using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-
+using SmartBudget.Core;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -132,6 +132,11 @@ namespace SmartBudget.Accounts.ViewModels
         {
             GetCardsBalance();
             GetAccounts();
+
+            //if (CardAccounts.Count > 0 || BankAccounts.Count > 0 || CreditAccounts.Count > 0)
+            //    _regionManager.RequestNavigate("AccountsContent", "BlankAccounts");
+            //else
+            _regionManager.RequestNavigate(RegionNames.AccountsContent, "BlankAccounts");
         }
 
         private void GetCardsBalance()

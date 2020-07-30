@@ -65,7 +65,7 @@
                        Margin="10"
                        Cursor="Hand">
                 <Rectangle.InputBindings>
-                    <MouseBinding Command="{Binding AddCardAccountCommand}"
+                    <MouseBinding Command="{Binding AddAccountCommand}"
                                   MouseAction="LeftClick" />
                 </Rectangle.InputBindings>
             </Rectangle>
@@ -75,7 +75,7 @@
                    VerticalAlignment="Center"
                    Cursor="Hand">
                 <Image.InputBindings>
-                    <MouseBinding Command="{Binding AddCardAccountCommand}"
+                    <MouseBinding Command="{Binding AddAccountCommand}"
                                   MouseAction="LeftClick" />
                 </Image.InputBindings>
             </Image>
@@ -135,7 +135,7 @@
                        Margin="10"
                        Cursor="Hand">
                 <Rectangle.InputBindings>
-                    <MouseBinding Command="{Binding AddBankAccountCommand}"
+                    <MouseBinding Command="{Binding AddAccountCommand}"
                                   MouseAction="LeftClick" />
                 </Rectangle.InputBindings>
             </Rectangle>
@@ -145,7 +145,7 @@
                    VerticalAlignment="Center"
                    Cursor="Hand">
                 <Image.InputBindings>
-                    <MouseBinding Command="{Binding AddBankAccountCommand}"
+                    <MouseBinding Command="{Binding AddAccountCommand}"
                                   MouseAction="LeftClick" />
                 </Image.InputBindings>
             </Image>

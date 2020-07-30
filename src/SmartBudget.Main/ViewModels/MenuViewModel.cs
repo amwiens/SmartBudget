@@ -1,8 +1,12 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
+
+using System;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -28,11 +32,29 @@ namespace SmartBudget.Main.ViewModels
 
         public DelegateCommand<string> NavigateCommand { get; private set; }
 
-        public MenuViewModel(IRegionManager regionManager)
+        public MenuViewModel(IRegionManager regionManager,
+            IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
-
+            eventAggregator.GetEvent<NavigationEvent>().Subscribe(OnNavigationReceived);
             NavigateCommand = new DelegateCommand<string>(Navigate);
+        }
+
+        private void OnNavigationReceived(string message)
+        {
+            DashboardChecked = false;
+            AccountsChecked = false;
+
+            switch (message)
+            {
+                case "Dashboard":
+                    DashboardChecked = true;
+                    break;
+
+                case "Accounts":
+                    AccountsChecked = true;
+                    break;
+            }
         }
 
         private void Navigate(string navigatePath)
