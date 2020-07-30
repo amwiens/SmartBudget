@@ -1,6 +1,5 @@
 ﻿using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
-using SmartBudget.EntityFramework.DataAccess;
 
 using System;
 using System.Collections.Generic;

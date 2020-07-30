@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 using System.IO;
 
-namespace SmartBudget.EntityFramework.DataAccess
+namespace SmartBudget.EntityFramework
 {
     public class SmartBudgetDbContextFactory : IDesignTimeDbContextFactory<SmartBudgetDbContext>
     {

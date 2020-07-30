@@ -17,4 +17,8 @@
     <ProjectReference Include="..\SmartBudget.Core\SmartBudget.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\" />
+  </ItemGroup>
+
 </Project>

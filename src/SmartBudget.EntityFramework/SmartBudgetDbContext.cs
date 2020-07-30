@@ -4,7 +4,7 @@ using SmartBudget.Core.Models;
 
 using System.IO;
 
-namespace SmartBudget.EntityFramework.DataAccess
+namespace SmartBudget.EntityFramework
 {
     public class SmartBudgetDbContext : DbContext
     {

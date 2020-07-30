@@ -5,12 +5,12 @@ namespace SmartBudget.EntityFramework
 {
     public class App
     {
-        public static DataAccess.SmartBudgetDbContext CreateDatabase()
+        public static SmartBudgetDbContext CreateDatabase()
         {
             // Database
             string dbLocation = Path.Combine(Environment.CurrentDirectory, "smartBudget.db");
             System.Diagnostics.Debug.WriteLine($"Database location: {dbLocation}");
-            DataAccess.SmartBudgetDbContext ctx = DataAccess.SmartBudgetDbContext.Create(dbLocation);
+            SmartBudgetDbContext ctx = SmartBudgetDbContext.Create(dbLocation);
             return ctx;
         }
     }
