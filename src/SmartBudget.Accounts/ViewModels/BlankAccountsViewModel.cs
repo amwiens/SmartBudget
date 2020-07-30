@@ -31,7 +31,6 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -41,7 +40,6 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
-
         }
     }
 }

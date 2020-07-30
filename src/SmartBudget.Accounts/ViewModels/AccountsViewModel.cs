@@ -4,6 +4,7 @@ using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
+
 using SmartBudget.Core;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;

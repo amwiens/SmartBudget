@@ -1,6 +1,7 @@
 ﻿<Window x:Class="SmartBudget.Views.ShellWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:core="clr-namespace:SmartBudget.Core;assembly=SmartBudget.Core"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="450" Width="800">
@@ -13,8 +14,7 @@
         <Border Grid.Column="0"
                 BorderBrush="{StaticResource BrushOutline}"
                 BorderThickness="0 0 1 0">
-            <!--<TextBlock Text="SmartBudget" />-->
-            <ContentControl prism:RegionManager.RegionName="Sidebar" />
+            <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.Sidebar}" />
         </Border>
 
         <Grid Grid.Column="1">
@@ -26,11 +26,11 @@
             <Border Grid.Row="0"
                     BorderBrush="{StaticResource BrushOutline}"
                     BorderThickness="0 0 0 1">
-                <ContentControl prism:RegionManager.RegionName="Topbar" />
+                <ContentControl prism:RegionManager.RegionName="{x:Static core:RegionNames.Topbar}" />
             </Border>
 
             <ContentControl Grid.Row="1"
-                            prism:RegionManager.RegionName="Content" />
+                            prism:RegionManager.RegionName="{x:Static core:RegionNames.Content}" />
         </Grid>
     </Grid>
 </Window>

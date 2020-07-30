@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -42,7 +43,7 @@ namespace SmartBudget.Main.ViewModels
                 { "area", "Reports" }
             };
 
-            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         private void AllAccounts()
@@ -52,7 +53,7 @@ namespace SmartBudget.Main.ViewModels
                 { "area", "Accounts" }
             };
 
-            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -68,12 +69,12 @@ namespace SmartBudget.Main.ViewModels
         {
             GetFavoriteAccounts();
 
-            _regionManager.RequestNavigate("DashboardStatistics", "BlankStatistics");
-            _regionManager.RequestNavigate("DashboardTransactions", "BlankTransactions");
+            _regionManager.RequestNavigate(RegionNames.DashboardStatistics, "BlankStatistics");
+            _regionManager.RequestNavigate(RegionNames.DashboardTransactions, "BlankTransactions");
             if (FavoriteAccounts.Count > 0)
-                _regionManager.RequestNavigate("DashboardFavoriteAccounts", "FavoriteAccounts");
+                _regionManager.RequestNavigate(RegionNames.DashboardFavoriteAccounts, "FavoriteAccounts");
             else
-                _regionManager.RequestNavigate("DashboardFavoriteAccounts", "BlankAccounts");
+                _regionManager.RequestNavigate(RegionNames.DashboardFavoriteAccounts, "BlankAccounts");
         }
 
         private async void GetFavoriteAccounts()

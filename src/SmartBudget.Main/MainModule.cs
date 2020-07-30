@@ -2,6 +2,7 @@
 using Prism.Modularity;
 using Prism.Regions;
 
+using SmartBudget.Core;
 using SmartBudget.Main.Views;
 
 namespace SmartBudget.Main
@@ -28,7 +29,7 @@ namespace SmartBudget.Main
             containerRegistry.RegisterForNavigation<BlankAccounts>();
             containerRegistry.RegisterForNavigation<BlankStatistics>();
             containerRegistry.RegisterForNavigation<FavoriteAccounts>();
-            _regionManager.RequestNavigate("Sidebar", "Menu");
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu");
         }
     }
 }

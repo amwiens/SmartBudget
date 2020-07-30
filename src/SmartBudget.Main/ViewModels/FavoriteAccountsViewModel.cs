@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -48,7 +49,7 @@ namespace SmartBudget.Main.ViewModels
                 { "account", account }
             };
 
-            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         private void EditAccount()
@@ -62,7 +63,7 @@ namespace SmartBudget.Main.ViewModels
                 //{ "account", account }
             };
 
-            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         private void DeleteAccount(Account account)
@@ -76,7 +77,7 @@ namespace SmartBudget.Main.ViewModels
                 { "account", account }
             };
 
-            _regionManager.RequestNavigate("Sidebar", "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -3,10 +3,9 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
-
-using System;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -66,8 +65,8 @@ namespace SmartBudget.Main.ViewModels
                     { "Title", navigatePath }
                 };
 
-                _regionManager.RequestNavigate("Content", navigatePath);
-                _regionManager.RequestNavigate("Topbar", "TopBar", p);
+                _regionManager.RequestNavigate(RegionNames.Content, navigatePath);
+                _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
 
                 switch (navigatePath)
                 {
@@ -98,8 +97,8 @@ namespace SmartBudget.Main.ViewModels
                         { "Title", navigatePath }
                     };
 
-                    _regionManager.RequestNavigate("Content", "Account", navigationParameters);
-                    _regionManager.RequestNavigate("Topbar", "TopBar", p);
+                    _regionManager.RequestNavigate(RegionNames.Content, "Account", navigationParameters);
+                    _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
 
                     DashboardChecked = false;
                     AccountsChecked = true;
@@ -111,8 +110,8 @@ namespace SmartBudget.Main.ViewModels
                         { "Title", navigatePath }
                     };
 
-                    _regionManager.RequestNavigate("Content", "AddAccount");
-                    _regionManager.RequestNavigate("Topbar", "TopBar", p);
+                    _regionManager.RequestNavigate(RegionNames.Content, "AddAccount");
+                    _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
 
                     DashboardChecked = false;
                     AccountsChecked = true;

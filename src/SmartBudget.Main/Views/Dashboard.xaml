@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="SmartBudget.Main.Views.Dashboard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:SmartBudget.Core;assembly=SmartBudget.Core"
              xmlns:local="clr-namespace:SmartBudget.Main.Views"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
@@ -55,7 +56,7 @@
                     </Grid>
 
                     <ContentControl Grid.Row="1"
-                                    prism:RegionManager.RegionName="DashboardStatistics" />
+                                    prism:RegionManager.RegionName="{x:Static core:RegionNames.DashboardStatistics}" />
                 </Grid>
 
                 <Grid x:Name="favoriteAccountsGrid"
@@ -90,7 +91,7 @@
                     </Grid>
 
                     <ContentControl Grid.Row="1"
-                                    prism:RegionManager.RegionName="DashboardFavoriteAccounts" />
+                                    prism:RegionManager.RegionName="{x:Static core:RegionNames.DashboardFavoriteAccounts}" />
                 </Grid>
             </Grid>
         </Border>
@@ -120,7 +121,7 @@
                 </Grid>
 
                 <ContentControl Grid.Row="1"
-                                prism:RegionManager.RegionName="DashboardTransactions" />
+                                prism:RegionManager.RegionName="{x:Static core:RegionNames.DashboardTransactions}" />
             </Grid>
         </Border>
     </Grid>
