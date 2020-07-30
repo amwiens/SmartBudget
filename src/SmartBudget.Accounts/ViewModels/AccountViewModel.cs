@@ -9,7 +9,7 @@ namespace SmartBudget.Accounts.ViewModels
     public class AccountViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly ISmartBudgetService _smartBudgetService;
+        private readonly IDataService<Account> _accountService;
 
         private Account _account;
 
@@ -28,10 +28,10 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         public AccountViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService)
+            IDataService<Account> accountService)
         {
             _regionManager = regionManager;
-            _smartBudgetService = smartBudgetService;
+            _accountService = accountService;
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -43,14 +43,14 @@ namespace SmartBudget.Accounts.ViewModels
         {
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             var account = new Account();
 
             if (navigationContext.Parameters.ContainsKey("account"))
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
-            Account = _smartBudgetService.GetAccountItem(account.Id);
+            Account = await _accountService.Get(account.Id);
         }
     }
 }

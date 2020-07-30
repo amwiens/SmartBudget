@@ -17,7 +17,7 @@ namespace SmartBudget.Accounts.ViewModels
     public class AccountsViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly ISmartBudgetService _smartBudgetService;
+        private readonly IDataService<Account> _accountService;
         private SeriesCollection _cardsBalanceCollection;
         private SeriesCollection _depositBalanceCollection;
         private SeriesCollection _creditBalanceCollection;
@@ -81,14 +81,15 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         public AccountsViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService)
+            IDataService<Account> accountService)
         {
             CardAccounts = new ObservableCollection<Account>();
             BankAccounts = new ObservableCollection<Account>();
             CreditAccounts = new ObservableCollection<Account>();
 
             _regionManager = regionManager;
-            _smartBudgetService = smartBudgetService;
+            _accountService = accountService;
+
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
             AddAccountCommand = new DelegateCommand(AddAccount);
         }
@@ -172,9 +173,9 @@ namespace SmartBudget.Accounts.ViewModels
             };
         }
 
-        private void GetAccounts()
+        private async void GetAccounts()
         {
-            var accounts = _smartBudgetService.GetAccounts();
+            var accounts = await _accountService.GetAll();
 
             foreach (var account in accounts.Where(a => a.AccountType == AccountType.Card))
             {

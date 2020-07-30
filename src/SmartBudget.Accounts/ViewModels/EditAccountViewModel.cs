@@ -12,7 +12,7 @@ namespace SmartBudget.Accounts.ViewModels
     public class EditAccountViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly ISmartBudgetService _smartBudgetService;
+        private readonly IDataService<Account> _accountService;
 
         private Account _account;
 
@@ -34,10 +34,10 @@ namespace SmartBudget.Accounts.ViewModels
         public DelegateCommand CancelCommand { get; private set; }
 
         public EditAccountViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService)
+            IDataService<Account> accountService)
         {
             _regionManager = regionManager;
-            _smartBudgetService = smartBudgetService;
+            _accountService = accountService;
 
             UpdateAccountCommand = new DelegateCommand(UpdateAccount);
             CancelCommand = new DelegateCommand(CancelAddAccount);
@@ -45,7 +45,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private async void UpdateAccount()
         {
-            var newAccount = await _smartBudgetService.UpdateAccountAsync(Account);
+            var newAccount = await _accountService.Update(Account.Id, Account);
 
             var p = new NavigationParameters
             {
@@ -75,14 +75,14 @@ namespace SmartBudget.Accounts.ViewModels
         {
         }
 
-        public void OnNavigatedTo(NavigationContext navigationContext)
+        public async void OnNavigatedTo(NavigationContext navigationContext)
         {
             var account = new Account();
 
             if (navigationContext.Parameters.ContainsKey("account"))
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
-            Account = _smartBudgetService.GetAccountItem(account.Id);
+            Account = await _accountService.Get(account.Id);
         }
     }
 }

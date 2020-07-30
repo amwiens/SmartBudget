@@ -13,7 +13,6 @@ namespace SmartBudget.Main.ViewModels
     public class FavoriteAccountsViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly ISmartBudgetService _smartBudgetService;
         private readonly IDataService<Account> _accountService;
         private ObservableCollection<Account> _favoriteAccounts;
 
@@ -28,11 +27,9 @@ namespace SmartBudget.Main.ViewModels
         public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
         public FavoriteAccountsViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService,
             IDataService<Account> accountService)
         {
             _regionManager = regionManager;
-            _smartBudgetService = smartBudgetService;
             _accountService = accountService;
 
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);

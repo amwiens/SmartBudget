@@ -25,7 +25,6 @@ namespace SmartBudget
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ISmartBudgetService, SmartBudgetService>();
             containerRegistry.RegisterSingleton<IDataService<Account>, AccountDataService>();
         }
 

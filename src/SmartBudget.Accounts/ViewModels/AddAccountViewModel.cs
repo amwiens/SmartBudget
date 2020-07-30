@@ -13,7 +13,7 @@ namespace SmartBudget.Accounts.ViewModels
     public class AddAccountViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
-        private readonly ISmartBudgetService _smartBudgetService;
+        private readonly IDataService<Account> _accountService;
 
         private AccountType _accountType;
 
@@ -83,10 +83,10 @@ namespace SmartBudget.Accounts.ViewModels
         public DelegateCommand CancelCommand { get; private set; }
 
         public AddAccountViewModel(IRegionManager regionManager,
-            ISmartBudgetService smartBudgetService)
+            IDataService<Account> accountService)
         {
             _regionManager = regionManager;
-            _smartBudgetService = smartBudgetService;
+            _accountService = accountService;
 
             SaveAccountCommand = new DelegateCommand(SaveAccount);
             CancelCommand = new DelegateCommand(CancelAddAccount);
@@ -105,7 +105,7 @@ namespace SmartBudget.Accounts.ViewModels
                 StartingAmount = StartingAmount
             };
 
-            var newAccount = await _smartBudgetService.AddAccountAsync(account);
+            var newAccount = await _accountService.Create(account);
 
             var p = new NavigationParameters
             {
