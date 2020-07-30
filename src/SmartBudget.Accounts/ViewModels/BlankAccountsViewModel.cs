@@ -26,7 +26,7 @@ namespace SmartBudget.Accounts.ViewModels
         private void AddAccount()
         {
             _regionManager.RequestNavigate("AccountsContent", "AddAccount");
-            _eventAggregator.GetEvent<NavigationEvent>().Publish("Dashboard");
+            _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
