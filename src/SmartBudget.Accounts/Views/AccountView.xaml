@@ -155,7 +155,15 @@
                                                   MouseAction="LeftClick" />
                                 </TextBlock.InputBindings>
                             </TextBlock>
-                            <TextBlock Text="DELETE" />
+                            <TextBlock Text="DELETE"
+                                       Padding="3"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding DeleteAccountCommand}"
+                                                  CommandParameter="{Binding Account.Id}"
+                                                  MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
                         </StackPanel>
                     </materialdesign:PopupBox>
                     <TextBlock Margin="10 0 0 0"

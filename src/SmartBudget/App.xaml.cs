@@ -3,6 +3,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 
 using SmartBudget.Accounts;
+using SmartBudget.Core.Dialogs;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 using SmartBudget.EntityFramework.Services;
@@ -25,7 +26,11 @@ namespace SmartBudget
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            // Data Services
             containerRegistry.RegisterSingleton<IDataService<Account>, AccountDataService>();
+
+            // Dialogs
+            containerRegistry.RegisterDialog<ConfirmDialog, ConfirmDialogViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
