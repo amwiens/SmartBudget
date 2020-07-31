@@ -46,7 +46,7 @@ namespace SmartBudget.Accounts.ViewModels
             _accountService = accountService;
 
             UpdateAccountCommand = new DelegateCommand(UpdateAccount);
-            CancelCommand = new DelegateCommand(CancelAddAccount);
+            CancelCommand = new DelegateCommand(CancelAccount);
         }
 
         private async void UpdateAccount()
@@ -63,7 +63,7 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
-        private void CancelAddAccount()
+        private void CancelAccount()
         {
             _regionManager.RequestNavigate(RegionNames.Content, "Accounts");
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
