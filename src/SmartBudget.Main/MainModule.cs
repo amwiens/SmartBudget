@@ -22,8 +22,11 @@ namespace SmartBudget.Main
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<Menu>();
-            containerRegistry.RegisterForNavigation<TopBar>();
+            _regionManager.RegisterViewWithRegion(RegionNames.Topbar, typeof(TopBar));
+            _regionManager.RegisterViewWithRegion(RegionNames.Sidebar, typeof(Menu));
+
+            //containerRegistry.RegisterForNavigation<Menu>();
+            //containerRegistry.RegisterForNavigation<TopBar>();
             containerRegistry.RegisterForNavigation<Dashboard>();
             containerRegistry.RegisterForNavigation<BlankTransactions>();
             containerRegistry.RegisterForNavigation<BlankAccounts>();

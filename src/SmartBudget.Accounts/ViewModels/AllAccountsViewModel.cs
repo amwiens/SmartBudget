@@ -89,11 +89,10 @@ namespace SmartBudget.Accounts.ViewModels
         {
             var p = new NavigationParameters
             {
-                { "area", "Accounts" },
                 { "page", "AddAccount" }
             };
 
-            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
@@ -104,11 +103,11 @@ namespace SmartBudget.Accounts.ViewModels
 
             var p = new NavigationParameters
             {
-                { "area", "Accounts" },
+                { "page", "Account" },
                 { "account", account }
             };
 
-            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

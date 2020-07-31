@@ -45,11 +45,11 @@ namespace SmartBudget.Main.ViewModels
 
             var p = new NavigationParameters
             {
-                { "area", "Accounts" },
+                { "page", "Account" },
                 { "account", account }
             };
 
-            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
         }
 
         private void EditAccount()
@@ -59,25 +59,25 @@ namespace SmartBudget.Main.ViewModels
 
             var p = new NavigationParameters
             {
-                { "area", "Accounts" },
+                { "page", "EditAccount" },
                 //{ "account", account }
             };
 
-            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
+            _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
         }
 
         private void DeleteAccount(Account account)
         {
-            if (account == null)
-                return;
+            //if (account == null)
+            //    return;
 
-            var p = new NavigationParameters
-            {
-                { "area", "Accounts" },
-                { "account", account }
-            };
+            //var p = new NavigationParameters
+            //{
+            //    { "area", "Accounts" },
+            //    { "account", account }
+            //};
 
-            _regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
+            //_regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

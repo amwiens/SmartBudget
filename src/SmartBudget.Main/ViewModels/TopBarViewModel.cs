@@ -1,5 +1,8 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Events;
+using Prism.Mvvm;
 using Prism.Regions;
+
+using SmartBudget.Core.Events;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -21,8 +24,15 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _imagePath, value); }
         }
 
-        public TopBarViewModel()
+        public TopBarViewModel(IEventAggregator eventAggregator)
         {
+            eventAggregator.GetEvent<NavigationEvent>().Subscribe(OnNavigationReceived);
+        }
+
+        private void OnNavigationReceived(string message)
+        {
+            Title = message;
+            ImagePath = $"pack://application:,,,/SmartBudget.Main;component/Resources/Icons/{message.ToLower()}.png";
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

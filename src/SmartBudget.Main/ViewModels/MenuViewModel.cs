@@ -12,6 +12,7 @@ namespace SmartBudget.Main.ViewModels
     public class MenuViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
+        private readonly IEventAggregator _eventAggregator;
 
         private bool _dashboardChecked = false;
 
@@ -35,6 +36,7 @@ namespace SmartBudget.Main.ViewModels
             IEventAggregator eventAggregator)
         {
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             eventAggregator.GetEvent<NavigationEvent>().Subscribe(OnNavigationReceived);
             NavigateCommand = new DelegateCommand<string>(Navigate);
         }
@@ -60,29 +62,8 @@ namespace SmartBudget.Main.ViewModels
         {
             if (navigatePath != null)
             {
-                var p = new NavigationParameters
-                {
-                    { "Title", navigatePath }
-                };
-
                 _regionManager.RequestNavigate(RegionNames.Content, navigatePath);
-                _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
-
-                switch (navigatePath)
-                {
-                    case "Dashboard":
-                        DashboardChecked = true;
-                        AccountsChecked = false;
-                        break;
-
-                    case "Accounts":
-                        DashboardChecked = false;
-                        AccountsChecked = true;
-                        break;
-
-                    default:
-                        throw new System.Exception("Value not found");
-                }
+                _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
             }
         }
 
@@ -92,29 +73,13 @@ namespace SmartBudget.Main.ViewModels
             {
                 if (navigationParameters.ContainsKey("account"))
                 {
-                    var p = new NavigationParameters
-                    {
-                        { "Title", navigatePath }
-                    };
-
-                    _regionManager.RequestNavigate(RegionNames.Content, "Account", navigationParameters);
-                    _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
-
-                    DashboardChecked = false;
-                    AccountsChecked = true;
+                    _regionManager.RequestNavigate(RegionNames.AccountsContent, "Account", navigationParameters);
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
                 }
                 if (navigationParameters.ContainsKey("page"))
                 {
-                    var p = new NavigationParameters
-                    {
-                        { "Title", navigatePath }
-                    };
-
-                    _regionManager.RequestNavigate(RegionNames.Content, "AddAccount");
-                    _regionManager.RequestNavigate(RegionNames.Topbar, "TopBar", p);
-
-                    DashboardChecked = false;
-                    AccountsChecked = true;
+                    _regionManager.RequestNavigate(RegionNames.AccountsContent, "AddAccount");
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
                 }
             }
         }

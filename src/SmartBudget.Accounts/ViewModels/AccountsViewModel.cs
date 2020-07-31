@@ -3,6 +3,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 
 using SmartBudget.Core;
+using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -59,16 +60,49 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            _regionManager.Regions.Remove(RegionNames.AccountsContent);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            if (navigationContext.Parameters.ContainsKey("page"))
+            {
+                switch (navigationContext.Parameters.GetValue<string>("page"))
+                {
+                    case "Account":
+                        _regionManager.RequestNavigate(RegionNames.AccountsContent, "Account", navigationContext.Parameters);
+                        break;
+
+                    case "AddAccount":
+                        _regionManager.RequestNavigate(RegionNames.AccountsContent, "AddAccount", navigationContext.Parameters);
+                        break;
+
+                    case "AllAccounts":
+                    default:
+                        ShowAllAccounts();
+                        break;
+                }
+            }
+            else
+            {
+                ShowAllAccounts();
+            }
+        }
+
+        private void ShowAllAccounts()
+        {
             GetAccounts();
 
             if (CardAccounts.Count > 0 || BankAccounts.Count > 0 || CreditAccounts.Count > 0)
+            {
                 _regionManager.RequestNavigate(RegionNames.AccountsContent, "AllAccounts");
+                _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
+            }
             else
+            {
                 _regionManager.RequestNavigate(RegionNames.AccountsContent, "BlankAccounts");
+                _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
+            }
         }
 
         private async void GetAccounts()
