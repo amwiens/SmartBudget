@@ -77,6 +77,10 @@ namespace SmartBudget.Accounts.ViewModels
                         _regionManager.RequestNavigate(RegionNames.AccountsContent, "AddAccount", navigationContext.Parameters);
                         break;
 
+                    case "EditAccount":
+                        _regionManager.RequestNavigate(RegionNames.AccountsContent, "EditAccount", navigationContext.Parameters);
+                        break;
+
                     case "AllAccounts":
                     default:
                         ShowAllAccounts();

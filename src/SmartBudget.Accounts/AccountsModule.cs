@@ -23,6 +23,7 @@ namespace SmartBudget.Accounts
             containerRegistry.RegisterForNavigation<BlankAccounts>("BlankAccounts");
             containerRegistry.RegisterForNavigation<AllAccountsView>("AllAccounts");
             containerRegistry.RegisterForNavigation<AddAccountView>("AddAccount");
+            containerRegistry.RegisterForNavigation<EditAccountView>("EditAccount");
         }
     }
 }

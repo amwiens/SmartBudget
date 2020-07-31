@@ -108,6 +108,7 @@ namespace SmartBudget.Accounts.ViewModels
             };
 
             _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
+            _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

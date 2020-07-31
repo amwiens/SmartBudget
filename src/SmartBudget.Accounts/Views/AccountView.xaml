@@ -146,7 +146,15 @@
                             <materialdesign:PackIcon Kind="DotsHorizontal" />
                         </materialdesign:PopupBox.ToggleContent>
                         <StackPanel Orientation="Vertical">
-                            <TextBlock Text="EDIT" />
+                            <TextBlock Text="EDIT"
+                                       Padding="3"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding EditAccountCommand}"
+                                                  CommandParameter="{Binding Account.Id}"
+                                                  MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
                             <TextBlock Text="DELETE" />
                         </StackPanel>
                     </materialdesign:PopupBox>
