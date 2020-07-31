@@ -16,9 +16,7 @@ namespace SmartBudget.EntityFramework
                 fs.Close();
             }
             SmartBudgetDbContext ctx = new SmartBudgetDbContext(dbPath);
-            //if (!ctx.Database.EnsureCreated())
             ctx.Database.Migrate();
-            //SeedData.AddSampleData(ctx);
             return ctx;
         }
 
@@ -37,11 +35,17 @@ namespace SmartBudget.EntityFramework
 
         public DbSet<Account> Accounts { get; set; }
 
+        public DbSet<Transaction> Transactions { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite($"Filename={_dbPath}");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Account>().HasMany(a => a.Transactions);
+            modelBuilder.Entity<Transaction>().HasOne(a => a.ChargedAccount);
+            modelBuilder.Entity<Transaction>().HasOne(a => a.TargetAccount);
+
             base.OnModelCreating(modelBuilder);
         }
     }

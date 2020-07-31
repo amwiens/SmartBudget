@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SmartBudget.Core.Models
@@ -32,5 +33,7 @@ namespace SmartBudget.Core.Models
         public decimal StartingAmount { get; set; }
 
         public decimal PaidAmount { get; set; }
+
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }
