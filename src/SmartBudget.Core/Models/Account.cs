@@ -36,7 +36,11 @@ namespace SmartBudget.Core.Models
 
         public decimal PaidAmount { get; set; }
 
+        [InverseProperty(nameof(Transaction.Account))]
         public virtual ICollection<Transaction> Transactions { get; set; }
+
+        [InverseProperty(nameof(Transaction.TargetAccount))]
+        public virtual ICollection<Transaction> TargetTransactions { get; set; }
 
         [NotMapped]
         public decimal Balance

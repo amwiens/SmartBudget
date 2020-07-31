@@ -4,12 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using SmartBudget.EntityFramework;
 
 namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200725210844_MoreAccountChanges")]
-    partial class MoreAccountChanges
+    [Migration("20200731231320_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -57,6 +58,58 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("SmartBudget.Core.Models.Transaction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsCleared")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Payee")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("TargetAccountId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TransactionType")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("TargetAccountId");
+
+                    b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("SmartBudget.Core.Models.Transaction", b =>
+                {
+                    b.HasOne("SmartBudget.Core.Models.Account", "Account")
+                        .WithMany("Transactions")
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartBudget.Core.Models.Account", "TargetAccount")
+                        .WithMany("TargetTransactions")
+                        .HasForeignKey("TargetAccountId");
                 });
 #pragma warning restore 612, 618
         }

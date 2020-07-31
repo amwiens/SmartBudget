@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
 {
@@ -23,7 +24,13 @@ namespace SmartBudget.Core.Models
 
         public string Note { get; set; }
 
-        public virtual Account ChargedAccount { get; set; }
+        [ForeignKey(nameof(Account)), Column(Order = 0)]
+        public int AccountId { get; set; }
+
+        public virtual Account Account { get; set; }
+
+        [ForeignKey(nameof(TargetAccount)), Column(Order = 1)]
+        public int? TargetAccountId { get; set; }
 
         public virtual Account? TargetAccount { get; set; }
     }

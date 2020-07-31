@@ -64,14 +64,11 @@ namespace SmartBudget.EntityFramework.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("AccountId")
+                    b.Property<int>("AccountId")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
-
-                    b.Property<int?>("ChargedAccountId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("TEXT");
@@ -95,8 +92,6 @@ namespace SmartBudget.EntityFramework.Migrations
 
                     b.HasIndex("AccountId");
 
-                    b.HasIndex("ChargedAccountId");
-
                     b.HasIndex("TargetAccountId");
 
                     b.ToTable("Transactions");
@@ -104,16 +99,14 @@ namespace SmartBudget.EntityFramework.Migrations
 
             modelBuilder.Entity("SmartBudget.Core.Models.Transaction", b =>
                 {
-                    b.HasOne("SmartBudget.Core.Models.Account", null)
+                    b.HasOne("SmartBudget.Core.Models.Account", "Account")
                         .WithMany("Transactions")
-                        .HasForeignKey("AccountId");
-
-                    b.HasOne("SmartBudget.Core.Models.Account", "ChargedAccount")
-                        .WithMany()
-                        .HasForeignKey("ChargedAccountId");
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("SmartBudget.Core.Models.Account", "TargetAccount")
-                        .WithMany()
+                        .WithMany("TargetTransactions")
                         .HasForeignKey("TargetAccountId");
                 });
 #pragma warning restore 612, 618

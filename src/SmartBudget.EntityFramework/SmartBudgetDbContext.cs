@@ -42,9 +42,12 @@ namespace SmartBudget.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Account>().HasMany(a => a.Transactions);
-            modelBuilder.Entity<Transaction>().HasOne(a => a.ChargedAccount);
-            modelBuilder.Entity<Transaction>().HasOne(a => a.TargetAccount);
+            //modelBuilder.Entity<Account>().HasMany(a => a.Transactions);
+            //modelBuilder.Entity<Transaction>()
+            //            .HasRequired(t => t.Account)
+            //            .WithMany(a => a.Transactions)
+            //            .HasForeignKey(t => t.AccountId)
+            //            .WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }
