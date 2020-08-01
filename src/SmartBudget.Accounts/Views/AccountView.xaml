@@ -45,7 +45,7 @@
                            Style="{StaticResource H4PrimaryDark}" />
 
                 <TextBlock Grid.Column="2"
-                           Text="{Binding Balance, StringFormat={}{0:C}}"
+                           Text="{Binding Account.Balance, StringFormat={}{0:C}}"
                            Style="{StaticResource H4SecondaryDark2}" />
             </Grid>
 

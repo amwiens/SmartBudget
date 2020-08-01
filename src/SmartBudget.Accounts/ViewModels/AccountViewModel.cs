@@ -27,14 +27,6 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _account, value); }
         }
 
-        private decimal _balance = 0.00M;
-
-        public decimal Balance
-        {
-            get { return _balance; }
-            set { SetProperty(ref _balance, value); }
-        }
-
         public DelegateCommand<int?> EditAccountCommand { get; private set; }
         public DelegateCommand<int?> DeleteAccountCommand { get; private set; }
 

@@ -63,6 +63,13 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _depositBalanceCollection, value); }
         }
 
+        private decimal _depositBalance;
+        public decimal DepositBalance
+        {
+            get { return _depositBalance; }
+            set { SetProperty(ref _depositBalance, value); }
+        }
+
         public SeriesCollection CreditBalanceCollection
         {
             get { return _creditBalanceCollection; }
@@ -122,8 +129,13 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetCardsBalance();
             GetAccounts();
+            if (CardAccounts.Count > 0)
+                GetCardsBalance();
+            if (BankAccounts.Count > 0)
+                GetBankBalance();
+            if (CreditAccounts.Count > 0)
+                GetCreditBalance();
         }
 
         private void GetCardsBalance()
@@ -139,7 +151,10 @@ namespace SmartBudget.Accounts.ViewModels
                     Stroke = new SolidColorBrush(Color.FromRgb(109, 210, 48)) // line color
                 }
             };
+        }
 
+        private void GetBankBalance()
+        {
             DepositBalanceCollection = new SeriesCollection
             {
                 new LineSeries
@@ -152,6 +167,11 @@ namespace SmartBudget.Accounts.ViewModels
                 }
             };
 
+            DepositBalance = BankAccounts.Sum(a => a.Balance);
+        }
+
+        private void GetCreditBalance()
+        {
             CreditBalanceCollection = new SeriesCollection
             {
                 new LineSeries

@@ -62,7 +62,7 @@
                 <StackPanel Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
-                               Text="$200.00"
+                               Text="{Binding DepositBalance, StringFormat={}{0:C}}"
                                HorizontalAlignment="Center" />
                     <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
                                Text="Deposit"
