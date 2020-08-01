@@ -64,6 +64,7 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         private decimal _depositBalance;
+
         public decimal DepositBalance
         {
             get { return _depositBalance; }

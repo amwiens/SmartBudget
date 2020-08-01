@@ -14,6 +14,10 @@
         public static string DashboardTransactions = "DashboardTransactions";
         public static string DashboardFavoriteAccounts = "DashboardFavoriteAccounts";
 
+        // Accounts view
         public static string AccountsContent = "AccountsContent";
+
+        // Account view
+        public static string TransactionsContent = "TransactionsContent";
     }
 }

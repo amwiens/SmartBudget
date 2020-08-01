@@ -73,7 +73,7 @@ namespace SmartBudget.Accounts.ViewModels
                     var success = await _accountService.Delete(int.Parse(id.ToString()));
 
                     _regionManager.RequestNavigate(RegionNames.Content, "Accounts");
-                    _eventAggregator.GetEvent<NavigationEvent>().Publish("Accocunts");
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                 }
             });
         }
@@ -95,6 +95,18 @@ namespace SmartBudget.Accounts.ViewModels
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
             Account = await _accountService.Get(account.Id);
+
+            if (Account.Transactions.Count > 0)
+            {
+                var p = new NavigationParameters
+                {
+                    { "accountid", account.Id }
+                };
+
+                _regionManager.RequestNavigate(RegionNames.TransactionsContent, "Transactions", p);
+            }
+            else
+                _regionManager.RequestNavigate(RegionNames.TransactionsContent, "BlankTransactions");
         }
     }
 }

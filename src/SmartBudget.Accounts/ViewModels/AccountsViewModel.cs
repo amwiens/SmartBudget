@@ -60,6 +60,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            _regionManager.Regions.Remove(RegionNames.TransactionsContent);
             _regionManager.Regions.Remove(RegionNames.AccountsContent);
         }
 

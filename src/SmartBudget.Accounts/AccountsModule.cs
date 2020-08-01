@@ -20,10 +20,12 @@ namespace SmartBudget.Accounts
         {
             containerRegistry.RegisterForNavigation<AccountsView>("Accounts");
             containerRegistry.RegisterForNavigation<AccountView>("Account");
-            containerRegistry.RegisterForNavigation<BlankAccounts>("BlankAccounts");
+            containerRegistry.RegisterForNavigation<BlankAccountsView>("BlankAccounts");
             containerRegistry.RegisterForNavigation<AllAccountsView>("AllAccounts");
             containerRegistry.RegisterForNavigation<AddAccountView>("AddAccount");
             containerRegistry.RegisterForNavigation<EditAccountView>("EditAccount");
+            containerRegistry.RegisterForNavigation<BlankTransactionsView>("BlankTransactions");
+            containerRegistry.RegisterForNavigation<TransactionsView>("Transactions");
         }
     }
 }
