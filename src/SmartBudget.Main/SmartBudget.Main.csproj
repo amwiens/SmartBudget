@@ -16,6 +16,7 @@
     <None Remove="Resources\Icons\accounts.png" />
     <None Remove="Resources\Icons\add.png" />
     <None Remove="Resources\Icons\add_primary.png" />
+    <None Remove="Resources\Icons\cancel_white.png" />
     <None Remove="Resources\Icons\dashboard.png" />
     <None Remove="Resources\Icons\expense.png" />
     <None Remove="Resources\Icons\income.png" />
@@ -43,6 +44,7 @@
     <Resource Include="Resources\Icons\accounts.png" />
     <Resource Include="Resources\Icons\add.png" />
     <Resource Include="Resources\Icons\add_primary.png" />
+    <Resource Include="Resources\Icons\cancel_white.png" />
     <Resource Include="Resources\Icons\expense.png" />
     <Resource Include="Resources\Icons\dashboard.png" />
     <Resource Include="Resources\Icons\income.png" />

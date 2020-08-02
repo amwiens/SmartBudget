@@ -14,5 +14,16 @@ namespace SmartBudget.Core.Dialogs
 
             dialogService.ShowDialog("ConfirmDialog", p, callBack);
         }
+
+        public static void ShowTransactionDialog(this IDialogService dialogService,
+            int transactionId, Action<IDialogResult> callBack)
+        {
+            var p = new DialogParameters
+            {
+                { "transactionid", transactionId }
+            };
+
+            dialogService.ShowDialog("TransactionDialog", p, callBack);
+        }
     }
 }
