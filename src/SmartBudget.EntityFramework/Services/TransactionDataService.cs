@@ -36,6 +36,7 @@ namespace SmartBudget.EntityFramework.Services
             using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
             {
                 Transaction entity = await context.Transactions
+                    .Include((t) => t.Account)
                     .FirstOrDefaultAsync((e) => e.Id == id);
                 return entity;
             }
