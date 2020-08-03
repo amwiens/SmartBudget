@@ -6,8 +6,8 @@
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
-            <Setter Property="Width" Value="400" />
-            <Setter Property="Height" Value="400" />
+            <Setter Property="Width" Value="500" />
+            <Setter Property="Height" Value="500" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
         </Style>
@@ -54,6 +54,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -61,22 +65,51 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0"
-                               Text="{Binding Transaction.Account.Name}"
+                               Text="Account"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBlock Grid.Row="0" Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               Text="{Binding Transaction.Amount, StringFormat={}{0:C}}"
+                               Text="{Binding Account.Name}"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="{Binding Transaction.Note}"
-                               Style="{StaticResource H5SecondaryDark1}" />
+                               Text="Payee"
+                               Style="{StaticResource H5PrimaryDark}" />
 
-                    <TextBlock Grid.Row="1" Grid.Column="1"
-                               HorizontalAlignment="Right"
-                               Text="{Binding Transaction.Date, StringFormat={}{0:M/d/yyyy}}"
-                               Style="{StaticResource H5SecondaryDark1}" />
+                    <DatePicker Grid.Row="1" Grid.Column="1"
+                                SelectedDate="{Binding Transaction.Date}" />
+
+                    <TextBlock Grid.Row="2" Grid.Column="0"
+                               Text="Payee"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <TextBox Grid.Row="2" Grid.Column="1"
+                             Text="{Binding Transaction.Payee}" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0"
+                               Text="Amount"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <TextBox Grid.Row="3" Grid.Column="1"
+                               Text="{Binding Transaction.Amount}" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0"
+                               Text="Transaction type"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <ComboBox Grid.Row="4" Grid.Column="1"
+                              ItemsSource="{Binding Path=TransactionTypeCaptions}"
+                              DisplayMemberPath="Value"
+                              SelectedValuePath="Key"
+                              SelectedValue="{Binding Transaction.Type, Mode=TwoWay}"
+                              Width="200" />
+
+                    <TextBlock Grid.Row="5" Grid.Column="0"
+                               Text="Note"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <TextBox Grid.Row="5" Grid.Column="1"
+                             Text="{Binding Transaction.Note}" />
                 </Grid>
             </Border>
 

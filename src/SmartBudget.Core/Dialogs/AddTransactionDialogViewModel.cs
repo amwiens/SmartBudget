@@ -6,6 +6,7 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
 using System;
+using System.Collections.Generic;
 
 namespace SmartBudget.Core.Dialogs
 {
@@ -21,6 +22,14 @@ namespace SmartBudget.Core.Dialogs
             get { return _transaction; }
             set { SetProperty(ref _transaction, value); }
         }
+
+        public Dictionary<TransactionType, string> TransactionTypeCaptions { get; } =
+            new Dictionary<TransactionType, string>()
+            {
+                { TransactionType.Expense, "Expense" },
+                { TransactionType.Income, "Income" },
+                { TransactionType.Transfer, "Transfer" }
+            };
 
         private Account _account;
 
@@ -43,6 +52,8 @@ namespace SmartBudget.Core.Dialogs
             _transactionService = transactionService;
             _accountService = accountService;
 
+            Transaction = new Transaction();
+
             SaveDialogCommand = new DelegateCommand(SaveDialog);
             CancelDialogCommand = new DelegateCommand(CancelDialog);
         }
@@ -50,6 +61,9 @@ namespace SmartBudget.Core.Dialogs
         private void SaveDialog()
         {
             var result = ButtonResult.OK;
+
+            Transaction.AccountId = Account.Id;
+            var transaction = _transactionService.Create(Transaction);
 
             RequestClose?.Invoke(new DialogResult(result));
         }
