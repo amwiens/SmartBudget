@@ -120,7 +120,7 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <DatePicker Grid.Column="1"
-                            Text="{Binding StartDate}"
+                            SelectedDate="{Binding StartDate, Mode=TwoWay}"
                             Width="200" />
             </Grid>
 
@@ -135,7 +135,7 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <DatePicker Grid.Column="1"
-                            Text="{Binding EndDate}"
+                            SelectedDate="{Binding EndDate, Mode=TwoWay}"
                             Width="200" />
             </Grid>
 
