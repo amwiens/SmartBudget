@@ -4,6 +4,7 @@ using Prism.Services.Dialogs;
 
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
+
 using System;
 
 namespace SmartBudget.Core.Dialogs
@@ -13,6 +14,7 @@ namespace SmartBudget.Core.Dialogs
         private readonly ITransactionService _transactionService;
 
         private Transaction _transaction;
+
         public Transaction Transaction
         {
             get { return _transaction; }
@@ -24,7 +26,6 @@ namespace SmartBudget.Core.Dialogs
         public event Action<IDialogResult> RequestClose;
 
         public DelegateCommand CloseDialogCommand { get; }
-        //public DelegateCommand NoDialogCommand { get; }
 
         public TransactionDialogViewModel(ITransactionService transactionService)
         {
@@ -47,7 +48,6 @@ namespace SmartBudget.Core.Dialogs
 
         public void OnDialogClosed()
         {
-
         }
 
         public async void OnDialogOpened(IDialogParameters parameters)
