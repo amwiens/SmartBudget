@@ -126,7 +126,6 @@
                         Margin="10 0 0 0"
                         HorizontalAlignment="Right" />
             </StackPanel>
-
         </Grid>
     </Border>
 </UserControl>
