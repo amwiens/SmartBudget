@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="SmartBudget.Core.Dialogs.AddTransactionDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource BrushBackground2}" />
+            <Setter Property="ResizeMode" Value="NoResize" />
+            <Setter Property="Width" Value="400" />
+            <Setter Property="Height" Value="400" />
+            <Setter Property="WindowStyle" Value="None" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/cancel_white.png"
+               Height="20"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Right"
+               Cursor="Hand">
+            <Image.InputBindings>
+                <MouseBinding Command="{Binding CloseDialogCommand}"
+                              MouseAction="LeftClick" />
+            </Image.InputBindings>
+        </Image>
+
+        <TextBlock Grid.Row="2"
+                   Text="{Binding Transaction.Payee}"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource H4PrimaryDark}" />
+
+        <TextBlock Grid.Row="3"
+                   Text="Paid"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource H5Primary}"
+                   Foreground="{StaticResource BrushSecondary2}" />
+
+        <Border Grid.Row="4"
+                BorderBrush="{StaticResource BrushOutline}"
+                BorderThickness="0 1 0 1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0"
+                           Text="{Binding Transaction.Account.Name}"
+                           Style="{StaticResource H5PrimaryDark}" />
+
+                <TextBlock Grid.Row="0" Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Text="{Binding Transaction.Amount, StringFormat={}{0:C}}"
+                           Style="{StaticResource H5PrimaryDark}" />
+
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="{Binding Transaction.Note}"
+                           Style="{StaticResource H5SecondaryDark1}" />
+
+                <TextBlock Grid.Row="1" Grid.Column="1"
+                           HorizontalAlignment="Right"
+                           Text="{Binding Transaction.Date, StringFormat={}{0:M/d/yyyy}}"
+                           Style="{StaticResource H5SecondaryDark1}" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

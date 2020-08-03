@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SmartBudget.EntityFramework.Services
 {
-    public class AccountDataService : IDataService<Account>
+    public class AccountDataService : IAccountService
     {
         private readonly SmartBudgetDbContextFactory _contextFactory;
         private readonly NonQueryDataService<Account> _nonQueryDataService;
@@ -31,6 +31,16 @@ namespace SmartBudget.EntityFramework.Services
         }
 
         public async Task<Account> Get(int id)
+        {
+            using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
+            {
+                Account entity = await context.Accounts
+                    .FirstOrDefaultAsync((e) => e.Id == id);
+                return entity;
+            }
+        }
+
+        public async Task<Account> GetWithTransactions(int id)
         {
             using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
             {

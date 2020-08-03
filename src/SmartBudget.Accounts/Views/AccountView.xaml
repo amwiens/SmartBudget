@@ -136,6 +136,7 @@
                   Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0"
                             Orientation="Horizontal">
@@ -189,7 +190,35 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="Latest transactions"
+                           VerticalAlignment="Center"
                            Style="{StaticResource H4PrimaryDark}" />
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Horizontal">
+                    <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/add_primary.png"
+                           Height="20"
+                           Margin="10"
+                           VerticalAlignment="Center"
+                           Cursor="Hand">
+                        <Image.InputBindings>
+                            <MouseBinding Command="{Binding AddTransactionCommand}"
+                                          CommandParameter="{Binding Account.Id}"
+                                          MouseAction="LeftClick" />
+                        </Image.InputBindings>
+                    </Image>
+
+                    <TextBlock Grid.Column="0"
+                               Text="NEW TRANSACTION"
+                               Style="{StaticResource TextLinkSecondaryDark2}"
+                               VerticalAlignment="Center"
+                               Cursor="Hand">
+                        <TextBlock.InputBindings>
+                            <MouseBinding Command="{Binding AddTransactionCommand}"
+                                          CommandParameter="{Binding Account.Id}"
+                                          MouseAction="LeftClick" />
+                        </TextBlock.InputBindings>
+                    </TextBlock>
+                </StackPanel>
             </Grid>
             <ContentControl Grid.Row="1"
                             prism:RegionManager.RegionName="{x:Static core:RegionNames.TransactionsContent}" />

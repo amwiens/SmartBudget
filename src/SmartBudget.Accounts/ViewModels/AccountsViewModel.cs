@@ -16,7 +16,7 @@ namespace SmartBudget.Accounts.ViewModels
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
-        private readonly IDataService<Account> _accountService;
+        private readonly IAccountService _accountService;
 
         private ObservableCollection<Account> _cardAccounts;
         private ObservableCollection<Account> _bankAccounts;
@@ -42,7 +42,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         public AccountsViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
-            IDataService<Account> accountService)
+            IAccountService accountService)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;

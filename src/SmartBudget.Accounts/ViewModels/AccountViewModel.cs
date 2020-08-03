@@ -17,7 +17,7 @@ namespace SmartBudget.Accounts.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly IDialogService _dialogService;
-        private readonly IDataService<Account> _accountService;
+        private readonly IAccountService _accountService;
 
         private Account _account;
 
@@ -29,11 +29,12 @@ namespace SmartBudget.Accounts.ViewModels
 
         public DelegateCommand<int?> EditAccountCommand { get; private set; }
         public DelegateCommand<int?> DeleteAccountCommand { get; private set; }
+        public DelegateCommand<int?> AddTransactionCommand { get; private set; }
 
         public AccountViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
             IDialogService dialogService,
-            IDataService<Account> accountService)
+            IAccountService accountService)
         {
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
@@ -42,6 +43,17 @@ namespace SmartBudget.Accounts.ViewModels
 
             EditAccountCommand = new DelegateCommand<int?>(EditAccount);
             DeleteAccountCommand = new DelegateCommand<int?>(DeleteAccount);
+            AddTransactionCommand = new DelegateCommand<int?>(AddTransaction);
+        }
+
+        private void AddTransaction(int? accountId)
+        {
+            if (accountId == null)
+                return;
+
+            _dialogService.ShowAddTransactionDialog(int.Parse(accountId.ToString()), async result =>
+            {
+            });
         }
 
         private async void EditAccount(int? id)
@@ -94,7 +106,7 @@ namespace SmartBudget.Accounts.ViewModels
             if (navigationContext.Parameters.ContainsKey("account"))
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
-            Account = await _accountService.Get(account.Id);
+            Account = await _accountService.GetWithTransactions(account.Id);
 
             if (Account.Transactions.Count > 0)
             {
