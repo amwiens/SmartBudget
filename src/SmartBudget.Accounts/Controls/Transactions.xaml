@@ -11,7 +11,7 @@
                     <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary2}" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding IsTransferIncome}" Value="True">
-                    <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary1}" />
+                    <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary2}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
