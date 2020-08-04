@@ -4,8 +4,12 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 using SmartBudget.EntityFramework.Services.Common;
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+
+using Z.EntityFramework.Plus;
 
 namespace SmartBudget.EntityFramework.Services
 {
@@ -77,6 +81,19 @@ namespace SmartBudget.EntityFramework.Services
         public async Task<Account> Update(int id, Account entity)
         {
             return await _nonQueryDataService.Update(id, entity);
+        }
+
+        public async Task<IEnumerable<Account>> GetAccountDataBeforeDateByType(DateTime date, AccountType accountType)
+        {
+            using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
+            {
+                IEnumerable<Account> entities = await context.Accounts
+                    .Where(a => a.AccountType == accountType)
+                    .IncludeFilter(a => a.Transactions.Where(t => t.Date <= date))
+                    .IncludeFilter(a => a.TargetTransactions.Where(t => t.Date <= date))
+                    .ToListAsync();
+                return entities;
+            }
         }
     }
 }

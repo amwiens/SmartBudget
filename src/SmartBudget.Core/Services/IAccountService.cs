@@ -1,5 +1,6 @@
 ﻿using SmartBudget.Core.Models;
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,5 +11,7 @@ namespace SmartBudget.Core.Services
         Task<Account> GetWithTransactions(int accountId);
 
         Task<IEnumerable<Account>> GetAllWithTransactions();
+
+        Task<IEnumerable<Account>> GetAccountDataBeforeDateByType(DateTime date, AccountType accountType);
     }
 }

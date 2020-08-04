@@ -10,8 +10,6 @@ using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
-using System.Threading.Tasks;
-
 namespace SmartBudget.Accounts.ViewModels
 {
     public class AccountViewModel : BindableBase, INavigationAware
@@ -100,7 +98,6 @@ namespace SmartBudget.Accounts.ViewModels
 
         private async void ImportTransactions(int? id)
         {
-
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

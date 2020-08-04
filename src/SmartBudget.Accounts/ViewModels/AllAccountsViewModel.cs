@@ -11,8 +11,10 @@ using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Media;
 
 namespace SmartBudget.Accounts.ViewModels
@@ -22,6 +24,7 @@ namespace SmartBudget.Accounts.ViewModels
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
+
         private SeriesCollection _cardsBalanceCollection;
         private SeriesCollection _depositBalanceCollection;
         private SeriesCollection _creditBalanceCollection;
@@ -139,14 +142,14 @@ namespace SmartBudget.Accounts.ViewModels
                 GetCreditBalance();
         }
 
-        private void GetCardsBalance()
+        private async void GetCardsBalance()
         {
             CardsBalanceCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Balance",
-                    Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
+                    Values = await GetAccountBalanceChartValues(AccountType.Card),
                     PointGeometry = null,
                     Fill = new SolidColorBrush(Color.FromRgb(223, 245, 210)), // fill color
                     Stroke = new SolidColorBrush(Color.FromRgb(109, 210, 48)) // line color
@@ -154,14 +157,14 @@ namespace SmartBudget.Accounts.ViewModels
             };
         }
 
-        private void GetBankBalance()
+        private async void GetBankBalance()
         {
             DepositBalanceCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Balance",
-                    Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
+                    Values = await GetAccountBalanceChartValues(AccountType.Bank),
                     PointGeometry = null,
                     Fill = new SolidColorBrush(Color.FromRgb(255, 239, 215)), // fill color
                     Stroke = new SolidColorBrush(Color.FromRgb(255, 171, 43)) // line color
@@ -171,14 +174,14 @@ namespace SmartBudget.Accounts.ViewModels
             DepositBalance = BankAccounts.Sum(a => a.Balance);
         }
 
-        private void GetCreditBalance()
+        private async void GetCreditBalance()
         {
             CreditBalanceCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Balance",
-                    Values = new ChartValues<double> { 1400, 1500, 1200, 600, 200 },
+                    Values = await GetAccountBalanceChartValues(AccountType.Credit),
                     PointGeometry = null,
                     Fill = new SolidColorBrush(Color.FromRgb(255, 218, 233)), // fill color
                     Stroke = new SolidColorBrush(Color.FromRgb(254, 77, 151)) // line color
@@ -202,6 +205,22 @@ namespace SmartBudget.Accounts.ViewModels
             {
                 CreditAccounts.Add(account);
             }
+        }
+
+        private async Task<ChartValues<decimal>> GetAccountBalanceChartValues(AccountType accountType)
+        {
+            var chartValues = new ChartValues<decimal>();
+
+            for (int i = 30; i > 0; i--)
+            {
+                var newDate = DateTime.Now.AddDays(-i);
+
+                var accounts = await _accountService.GetAccountDataBeforeDateByType(newDate, accountType);
+                var sum = accounts.Sum(a => a.Balance);
+                chartValues.Add(sum);
+            }
+
+            return chartValues;
         }
     }
 }
