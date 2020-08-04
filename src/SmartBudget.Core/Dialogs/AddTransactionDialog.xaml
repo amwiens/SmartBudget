@@ -66,38 +66,49 @@
 
                     <TextBlock Grid.Row="0" Grid.Column="0"
                                Text="Account"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBlock Grid.Row="0" Grid.Column="1"
+                               Margin="5"
                                Text="{Binding Account.Name}"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="Payee"
+                               Text="Date"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <DatePicker Grid.Row="1" Grid.Column="1"
+                                Margin="5"
                                 SelectedDate="{Binding Transaction.Date}" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0"
                                Text="Payee"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBox Grid.Row="2" Grid.Column="1"
+                             Margin="5"
                              Text="{Binding Transaction.Payee}" />
 
                     <TextBlock Grid.Row="3" Grid.Column="0"
                                Text="Amount"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBox Grid.Row="3" Grid.Column="1"
-                               Text="{Binding Transaction.Amount}" />
+                             Margin="5"
+                             Text="{Binding Transaction.Amount}" />
 
                     <TextBlock Grid.Row="4" Grid.Column="0"
                                Text="Transaction type"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <ComboBox Grid.Row="4" Grid.Column="1"
+                              Margin="5"
                               ItemsSource="{Binding Path=TransactionTypeCaptions}"
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
@@ -106,9 +117,11 @@
 
                     <TextBlock Grid.Row="5" Grid.Column="0"
                                Text="Note"
+                               VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBox Grid.Row="5" Grid.Column="1"
+                             Margin="5"
                              Text="{Binding Transaction.Note}" />
                 </Grid>
             </Border>
