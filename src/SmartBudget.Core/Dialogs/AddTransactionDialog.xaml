@@ -12,6 +12,24 @@
             <Setter Property="AllowsTransparency" Value="True" />
         </Style>
     </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <Style x:Key="TransferTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H5PrimaryDark}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="2">
+                    <Setter Property="TextBlock.Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="TransferComboBox" TargetType="ComboBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="2">
+                    <Setter Property="ComboBox.Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Border CornerRadius="5"
             Background="{StaticResource BrushBackground2}">
         <Grid Margin="10">
@@ -58,6 +76,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -76,53 +95,73 @@
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="Date"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
-
-                    <DatePicker Grid.Row="1" Grid.Column="1"
-                                Margin="5"
-                                SelectedDate="{Binding Transaction.Date}" />
-
-                    <TextBlock Grid.Row="2" Grid.Column="0"
-                               Text="Payee"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
-
-                    <TextBox Grid.Row="2" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Transaction.Payee}" />
-
-                    <TextBlock Grid.Row="3" Grid.Column="0"
-                               Text="Amount"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
-
-                    <TextBox Grid.Row="3" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Transaction.Amount}" />
-
-                    <TextBlock Grid.Row="4" Grid.Column="0"
                                Text="Transaction type"
                                VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
-                    <ComboBox Grid.Row="4" Grid.Column="1"
+                    <ComboBox Grid.Row="1" Grid.Column="1"
                               Margin="5"
                               ItemsSource="{Binding Path=TransactionTypeCaptions}"
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
-                              SelectedValue="{Binding Transaction.TransactionType, Mode=TwoWay}"
+                              SelectedValue="{Binding TransactionType, Mode=TwoWay}"
                               Width="200" />
 
+                    <TextBlock Grid.Row="2" Grid.Column="0"
+                               Text="Transfer account"
+                               VerticalAlignment="Center"
+                               Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <ComboBox Grid.Row="2" Grid.Column="1"
+                              Margin="5"
+                              Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                              ItemsSource="{Binding Path=AccountCaptions}"
+                              DisplayMemberPath="Value"
+                              SelectedValuePath="Key"
+                              SelectedValue="{Binding Transaction.TargetAccountId, Mode=TwoWay}"
+                              Width="200" />
+
+                    <TextBlock Grid.Row="3" Grid.Column="0"
+                               Text="Date"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <DatePicker Grid.Row="3" Grid.Column="1"
+                                Margin="5"
+                                SelectedDate="{Binding Transaction.Date}"
+                                Width="200" />
+
+                    <TextBlock Grid.Row="4" Grid.Column="0"
+                               Text="Payee"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <TextBox Grid.Row="4" Grid.Column="1"
+                             Margin="5"
+                             Text="{Binding Transaction.Payee}"
+                             Width="200" />
+
                     <TextBlock Grid.Row="5" Grid.Column="0"
-                               Text="Note"
+                               Text="Amount"
                                VerticalAlignment="Center"
                                Style="{StaticResource H5PrimaryDark}" />
 
                     <TextBox Grid.Row="5" Grid.Column="1"
                              Margin="5"
-                             Text="{Binding Transaction.Note}" />
+                             Text="{Binding Transaction.Amount}"
+                             Width="200"
+                             HorizontalContentAlignment="Right" />
+
+                    <TextBlock Grid.Row="6" Grid.Column="0"
+                               Text="Note"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource H5PrimaryDark}" />
+
+                    <TextBox Grid.Row="6" Grid.Column="1"
+                             Margin="5"
+                             Text="{Binding Transaction.Note}"
+                             Width="200" />
                 </Grid>
             </Border>
 

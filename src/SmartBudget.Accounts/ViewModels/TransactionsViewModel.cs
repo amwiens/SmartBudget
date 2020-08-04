@@ -88,7 +88,21 @@ namespace SmartBudget.Accounts.ViewModels
             var transactions = await _transactionService.GetByAccountId(accountId);
             foreach (var transaction in transactions.OrderByDescending(t => t.Date))
             {
-                Transactions.Add(transaction);
+                Transactions.Add(new Transaction
+                {
+                    WorkingAccountId = _accountId,
+                    Id = transaction.Id,
+                    Payee = transaction.Payee,
+                    Date = transaction.Date,
+                    Amount = transaction.Amount,
+                    IsCleared = transaction.IsCleared,
+                    TransactionType = transaction.TransactionType,
+                    Note = transaction.Note,
+                    AccountId = transaction.AccountId,
+                    Account = transaction.Account,
+                    TargetAccountId = transaction.TargetAccountId,
+                    TargetAccount = transaction.TargetAccount,
+                });
             }
         }
     }

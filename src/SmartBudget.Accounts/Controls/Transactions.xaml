@@ -1,12 +1,17 @@
 ﻿<UserControl x:Class="SmartBudget.Accounts.Controls.Transactions"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
     <UserControl.Resources>
+        <converters:IncomeExpenseConverter x:Key="IncomeExpenseConverter" />
         <Style x:Key="AmountTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H4PrimaryDark}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding TransactionType}" Value="0">
+                <DataTrigger Binding="{Binding IsIncome}" Value="True">
                     <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary2}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsTransferIncome}" Value="True">
+                    <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary1}" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -44,9 +49,17 @@
             <StackPanel Grid.Column="2"
                         Orientation="Vertical"
                         Margin="10">
-                <TextBlock Text="{Binding Amount, StringFormat={}{0:C}}"
-                           HorizontalAlignment="Right"
-                           Style="{StaticResource AmountTextBlock}" />
+                <TextBlock HorizontalAlignment="Right"
+                           Style="{StaticResource AmountTextBlock}">
+                    <TextBlock.Text>
+                        <MultiBinding Converter="{StaticResource IncomeExpenseConverter}">
+                            <Binding Path="TransactionType" />
+                            <Binding Path="Amount" />
+                            <Binding Path="WorkingAccountId" />
+                            <Binding Path="TargetAccountId" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
                 <TextBlock Text="{Binding Date, StringFormat={}{0:M/d/yyyy}}"
                            HorizontalAlignment="Right"
                            Style="{StaticResource H5SecondaryDark1}" />

@@ -7,6 +7,7 @@ using SmartBudget.Core.Services;
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Core.Dialogs
 {
@@ -23,6 +24,26 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _transaction, value); }
         }
 
+        private bool _isTransfer = false;
+
+        public bool IsTransfer
+        {
+            get { return _isTransfer; }
+            set { SetProperty(ref _isTransfer, value); }
+        }
+
+        private TransactionType _transactionType;
+
+        public TransactionType TransactionType
+        {
+            get { return _transactionType; }
+            set
+            {
+                SetProperty(ref _transactionType, value);
+                IsTransfer = TransactionType == TransactionType.Transfer;
+            }
+        }
+
         public Dictionary<TransactionType, string> TransactionTypeCaptions { get; } =
             new Dictionary<TransactionType, string>()
             {
@@ -30,6 +51,8 @@ namespace SmartBudget.Core.Dialogs
                 { TransactionType.Income, "Income" },
                 { TransactionType.Transfer, "Transfer" }
             };
+
+        public Dictionary<int, string> AccountCaptions { get; }
 
         private Account _account;
 
@@ -52,6 +75,8 @@ namespace SmartBudget.Core.Dialogs
             _transactionService = transactionService;
             _accountService = accountService;
 
+            AccountCaptions = new Dictionary<int, string>();
+
             Transaction = new Transaction();
             Transaction.Date = DateTime.Now;
 
@@ -64,6 +89,7 @@ namespace SmartBudget.Core.Dialogs
             var result = ButtonResult.OK;
 
             Transaction.AccountId = Account.Id;
+            Transaction.TransactionType = TransactionType;
             var transaction = _transactionService.Create(Transaction);
 
             RequestClose?.Invoke(new DialogResult(result));
@@ -89,6 +115,18 @@ namespace SmartBudget.Core.Dialogs
         {
             var accountId = parameters.GetValue<int>("accountid");
             Account = await _accountService.Get(accountId);
+
+            await GetAccounts();
+        }
+
+        private async Task GetAccounts()
+        {
+            var accounts = await _accountService.GetAll();
+
+            foreach (var account in accounts)
+            {
+                AccountCaptions.Add(account.Id, account.Name);
+            }
         }
     }
 }

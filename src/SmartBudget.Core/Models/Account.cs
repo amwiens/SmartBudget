@@ -47,14 +47,23 @@ namespace SmartBudget.Core.Models
         {
             get
             {
-                if (Transactions.Count > 0)
+                var expenses = 0.0M;
+                var income = 0.0M;
+                var transfersFrom = 0.0M;
+                var transfersTo = 0.0M;
+
+                if (Transactions != null && Transactions.Count > 0)
                 {
-                    var expenses = Transactions.Where(t => t.TransactionType == TransactionType.Expense).Sum(x => x.Amount);
-                    var income = Transactions.Where(t => t.TransactionType == TransactionType.Income).Sum(x => x.Amount);
-                    return StartingAmount - expenses + income;
+                    expenses = Transactions.Where(t => t.TransactionType == TransactionType.Expense).Sum(x => x.Amount);
+                    income = Transactions.Where(t => t.TransactionType == TransactionType.Income).Sum(x => x.Amount);
+                    transfersFrom = Transactions.Where(t => t.TransactionType == TransactionType.Transfer).Sum(x => x.Amount);
                 }
-                else
-                    return StartingAmount;
+                if (TargetTransactions != null && TargetTransactions.Count > 0)
+                {
+                    transfersTo = TargetTransactions.Where(t => t.TransactionType == TransactionType.Transfer).Sum(x => x.Amount);
+                }
+
+                return StartingAmount - expenses + income - transfersFrom + transfersTo;
             }
         }
     }

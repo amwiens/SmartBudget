@@ -188,7 +188,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private async void GetAccounts()
         {
-            var accounts = await _accountService.GetAll();
+            var accounts = await _accountService.GetAllWithTransactions();
 
             foreach (var account in accounts.Where(a => a.AccountType == AccountType.Card))
             {

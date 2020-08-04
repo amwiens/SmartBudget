@@ -36,8 +36,8 @@ namespace SmartBudget.EntityFramework.Services
             using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
             {
                 Transaction entity = await context.Transactions
-                    .Include((t) => t.Account)
-                    .FirstOrDefaultAsync((e) => e.Id == id);
+                    .Include(t => t.Account)
+                    .FirstOrDefaultAsync(e => e.Id == id);
                 return entity;
             }
         }
@@ -56,9 +56,15 @@ namespace SmartBudget.EntityFramework.Services
         {
             using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
             {
-                IEnumerable<Transaction> entities = await context.Transactions
-                    .Where((e) => e.AccountId == accountId)
+                //IEnumerable<Transaction> entities = new
+                IEnumerable<Transaction> ownEntities = await context.Transactions
+                    .Where(e => e.AccountId == accountId)
                     .ToListAsync();
+                IEnumerable<Transaction> targetEntities = await context.Transactions
+                    .Where(e => e.TargetAccountId == accountId)
+                    .ToListAsync();
+
+                var entities = ownEntities.Concat(targetEntities);
                 return entities;
             }
         }

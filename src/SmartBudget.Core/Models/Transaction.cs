@@ -33,5 +33,14 @@ namespace SmartBudget.Core.Models
         public int? TargetAccountId { get; set; }
 
         public virtual Account? TargetAccount { get; set; }
+
+        [NotMapped]
+        public bool IsIncome => TransactionType == TransactionType.Income;
+
+        [NotMapped]
+        public bool IsTransferIncome => TargetAccountId == WorkingAccountId;
+
+        [NotMapped]
+        public int WorkingAccountId { get; set; }
     }
 }

@@ -117,7 +117,7 @@ namespace SmartBudget.Accounts.ViewModels
         {
             Account = await _accountService.GetWithTransactions(accountId);
 
-            if (Account.Transactions.Count > 0)
+            if (Account.Transactions.Count > 0 || Account.TargetTransactions.Count > 0)
             {
                 var p = new NavigationParameters
                 {
