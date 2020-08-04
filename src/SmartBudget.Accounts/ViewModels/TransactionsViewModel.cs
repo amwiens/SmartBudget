@@ -10,6 +10,7 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SmartBudget.Accounts.ViewModels
 {
@@ -19,6 +20,7 @@ namespace SmartBudget.Accounts.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IDialogService _dialogService;
         private readonly ITransactionService _transactionService;
+        private int _accountId;
 
         private ObservableCollection<Transaction> _transactions;
 
@@ -51,13 +53,10 @@ namespace SmartBudget.Accounts.ViewModels
         {
             _dialogService.ShowTransactionDialog(transaction.Id, result =>
             {
-                //if (result.Result == ButtonResult.Yes)
-                //{
-                //    var success = await _accountService.Delete(int.Parse(id.ToString()));
-
-                //    _regionManager.RequestNavigate(RegionNames.Content, "Accounts");
-                //    _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
-                //}
+                if (result.Result == ButtonResult.OK)
+                {
+                    GetTransactions(_accountId);
+                }
             });
         }
 
@@ -67,18 +66,12 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
-        public async void OnNavigatedTo(NavigationContext navigationContext)
+        public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            int accountId = 0;
-
             if (navigationContext.Parameters.ContainsKey("accountid"))
-                accountId = navigationContext.Parameters.GetValue<int>("accountid");
+                _accountId = navigationContext.Parameters.GetValue<int>("accountid");
 
-            var transactions = await _transactionService.GetByAccountId(accountId);
-            foreach (var transaction in transactions)
-            {
-                Transactions.Add(transaction);
-            }
+            GetTransactions(_accountId);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -88,6 +81,15 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+        }
+
+        private async void GetTransactions(int accountId)
+        {
+            var transactions = await _transactionService.GetByAccountId(accountId);
+            foreach (var transaction in transactions.OrderByDescending(t => t.Date))
+            {
+                Transactions.Add(transaction);
+            }
         }
     }
 }

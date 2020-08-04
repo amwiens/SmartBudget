@@ -53,6 +53,10 @@ namespace SmartBudget.Accounts.ViewModels
 
             _dialogService.ShowAddTransactionDialog(int.Parse(accountId.ToString()), async result =>
             {
+                if (result.Result == ButtonResult.OK)
+                {
+                    GetTransactions(int.Parse(accountId.ToString()));
+                }
             });
         }
 
@@ -106,13 +110,18 @@ namespace SmartBudget.Accounts.ViewModels
             if (navigationContext.Parameters.ContainsKey("account"))
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
-            Account = await _accountService.GetWithTransactions(account.Id);
+            GetTransactions(account.Id);
+        }
+
+        private async void GetTransactions(int accountId)
+        {
+            Account = await _accountService.GetWithTransactions(accountId);
 
             if (Account.Transactions.Count > 0)
             {
                 var p = new NavigationParameters
                 {
-                    { "accountid", account.Id }
+                    { "accountid", accountId }
                 };
 
                 _regionManager.RequestNavigate(RegionNames.TransactionsContent, "Transactions", p);

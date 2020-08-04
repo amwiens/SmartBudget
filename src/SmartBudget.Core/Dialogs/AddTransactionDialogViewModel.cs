@@ -53,6 +53,7 @@ namespace SmartBudget.Core.Dialogs
             _accountService = accountService;
 
             Transaction = new Transaction();
+            Transaction.Date = DateTime.Now;
 
             SaveDialogCommand = new DelegateCommand(SaveDialog);
             CancelDialogCommand = new DelegateCommand(CancelDialog);

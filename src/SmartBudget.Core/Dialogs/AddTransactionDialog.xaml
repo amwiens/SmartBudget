@@ -101,7 +101,7 @@
                               ItemsSource="{Binding Path=TransactionTypeCaptions}"
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
-                              SelectedValue="{Binding Transaction.Type, Mode=TwoWay}"
+                              SelectedValue="{Binding Transaction.TransactionType, Mode=TwoWay}"
                               Width="200" />
 
                     <TextBlock Grid.Row="5" Grid.Column="0"
