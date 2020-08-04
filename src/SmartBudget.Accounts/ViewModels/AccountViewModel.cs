@@ -10,6 +10,8 @@ using SmartBudget.Core.Events;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System.Threading.Tasks;
+
 namespace SmartBudget.Accounts.ViewModels
 {
     public class AccountViewModel : BindableBase, INavigationAware
@@ -30,6 +32,7 @@ namespace SmartBudget.Accounts.ViewModels
         public DelegateCommand<int?> EditAccountCommand { get; private set; }
         public DelegateCommand<int?> DeleteAccountCommand { get; private set; }
         public DelegateCommand<int?> AddTransactionCommand { get; private set; }
+        public DelegateCommand<int?> ImportTransactionsCommand { get; private set; }
 
         public AccountViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
@@ -44,6 +47,7 @@ namespace SmartBudget.Accounts.ViewModels
             EditAccountCommand = new DelegateCommand<int?>(EditAccount);
             DeleteAccountCommand = new DelegateCommand<int?>(DeleteAccount);
             AddTransactionCommand = new DelegateCommand<int?>(AddTransaction);
+            ImportTransactionsCommand = new DelegateCommand<int?>(ImportTransactions);
         }
 
         private void AddTransaction(int? accountId)
@@ -92,6 +96,11 @@ namespace SmartBudget.Accounts.ViewModels
                     _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                 }
             });
+        }
+
+        private async void ImportTransactions(int? id)
+        {
+
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

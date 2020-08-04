@@ -145,7 +145,17 @@
                         <materialdesign:PopupBox.ToggleContent>
                             <materialdesign:PackIcon Kind="DotsHorizontal" />
                         </materialdesign:PopupBox.ToggleContent>
-                        <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Vertical"
+                                    Background="{StaticResource BrushPrimary2}">
+                            <TextBlock Text="IMPORT TRANSACTIONS"
+                                       Padding="3"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding ImportTransactionsCommand}"
+                                                  CommandParameter="{Binding Account.Id}"
+                                                  MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
                             <TextBlock Text="EDIT"
                                        Padding="3"
                                        Cursor="Hand">
