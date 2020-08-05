@@ -36,7 +36,7 @@
             </Image>
 
             <TextBlock Grid.Row="2"
-                       Text="{Binding Transaction.Payee}"
+                       Text="{Binding Transaction.Payee.Name}"
                        HorizontalAlignment="Center"
                        Style="{StaticResource H4PrimaryDark}" />
 

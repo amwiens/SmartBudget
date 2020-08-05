@@ -8,6 +8,7 @@ using SmartBudget.Core.Services;
 using SmartBudget.EntityFramework.Services;
 using SmartBudget.Main;
 using SmartBudget.Views;
+using SmartBudget.YelpAPI.Services;
 
 using System.Windows;
 
@@ -28,6 +29,7 @@ namespace SmartBudget
             // Data Services
             containerRegistry.RegisterSingleton<IAccountService, AccountDataService>();
             containerRegistry.RegisterSingleton<ITransactionService, TransactionDataService>();
+            containerRegistry.RegisterSingleton<IBusinessService, BusinessService>();
 
             // Dialogs
             containerRegistry.RegisterDialog<ConfirmDialog, ConfirmDialogViewModel>();
