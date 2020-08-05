@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartBudget.EntityFramework.Migrations
 {
@@ -31,12 +30,38 @@ namespace SmartBudget.EntityFramework.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Payees",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: false),
+                    YelpId = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Address1 = table.Column<string>(nullable: true),
+                    Address2 = table.Column<string>(nullable: true),
+                    Address3 = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
+                    Country = table.Column<string>(nullable: true),
+                    DisplayAddress = table.Column<string>(nullable: true),
+                    State = table.Column<string>(nullable: true),
+                    ZipCode = table.Column<string>(nullable: true),
+                    Latitude = table.Column<decimal>(nullable: false),
+                    Longitude = table.Column<decimal>(nullable: false),
+                    Phone = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Payees", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Payee = table.Column<string>(nullable: true),
+                    PayeeId = table.Column<int>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     Amount = table.Column<decimal>(nullable: false),
                     IsCleared = table.Column<bool>(nullable: false),
@@ -55,6 +80,12 @@ namespace SmartBudget.EntityFramework.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "FK_Transactions_Payees_PayeeId",
+                        column: x => x.PayeeId,
+                        principalTable: "Payees",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
                         name: "FK_Transactions_Accounts_TargetAccountId",
                         column: x => x.TargetAccountId,
                         principalTable: "Accounts",
@@ -66,6 +97,11 @@ namespace SmartBudget.EntityFramework.Migrations
                 name: "IX_Transactions_AccountId",
                 table: "Transactions",
                 column: "AccountId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transactions_PayeeId",
+                table: "Transactions",
+                column: "PayeeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_TargetAccountId",
@@ -80,6 +116,9 @@ namespace SmartBudget.EntityFramework.Migrations
 
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "Payees");
         }
     }
 }

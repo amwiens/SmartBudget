@@ -37,18 +37,13 @@ namespace SmartBudget.EntityFramework
 
         public DbSet<Transaction> Transactions { get; set; }
 
+        public DbSet<Payee> Payees { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite($"Filename={_dbPath}");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Account>().HasMany(a => a.Transactions);
-            //modelBuilder.Entity<Transaction>()
-            //            .HasRequired(t => t.Account)
-            //            .WithMany(a => a.Transactions)
-            //            .HasForeignKey(t => t.AccountId)
-            //            .WillCascadeOnDelete(false);
-
             base.OnModelCreating(modelBuilder);
         }
     }

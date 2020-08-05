@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.Accounts", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.Core", "src\SmartBudget.Core\SmartBudget.Core.csproj", "{C5996338-9CC0-4753-9959-3EFD2EFCD3B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget.EntityFramework", "src\SmartBudget.EntityFramework\SmartBudget.EntityFramework.csproj", "{F3080965-22BD-4993-9C8C-EA248B0E0195}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.EntityFramework", "src\SmartBudget.EntityFramework\SmartBudget.EntityFramework.csproj", "{F3080965-22BD-4993-9C8C-EA248B0E0195}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{E500DC9B-BFBA-47A4-969C-D89D8E857653}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

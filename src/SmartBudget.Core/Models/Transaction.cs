@@ -12,7 +12,10 @@ namespace SmartBudget.Core.Models
 
     public class Transaction : DomainObject
     {
-        public string Payee { get; set; }
+        [ForeignKey(nameof(Payee)), Column(Order = 2)]
+        public int PayeeId { get; set; }
+
+        public Payee Payee { get; set; }
 
         public DateTime Date { get; set; }
 

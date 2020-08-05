@@ -9,7 +9,7 @@ using SmartBudget.EntityFramework;
 namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200731231320_Initial")]
+    [Migration("20200805170746_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,60 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("SmartBudget.Core.Models.Payee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Address3")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("City")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DisplayAddress")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Latitude")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("Longitude")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("State")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("YelpId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ZipCode")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Payees");
+                });
+
             modelBuilder.Entity("SmartBudget.Core.Models.Transaction", b =>
                 {
                     b.Property<int>("Id")
@@ -81,8 +135,8 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Payee")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("PayeeId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("TargetAccountId")
                         .HasColumnType("INTEGER");
@@ -94,6 +148,8 @@ namespace SmartBudget.EntityFramework.Migrations
 
                     b.HasIndex("AccountId");
 
+                    b.HasIndex("PayeeId");
+
                     b.HasIndex("TargetAccountId");
 
                     b.ToTable("Transactions");
@@ -104,6 +160,12 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.HasOne("SmartBudget.Core.Models.Account", "Account")
                         .WithMany("Transactions")
                         .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartBudget.Core.Models.Payee", "Payee")
+                        .WithMany()
+                        .HasForeignKey("PayeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
