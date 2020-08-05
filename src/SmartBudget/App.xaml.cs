@@ -29,6 +29,7 @@ namespace SmartBudget
             // Data Services
             containerRegistry.RegisterSingleton<IAccountService, AccountDataService>();
             containerRegistry.RegisterSingleton<ITransactionService, TransactionDataService>();
+            containerRegistry.RegisterSingleton<IPayeeService, PayeeDataService>();
             containerRegistry.RegisterSingleton<IBusinessService, BusinessService>();
 
             // Dialogs
