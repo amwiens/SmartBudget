@@ -32,7 +32,7 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _isTransfer, value); }
         }
 
-        private TransactionType _transactionType;
+        private TransactionType _transactionType = TransactionType.Expense;
 
         public TransactionType TransactionType
         {

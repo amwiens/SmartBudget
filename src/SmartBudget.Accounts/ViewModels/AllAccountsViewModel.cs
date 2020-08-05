@@ -12,6 +12,7 @@ using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -66,6 +67,14 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _depositBalanceCollection, value); }
         }
 
+        private decimal _cardsBalance;
+
+        public decimal CardsBalance
+        {
+            get { return _cardsBalance; }
+            set { SetProperty(ref _cardsBalance, value); }
+        }
+
         private decimal _depositBalance;
 
         public decimal DepositBalance
@@ -74,11 +83,21 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _depositBalance, value); }
         }
 
+        private decimal _creditBalance;
+
+        public decimal CreditBalance
+        {
+            get { return _creditBalance; }
+            set { SetProperty(ref _creditBalance, value); }
+        }
+
         public SeriesCollection CreditBalanceCollection
         {
             get { return _creditBalanceCollection; }
             set { SetProperty(ref _creditBalanceCollection, value); }
         }
+
+        public List<string> Labels { get; set; }
 
         public AllAccountsViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
@@ -87,6 +106,7 @@ namespace SmartBudget.Accounts.ViewModels
             CardAccounts = new ObservableCollection<Account>();
             BankAccounts = new ObservableCollection<Account>();
             CreditAccounts = new ObservableCollection<Account>();
+            Labels = new List<string>();
 
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
@@ -140,6 +160,13 @@ namespace SmartBudget.Accounts.ViewModels
                 GetBankBalance();
             if (CreditAccounts.Count > 0)
                 GetCreditBalance();
+
+
+            for (int i = 30; i > 0; i--)
+            {
+                var newDate = DateTime.Now.AddDays(-i);
+                Labels.Add(newDate.ToShortDateString());
+            }
         }
 
         private async void GetCardsBalance()
@@ -155,6 +182,8 @@ namespace SmartBudget.Accounts.ViewModels
                     Stroke = new SolidColorBrush(Color.FromRgb(109, 210, 48)) // line color
                 }
             };
+
+            CardsBalance = CardAccounts.Sum(a => a.Balance);
         }
 
         private async void GetBankBalance()
@@ -187,6 +216,8 @@ namespace SmartBudget.Accounts.ViewModels
                     Stroke = new SolidColorBrush(Color.FromRgb(254, 77, 151)) // line color
                 }
             };
+
+            CreditBalance = CreditAccounts.Sum(a => a.Balance);
         }
 
         private async void GetAccounts()

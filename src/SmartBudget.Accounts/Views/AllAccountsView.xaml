@@ -32,12 +32,13 @@
                 <StackPanel Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
-                               Text="$200.00"
+                               Text="{Binding CardsBalance, StringFormat={}{0:C}}"
                                HorizontalAlignment="Center" />
                     <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
                                Text="Cards balance" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding CardsBalanceCollection}">
+                <lvc:CartesianChart Series="{Binding CardsBalanceCollection}"
+                                    Width="400">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                   ShowLabels="False">
@@ -47,7 +48,8 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                     <lvc:CartesianChart.AxisX>
-                        <lvc:Axis ShowLabels="False">
+                        <lvc:Axis ShowLabels="False"
+                                  Labels="{Binding Labels}">
                             <lvc:Axis.Separator>
                                 <lvc:Separator IsEnabled="False" />
                             </lvc:Axis.Separator>
@@ -68,7 +70,8 @@
                                Text="Deposit"
                                HorizontalAlignment="Center" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding DepositBalanceCollection}">
+                <lvc:CartesianChart Series="{Binding DepositBalanceCollection}"
+                                    Width="400">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                       ShowLabels="False">
@@ -78,7 +81,8 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                     <lvc:CartesianChart.AxisX>
-                        <lvc:Axis ShowLabels="False">
+                        <lvc:Axis ShowLabels="False"
+                                  Labels="{Binding Labels}">
                             <lvc:Axis.Separator>
                                 <lvc:Separator IsEnabled="False" />
                             </lvc:Axis.Separator>
@@ -93,13 +97,14 @@
                 <StackPanel Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
-                               Text="$200.00"
+                               Text="{Binding CreditBalance, StringFormat={}{0:C}}"
                                HorizontalAlignment="Center" />
                     <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
                                Text="Pending credit"
                                HorizontalAlignment="Center" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding CreditBalanceCollection}">
+                <lvc:CartesianChart Series="{Binding CreditBalanceCollection}"
+                                    Width="400">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                   ShowLabels="False">
@@ -109,7 +114,8 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisY>
                     <lvc:CartesianChart.AxisX>
-                        <lvc:Axis ShowLabels="False">
+                        <lvc:Axis ShowLabels="False"
+                                  Labels="{Binding Labels}">
                             <lvc:Axis.Separator>
                                 <lvc:Separator IsEnabled="False" />
                             </lvc:Axis.Separator>

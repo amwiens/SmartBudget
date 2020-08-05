@@ -86,7 +86,7 @@ namespace SmartBudget.Accounts.ViewModels
         private async void GetTransactions(int accountId)
         {
             var transactions = await _transactionService.GetByAccountId(accountId);
-            foreach (var transaction in transactions.OrderByDescending(t => t.Date))
+            foreach (var transaction in transactions.OrderByDescending(t => t.Id).OrderByDescending(t => t.Date))
             {
                 Transactions.Add(new Transaction
                 {
