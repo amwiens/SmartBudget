@@ -107,7 +107,7 @@
                          Text="{Binding Account.Rate}"
                          HorizontalContentAlignment="Right"
                          Width="200"
-                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True"/>
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="6"

@@ -161,7 +161,6 @@ namespace SmartBudget.Accounts.ViewModels
             if (CreditAccounts.Count > 0)
                 GetCreditBalance();
 
-
             for (int i = 30; i > 0; i--)
             {
                 var newDate = DateTime.Now.AddDays(-i);
