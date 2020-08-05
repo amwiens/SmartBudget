@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
     </UserControl.Resources>
@@ -74,7 +75,8 @@
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding Account.Name}"
-                         Width="200" />
+                         Width="200"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="4"
@@ -88,7 +90,8 @@
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
                          Text="{Binding Account.AccountNumber}"
-                         Width="200" />
+                         Width="200"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="5"
@@ -103,7 +106,8 @@
                 <TextBox Grid.Column="1"
                          Text="{Binding Account.Rate}"
                          HorizontalContentAlignment="Right"
-                         Width="200" />
+                         Width="200"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True"/>
             </Grid>
 
             <Grid Grid.Row="6"
@@ -146,7 +150,8 @@
                 <TextBox Grid.Column="1"
                          Text="{Binding Account.StartingAmount}"
                          HorizontalContentAlignment="Right"
-                         Width="200" />
+                         Width="200"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="9"

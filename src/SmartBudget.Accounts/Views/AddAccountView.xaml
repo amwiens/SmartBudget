@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
     </UserControl.Resources>
@@ -106,7 +107,8 @@
                 <TextBox Grid.Column="1"
                          Text="{Binding Rate}"
                          Width="200"
-                         TextAlignment="Right" />
+                         TextAlignment="Right"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="6"
@@ -152,7 +154,8 @@
                 <TextBox Grid.Column="1"
                          Text="{Binding StartingAmount}"
                          Width="200"
-                         TextAlignment="Right" />
+                         TextAlignment="Right"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
             <Grid Grid.Row="9"
