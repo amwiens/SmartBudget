@@ -15,6 +15,7 @@ namespace SmartBudget.Core.Dialogs
     {
         private readonly ITransactionService _transactionService;
         private readonly IAccountService _accountService;
+        private readonly IPayeeService _payeeService;
 
         private Transaction _transaction;
 
@@ -70,27 +71,34 @@ namespace SmartBudget.Core.Dialogs
         public event Action<IDialogResult> RequestClose;
 
         public AddTransactionDialogViewModel(ITransactionService transactionService,
-            IAccountService accountService)
+            IAccountService accountService,
+            IPayeeService payeeService)
         {
             _transactionService = transactionService;
             _accountService = accountService;
+            _payeeService = payeeService;
 
             AccountCaptions = new Dictionary<int, string>();
 
             Transaction = new Transaction();
+            Transaction.Payee = new Payee();
             Transaction.Date = DateTime.Now;
 
-            SaveDialogCommand = new DelegateCommand(SaveDialog);
+            SaveDialogCommand = new DelegateCommand(async ()=> await SaveDialog());
             CancelDialogCommand = new DelegateCommand(CancelDialog);
         }
 
-        private void SaveDialog()
+        private async Task SaveDialog()
         {
             var result = ButtonResult.OK;
 
+            var payee = await _payeeService.Create(Transaction.Payee);
+
             Transaction.AccountId = Account.Id;
             Transaction.TransactionType = TransactionType;
-            var transaction = _transactionService.Create(Transaction);
+            Transaction.Payee = null;
+            Transaction.PayeeId = payee.Id;
+            var transaction = await _transactionService.Create(Transaction);
 
             RequestClose?.Invoke(new DialogResult(result));
         }

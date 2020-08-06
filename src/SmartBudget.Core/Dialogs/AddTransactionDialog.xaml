@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors;assembly=SmartBudget.Core">
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
@@ -56,7 +56,7 @@
             </Image>
 
             <TextBlock Grid.Row="2"
-                       Text="{Binding Transaction.Payee}"
+                       Text="{Binding Transaction.Payee.Name}"
                        HorizontalAlignment="Center"
                        Style="{StaticResource H4PrimaryDark}" />
 
@@ -140,7 +140,7 @@
 
                     <TextBox Grid.Row="4" Grid.Column="1"
                              Margin="5"
-                             Text="{Binding Transaction.Payee}"
+                             Text="{Binding Transaction.Payee.Name}"
                              Width="200" />
 
                     <TextBlock Grid.Row="5" Grid.Column="0"
