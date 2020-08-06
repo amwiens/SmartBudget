@@ -18,8 +18,8 @@ namespace SmartBudget.Core.Providers
 
         public PayeeSuggestionProvider()
         {
-            var payees = PayeeFactory.CreatePayeeList();
-            ListOfPayees = payees;
+            //var payees = PayeeFactory.CreatePayeeList();
+            //ListOfPayees = payees;
         }
 
         //public PayeeSuggestionProvider(IPayeeService payeeService)

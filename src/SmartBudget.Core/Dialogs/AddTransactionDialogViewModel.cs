@@ -7,6 +7,7 @@ using SmartBudget.Core.Services;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
 namespace SmartBudget.Core.Dialogs
@@ -16,6 +17,14 @@ namespace SmartBudget.Core.Dialogs
         private readonly ITransactionService _transactionService;
         private readonly IAccountService _accountService;
         private readonly IPayeeService _payeeService;
+
+        private ObservableCollection<Payee> _payees;
+
+        public ObservableCollection<Payee> Payees
+        {
+            get { return _payees; }
+            set { SetProperty(ref _payees, value); }
+        }
 
         private Transaction _transaction;
 
@@ -86,6 +95,8 @@ namespace SmartBudget.Core.Dialogs
             _accountService = accountService;
             _payeeService = payeeService;
 
+            Payees = new ObservableCollection<Payee>();
+
             AccountCaptions = new Dictionary<int, string>();
 
             Transaction = new Transaction
@@ -147,6 +158,7 @@ namespace SmartBudget.Core.Dialogs
             Account = await _accountService.Get(accountId);
 
             await GetAccounts();
+            await GetPayees();
         }
 
         private async Task GetAccounts()
@@ -156,6 +168,16 @@ namespace SmartBudget.Core.Dialogs
             foreach (var account in accounts)
             {
                 AccountCaptions.Add(account.Id, account.Name);
+            }
+        }
+
+        private async Task GetPayees()
+        {
+            var payees = await _payeeService.GetAll();
+
+            foreach (var payee in payees)
+            {
+                Payees.Add(payee);
             }
         }
     }

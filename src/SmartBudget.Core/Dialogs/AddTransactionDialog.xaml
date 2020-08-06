@@ -21,7 +21,7 @@
 
         <TextBlock x:Key="LoadingContent" Text="Loading..." Margin="5" FontSize="14" />
 
-        <providers:PayeeSuggestionProvider x:Key="PayeeSuggestionProvider" />
+        <providers:PayeeSuggestionProvider x:Key="PayeeSuggestionProvider" ListOfPayees="{Binding Payees}" />
         <DataTemplate x:Key="PayeeTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
