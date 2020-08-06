@@ -8,7 +8,9 @@ using SmartBudget.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace SmartBudget.Core.Dialogs
 {
@@ -96,6 +98,7 @@ namespace SmartBudget.Core.Dialogs
             _payeeService = payeeService;
 
             Payees = new ObservableCollection<Payee>();
+            GetPayees();
 
             AccountCaptions = new Dictionary<int, string>();
 
@@ -114,7 +117,7 @@ namespace SmartBudget.Core.Dialogs
             var result = ButtonResult.OK;
             Payee payee;
 
-            if (Transaction.Payee is null)
+            if (Transaction.Payee.Id == 0)
             {
                 var newPayee = new Payee
                 {
@@ -158,7 +161,6 @@ namespace SmartBudget.Core.Dialogs
             Account = await _accountService.Get(accountId);
 
             await GetAccounts();
-            await GetPayees();
         }
 
         private async Task GetAccounts()
@@ -171,7 +173,7 @@ namespace SmartBudget.Core.Dialogs
             }
         }
 
-        private async Task GetPayees()
+        private async void GetPayees()
         {
             var payees = await _payeeService.GetAll();
 

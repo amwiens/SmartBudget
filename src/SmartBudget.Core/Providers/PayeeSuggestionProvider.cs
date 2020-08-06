@@ -8,17 +8,34 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace SmartBudget.Core.Providers
 {
-    public class PayeeSuggestionProvider : ISuggestionProvider
+    public class PayeeSuggestionProvider : Button, ISuggestionProvider
     {
         public IPayeeService _payeeService;
-        public IEnumerable<Payee> ListOfPayees { get; set; }
+
+        public static readonly DependencyProperty ListOfPayeesProperty =
+            DependencyProperty.Register(
+                "ListOfPayees", typeof(IEnumerable<Payee>),
+                typeof(PayeeSuggestionProvider));
+        public IEnumerable<Payee> ListOfPayees
+        {
+            get { return (IEnumerable<Payee>)GetValue(ListOfPayeesProperty); }
+            set
+            {
+                SetValue(ListOfPayeesProperty, value);
+                Payees = value;
+            }
+        }
+
+        public IEnumerable<Payee> Payees { get; set; }
 
         public PayeeSuggestionProvider()
         {
-            //var payees = PayeeFactory.CreatePayeeList();
+            Payees = ListOfPayees;
             //ListOfPayees = payees;
         }
 
@@ -31,7 +48,7 @@ namespace SmartBudget.Core.Providers
         public Payee GetExactSuggestion(string filter)
         {
             if (string.IsNullOrWhiteSpace(filter)) return null;
-            return ListOfPayees
+            return Payees
                 .FirstOrDefault(p => string.Equals(p.Name, filter, StringComparison.CurrentCultureIgnoreCase));
         }
 
@@ -39,7 +56,7 @@ namespace SmartBudget.Core.Providers
         {
             if (string.IsNullOrWhiteSpace(filter)) return null;
             System.Threading.Thread.Sleep(1000);
-            return ListOfPayees
+            return Payees
                 .Where(p => p.Name.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) > -1)
                 .ToList();
         }
