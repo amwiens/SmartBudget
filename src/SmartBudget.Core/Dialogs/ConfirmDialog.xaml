@@ -8,6 +8,7 @@
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="400" />
             <Setter Property="Height" Value="200" />
+            <Setter Property="ShowInTaskbar" Value="False" />
         </Style>
     </prism:Dialog.WindowStyle>
     <Grid>

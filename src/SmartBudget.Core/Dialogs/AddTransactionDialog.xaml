@@ -11,6 +11,7 @@
             <Setter Property="Height" Value="500" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
+            <Setter Property="ShowInTaskbar" Value="False" />
         </Style>
     </prism:Dialog.WindowStyle>
     <UserControl.Resources>
