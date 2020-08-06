@@ -13,8 +13,8 @@ namespace SmartBudget.Core.Factories
         {
             return new List<Payee>
             {
-                new Payee { Id = 1, Name = "Carissa Wiens" },
-                new Payee { Id = 8, Name = "Debbie Goedtel" }
+                new Payee { Id = 1, Name = "Test user" },
+                new Payee { Id = 8, Name = "Test user2" }
             };
         }
 
