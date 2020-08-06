@@ -63,6 +63,14 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _account, value); }
         }
 
+        private string _newPayee;
+
+        public string NewPayee
+        {
+            get { return _newPayee; }
+            set { SetProperty(ref _newPayee, value); }
+        }
+
         public DelegateCommand SaveDialogCommand { get; }
         public DelegateCommand CancelDialogCommand { get; }
 
@@ -80,19 +88,33 @@ namespace SmartBudget.Core.Dialogs
 
             AccountCaptions = new Dictionary<int, string>();
 
-            Transaction = new Transaction();
-            Transaction.Payee = new Payee();
-            Transaction.Date = DateTime.Now;
+            Transaction = new Transaction
+            {
+                Payee = new Payee(),
+                Date = DateTime.Now
+            };
 
-            SaveDialogCommand = new DelegateCommand(async ()=> await SaveDialog());
+            SaveDialogCommand = new DelegateCommand(async () => await SaveDialog());
             CancelDialogCommand = new DelegateCommand(CancelDialog);
         }
 
         private async Task SaveDialog()
         {
             var result = ButtonResult.OK;
+            Payee payee;
 
-            var payee = await _payeeService.Create(Transaction.Payee);
+            if (Transaction.Payee is null)
+            {
+                var newPayee = new Payee
+                {
+                    Name = NewPayee,
+                    Latitude = 0.0M,
+                    Longitude = 0.0M
+                };
+                payee = await _payeeService.Create(newPayee);
+            }
+            else
+                payee = Transaction.Payee;
 
             Transaction.AccountId = Account.Id;
             Transaction.TransactionType = TransactionType;
