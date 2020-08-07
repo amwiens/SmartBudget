@@ -1,6 +1,8 @@
 ﻿using Prism.Mvvm;
 using Prism.Regions;
 
+using SmartBudget.Core;
+
 namespace SmartBudget.Expenses.ViewModels
 {
     public class ExpensesViewModel : BindableBase, INavigationAware
@@ -19,6 +21,7 @@ namespace SmartBudget.Expenses.ViewModels
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+            _regionManager.Regions.Remove(RegionNames.ExpensesContent);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

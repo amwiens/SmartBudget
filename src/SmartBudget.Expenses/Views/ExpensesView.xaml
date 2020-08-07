@@ -5,6 +5,114 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True">
     <Grid Background="{StaticResource BrushBackground2}">
-        <TextBlock Text="Expenses" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0"
+                BorderBrush="{StaticResource BrushOutline}"
+                BorderThickness="0 0 1 0"
+                Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="Calendar"
+                                   Style="{StaticResource H4SecondaryDark2}"
+                                   VerticalAlignment="Center" />
+
+                        <!--<TextBlock Grid.Column="1"
+                                   Text="ALL REPORTS"
+                                   Cursor="Hand"
+                                   Style="{StaticResource TextLinkPrimaryDark}"
+                                   VerticalAlignment="Center">
+                            <TextBlock.InputBindings>
+                                <MouseBinding Command="{Binding AllReportsCommand}"
+                                              MouseAction="LeftClick" />
+                            </TextBlock.InputBindings>
+                        </TextBlock>-->
+                    </Grid>
+
+                    <!--<ContentControl Grid.Row="1"
+                                    prism:RegionManager.RegionName="{x:Static core:RegionNames.DashboardStatistics}" />-->
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1"
+                BorderThickness="0"
+                Margin="10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0"
+                                   Text="All Expenses"
+                                   Style="{StaticResource H4SecondaryDark2}"
+                                   VerticalAlignment="Center" />
+
+                        <StackPanel Grid.Column="1"
+                                    Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/add_primary.png"
+                                   Height="20"
+                                   Margin="10"
+                                   VerticalAlignment="Center"
+                                   Cursor="Hand">
+                                <Image.InputBindings>
+                                    <MouseBinding Command="{Binding AddExpenseCommand}"
+                                                  MouseAction="LeftClick" />
+                                </Image.InputBindings>
+                            </Image>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="NEW EXPENSE"
+                                       Style="{StaticResource TextLinkSecondaryDark2}"
+                                       VerticalAlignment="Center"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding AddExpenseCommand}"
+                                                  MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
+                        </StackPanel>
+                    </Grid>
+
+                    <ContentControl Grid.Row="1"
+                                    prism:RegionManager.RegionName="{x:Static core:RegionNames.ExpensesContent}" />
+                </Grid>
+
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

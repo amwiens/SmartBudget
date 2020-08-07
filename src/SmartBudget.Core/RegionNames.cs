@@ -19,5 +19,8 @@
 
         // Account view
         public static string TransactionsContent = "TransactionsContent";
+
+        // Expenses view
+        public static string ExpensesContent = "ExpensesContent";
     }
 }
