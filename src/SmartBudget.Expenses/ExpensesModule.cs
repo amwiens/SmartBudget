@@ -18,6 +18,7 @@ namespace SmartBudget.Expenses
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<ExpensesView>("Expenses");
+            containerRegistry.RegisterForNavigation<BlankExpensesView>("BlankExpenses");
         }
     }
 }

@@ -39,6 +39,8 @@ namespace SmartBudget.EntityFramework
 
         public DbSet<Payee> Payees { get; set; }
 
+        public DbSet<Expense> Expenses { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseSqlite($"Filename={_dbPath}");
 
