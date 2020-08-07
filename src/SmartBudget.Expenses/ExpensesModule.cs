@@ -19,6 +19,7 @@ namespace SmartBudget.Expenses
         {
             containerRegistry.RegisterForNavigation<ExpensesView>("Expenses");
             containerRegistry.RegisterForNavigation<BlankExpensesView>("BlankExpenses");
+            containerRegistry.RegisterForNavigation<ExpensesListView>("ExpensesList");
         }
     }
 }
