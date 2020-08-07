@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.EntityFramework
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "APIs", "APIs", "{E500DC9B-BFBA-47A4-969C-D89D8E857653}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget.YelpAPI", "src\SmartBudget.YelpAPI\SmartBudget.YelpAPI.csproj", "{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBudget.YelpAPI", "src\SmartBudget.YelpAPI\SmartBudget.YelpAPI.csproj", "{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBudget.Expenses", "src\SmartBudget.Expenses\SmartBudget.Expenses.csproj", "{018EB82F-AC74-43BF-81E8-A658104919B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{018EB82F-AC74-43BF-81E8-A658104919B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{018EB82F-AC74-43BF-81E8-A658104919B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{018EB82F-AC74-43BF-81E8-A658104919B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{018EB82F-AC74-43BF-81E8-A658104919B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{29AC1EB4-BEBE-47CB-9DFD-1218C712D343} = {7A0547CA-9B82-4065-84AE-7A07D79857CD}
 		{2077A825-0080-418D-BB14-CFD83CC2AF2B} = {7A0547CA-9B82-4065-84AE-7A07D79857CD}
 		{CF563EB6-84AB-4562-80D5-1F35CCA3BCC7} = {E500DC9B-BFBA-47A4-969C-D89D8E857653}
+		{018EB82F-AC74-43BF-81E8-A658104919B9} = {7A0547CA-9B82-4065-84AE-7A07D79857CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {170C2A8A-F24A-4E93-AA03-E9690C1B9838}
