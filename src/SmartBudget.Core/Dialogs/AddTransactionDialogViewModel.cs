@@ -8,9 +8,7 @@ using SmartBudget.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 
 namespace SmartBudget.Core.Dialogs
 {

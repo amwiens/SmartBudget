@@ -5,11 +5,10 @@ using Prism.Regions;
 
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
-using SmartBudget.Core.Models;
 
 namespace SmartBudget.Main.ViewModels
 {
-    public class MenuViewModel : BindableBase, INavigationAware
+    public class MenuViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
@@ -28,6 +27,14 @@ namespace SmartBudget.Main.ViewModels
         {
             get { return _accountsChecked; }
             set { SetProperty(ref _accountsChecked, value); }
+        }
+
+        private bool _expensesChecked = false;
+
+        public bool ExpensesChecked
+        {
+            get { return _expensesChecked; }
+            set { SetProperty(ref _expensesChecked, value); }
         }
 
         public DelegateCommand<string> NavigateCommand { get; private set; }
@@ -54,6 +61,10 @@ namespace SmartBudget.Main.ViewModels
 
                 case "Accounts":
                     AccountsChecked = true;
+                    break;
+
+                case "Expenses":
+                    ExpensesChecked = true;
                     break;
             }
         }
@@ -82,50 +93,6 @@ namespace SmartBudget.Main.ViewModels
                     _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
                 }
             }
-        }
-
-        public void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            var area = string.Empty;
-            var p = new NavigationParameters();
-
-            if (navigationContext.Parameters.ContainsKey("area"))
-            {
-                area = navigationContext.Parameters.GetValue<string>("area");
-            }
-            if (navigationContext.Parameters.ContainsKey("account"))
-            {
-                Account account = navigationContext.Parameters.GetValue<Account>("account");
-                p.Add("account", account);
-            }
-            if (navigationContext.Parameters.ContainsKey("page"))
-            {
-                string page = navigationContext.Parameters.GetValue<string>("page");
-                p.Add("page", page);
-            }
-
-            switch (area)
-            {
-                case "Accounts":
-                    if (p.Count > 0)
-                        Navigate("Accounts", p);
-                    else
-                        Navigate("Accounts");
-                    break;
-
-                default:
-                    Navigate("Dashboard");
-                    break;
-            }
-        }
-
-        public bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public void OnNavigatedFrom(NavigationContext navigationContext)
-        {
         }
     }
 }

@@ -91,6 +91,19 @@
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
+                <RadioButton IsChecked="{Binding ExpensesChecked}" Command="{Binding NavigateCommand}" CommandParameter="Expenses">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/expenses.png"
+                                   Height="20"
+                                   VerticalAlignment="Center"
+                                   ToolTip="Expenses" />
+                            <TextBlock Padding="10 5"
+                                       Style="{StaticResource H3PrimaryDark}"
+                                       Text="EXPENSES" />
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
             </StackPanel>
         </Grid>
     </StackPanel>

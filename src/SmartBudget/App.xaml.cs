@@ -6,6 +6,7 @@ using SmartBudget.Accounts;
 using SmartBudget.Core.Dialogs;
 using SmartBudget.Core.Services;
 using SmartBudget.EntityFramework.Services;
+using SmartBudget.Expenses;
 using SmartBudget.Main;
 using SmartBudget.Views;
 using SmartBudget.YelpAPI.Services;
@@ -42,6 +43,7 @@ namespace SmartBudget
         {
             moduleCatalog.AddModule<MainModule>();
             moduleCatalog.AddModule<AccountsModule>();
+            moduleCatalog.AddModule<ExpensesModule>();
         }
     }
 }
