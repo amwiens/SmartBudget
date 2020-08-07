@@ -38,6 +38,7 @@ namespace SmartBudget
             containerRegistry.RegisterDialog<ConfirmDialog, ConfirmDialogViewModel>();
             containerRegistry.RegisterDialog<TransactionDialog, TransactionDialogViewModel>();
             containerRegistry.RegisterDialog<AddTransactionDialog, AddTransactionDialogViewModel>();
+            containerRegistry.RegisterDialog<AddExpenseDialog, AddExpenseDialogViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

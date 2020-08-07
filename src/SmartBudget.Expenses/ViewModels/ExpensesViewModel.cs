@@ -5,6 +5,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 
 using SmartBudget.Core;
+using SmartBudget.Core.Dialogs;
 using SmartBudget.Core.Services;
 
 using System.Linq;
@@ -35,6 +36,13 @@ namespace SmartBudget.Expenses.ViewModels
 
         private void AddExpense()
         {
+            _dialogService.ShowAddExpenseDialog(result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    GetExpenses();
+                }
+            });
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
