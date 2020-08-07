@@ -3,10 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors"
-             xmlns:acb="http://wpfcontrols.com/"
-             xmlns:providers="clr-namespace:SmartBudget.Core.Providers"
-             xmlns:controls="clr-namespace:SmartBudget.Core.Controls">
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
@@ -20,9 +17,6 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-        <TextBlock x:Key="LoadingContent" Text="Loading..." Margin="5" FontSize="14" />
-
-        <providers:PayeeSuggestionProvider x:Key="PayeeSuggestionProvider" />
         <DataTemplate x:Key="PayeeTemplate">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -160,25 +154,15 @@
 
                     <ComboBox Grid.Row="4" Grid.Column="1"
                               IsEditable="True"
-                              DisplayMemberPath="{Binding Name}"
+                              IsTextSearchEnabled="True"
+                              IsTextSearchCaseSensitive="False"
+                              StaysOpenOnEdit="True"
+                              TextSearch.TextPath="Name"
                               Text="{Binding NewPayee, Mode=TwoWay}"
                               ItemsSource="{Binding Payees}"
-                              SelectedItem="{Binding Transaction.Payee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              Width="200"
-                              controls:ComboBox.IsFilterOnAutocompleteEnabled="True" />
-                    <!--<acb:AutoCompleteTextBox Grid.Row="4" Grid.Column="1"
-                                             Width="200"
-                                             Height="26"
-                                             DisplayMember="Name"
-                                             Text="{Binding NewPayee, Mode=TwoWay}"
-                                             Provider="{StaticResource PayeeSuggestionProvider}"
-                                             ItemTemplate="{StaticResource PayeeTemplate}"
-                                             LoadingContent="{StaticResource LoadingContent}"
-                                             SelectedItem="{Binding Transaction.Payee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />-->
-                    <!--<TextBox Grid.Row="4" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Transaction.Payee.Name}"
-                             Width="200" />-->
+                              SelectedItem="{Binding Payee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              ItemTemplate="{StaticResource PayeeTemplate}"
+                              Width="200" />
 
                     <TextBlock Grid.Row="5" Grid.Column="0"
                                Text="Amount"

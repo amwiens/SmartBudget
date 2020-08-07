@@ -74,6 +74,14 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _account, value); }
         }
 
+        private Payee _payee;
+
+        public Payee Payee
+        {
+            get { return _payee; }
+            set { SetProperty(ref _payee, value); }
+        }
+
         private string _newPayee;
 
         public string NewPayee
@@ -117,7 +125,7 @@ namespace SmartBudget.Core.Dialogs
             var result = ButtonResult.OK;
             Payee payee;
 
-            if (Transaction.Payee.Id == 0)
+            if (Payee is null)
             {
                 var newPayee = new Payee
                 {
@@ -128,7 +136,7 @@ namespace SmartBudget.Core.Dialogs
                 payee = await _payeeService.Create(newPayee);
             }
             else
-                payee = Transaction.Payee;
+                payee = Payee;
 
             Transaction.AccountId = Account.Id;
             Transaction.TransactionType = TransactionType;
