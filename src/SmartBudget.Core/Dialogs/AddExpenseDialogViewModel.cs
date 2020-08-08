@@ -15,7 +15,7 @@ namespace SmartBudget.Core.Dialogs
     {
         private readonly IExpenseService _expenseService;
 
-        private Expense _expense;
+        private Expense _expense = new Expense();
 
         public Expense Expense
         {
@@ -66,26 +66,8 @@ namespace SmartBudget.Core.Dialogs
         private async Task SaveDialog()
         {
             var result = ButtonResult.OK;
-            //Payee payee;
 
-            //if (Payee is null)
-            //{
-            //    var newPayee = new Payee
-            //    {
-            //        Name = NewPayee,
-            //        Latitude = 0.0M,
-            //        Longitude = 0.0M
-            //    };
-            //    payee = await _payeeService.Create(newPayee);
-            //}
-            //else
-            //    payee = Payee;
-
-            //Expense.AccountId = Account.Id;
-            //Expense.TransactionType = ExpenseRecurrence;
-            //Expense.Payee = null;
-            //Expense.PayeeId = payee.Id;
-            //var transaction = await _expenseService.Create(Expense);
+            var expense = await _expenseService.Create(Expense);
 
             RequestClose?.Invoke(new DialogResult(result));
         }
