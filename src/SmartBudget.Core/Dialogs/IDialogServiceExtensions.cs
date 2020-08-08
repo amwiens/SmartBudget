@@ -9,8 +9,10 @@ namespace SmartBudget.Core.Dialogs
         public static void ShowConfirmDialog(this IDialogService dialogService,
             string message, Action<IDialogResult> callBack)
         {
-            var p = new DialogParameters();
-            p.Add("message", message);
+            var p = new DialogParameters
+            {
+                { "message", message }
+            };
 
             dialogService.ShowDialog("ConfirmDialog", p, callBack);
         }

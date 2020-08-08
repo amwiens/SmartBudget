@@ -13,7 +13,7 @@ namespace SmartBudget.EntityFramework
             var options = new DbContextOptionsBuilder<SmartBudgetDbContext>();
             var dbPath = Path.Combine(Environment.CurrentDirectory, "smartBudget.db");
             options.UseSqlite(dbPath);
-            SmartBudgetDbContext ctx = SmartBudgetDbContext.Create(dbPath);
+            _ = SmartBudgetDbContext.Create(dbPath);
 
             return new SmartBudgetDbContext(options.Options, dbPath);
         }

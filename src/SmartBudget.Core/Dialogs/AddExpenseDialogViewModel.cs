@@ -88,7 +88,7 @@ namespace SmartBudget.Core.Dialogs
         {
         }
 
-        public async void OnDialogOpened(IDialogParameters parameters)
+        public void OnDialogOpened(IDialogParameters parameters)
         {
         }
     }
