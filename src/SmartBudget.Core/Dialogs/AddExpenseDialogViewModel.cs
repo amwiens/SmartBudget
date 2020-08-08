@@ -37,6 +37,7 @@ namespace SmartBudget.Core.Dialogs
         public Dictionary<ExpenseRecurrence, string> ExpenseRecurrenceCaptions { get; } =
             new Dictionary<ExpenseRecurrence, string>()
             {
+                { ExpenseRecurrence.OneTime, "One time" },
                 { ExpenseRecurrence.Daily, "Daily" },
                 { ExpenseRecurrence.DailyWithoutWeekend, "Daily w/o weekend" },
                 { ExpenseRecurrence.Weekly, "Weekly" },

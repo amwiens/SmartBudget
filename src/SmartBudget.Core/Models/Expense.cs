@@ -4,6 +4,7 @@ namespace SmartBudget.Core.Models
 {
     public enum ExpenseRecurrence
     {
+        OneTime,
         Daily,
         DailyWithoutWeekend,
         Weekly,

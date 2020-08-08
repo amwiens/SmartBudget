@@ -7,7 +7,9 @@ using Prism.Services.Dialogs;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace SmartBudget.Expenses.ViewModels
 {
@@ -18,12 +20,28 @@ namespace SmartBudget.Expenses.ViewModels
         private readonly IDialogService _dialogService;
         private readonly IExpenseService _expenseService;
 
-        private ObservableCollection<Expense> _expenses;
+        private ObservableCollection<Expense> _monthlyExpenses;
 
-        public ObservableCollection<Expense> Expenses
+        public ObservableCollection<Expense> MonthlyExpenses
         {
-            get { return _expenses; }
-            set { SetProperty(ref _expenses, value); }
+            get { return _monthlyExpenses; }
+            set { SetProperty(ref _monthlyExpenses, value); }
+        }
+
+        private ObservableCollection<Expense> _yearlyExpenses;
+
+        public ObservableCollection<Expense> YearlyExpenses
+        {
+            get { return _yearlyExpenses; }
+            set { SetProperty(ref _yearlyExpenses, value); }
+        }
+
+        private ObservableCollection<Expense> _otherExpenses;
+
+        public ObservableCollection<Expense> OtherExpenses
+        {
+            get { return _otherExpenses; }
+            set { SetProperty(ref _otherExpenses, value); }
         }
 
         public DelegateCommand<Expense> ExpenseSelectedCommand { get; private set; }
@@ -38,7 +56,9 @@ namespace SmartBudget.Expenses.ViewModels
             _dialogService = dialogService;
             _expenseService = expenseService;
 
-            Expenses = new ObservableCollection<Expense>();
+            MonthlyExpenses = new ObservableCollection<Expense>();
+            YearlyExpenses = new ObservableCollection<Expense>();
+            OtherExpenses = new ObservableCollection<Expense>();
 
             ExpenseSelectedCommand = new DelegateCommand<Expense>(ExpenseSelected);
         }
@@ -64,9 +84,38 @@ namespace SmartBudget.Expenses.ViewModels
         private async void GetExpenses()
         {
             var expenses = await _expenseService.GetAll();
-            foreach (var expense in expenses)
+
+            foreach (var expense in expenses.Where(e => e.Recurrence == ExpenseRecurrence.Monthly && (e.EndDate is null || e.EndDate > DateTime.Now) && e.StartDate.AddMonths(-1) < DateTime.Now).OrderBy(e => e.StartDate.Day))
             {
-                Expenses.Add(new Expense
+                MonthlyExpenses.Add(new Expense
+                {
+                    Id = expense.Id,
+                    Name = expense.Name,
+                    Amount = expense.Amount,
+                    StartDate = expense.StartDate,
+                    EndDate = expense.EndDate,
+                    IsEndless = expense.IsEndless,
+                    Recurrence = expense.Recurrence
+                });
+            }
+
+            foreach (var expense in expenses.Where(e => e.Recurrence == ExpenseRecurrence.Yearly && (e.EndDate is null || e.EndDate > DateTime.Now) && e.StartDate.AddMonths(-1) < DateTime.Now).OrderBy(e => e.StartDate.Day).OrderBy(e => e.StartDate.Month))
+            {
+                YearlyExpenses.Add(new Expense
+                {
+                    Id = expense.Id,
+                    Name = expense.Name,
+                    Amount = expense.Amount,
+                    StartDate = expense.StartDate,
+                    EndDate = expense.EndDate,
+                    IsEndless = expense.IsEndless,
+                    Recurrence = expense.Recurrence
+                });
+            }
+
+            foreach (var expense in expenses.Where(e => e.Recurrence != ExpenseRecurrence.Monthly && e.Recurrence != ExpenseRecurrence.Yearly && (e.EndDate is null || e.EndDate > DateTime.Now) && e.StartDate.AddMonths(-1) < DateTime.Now))
+            {
+                OtherExpenses.Add(new Expense
                 {
                     Id = expense.Id,
                     Name = expense.Name,

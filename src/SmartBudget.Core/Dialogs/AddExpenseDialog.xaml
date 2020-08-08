@@ -88,7 +88,7 @@
                               ItemsSource="{Binding Path=ExpenseRecurrenceCaptions}"
                               DisplayMemberPath="Value"
                               SelectedValuePath="Key"
-                              SelectedValue="{Binding Expense.ExpenseRecurrence, Mode=TwoWay}"
+                              SelectedValue="{Binding Expense.Recurrence, Mode=TwoWay}"
                               Width="200" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0"
