@@ -4,8 +4,8 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 
-using SmartBudget.Core.Dialogs;
 using SmartBudget.Core.Events;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 

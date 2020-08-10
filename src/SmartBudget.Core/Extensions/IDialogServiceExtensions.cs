@@ -2,7 +2,7 @@
 
 using System;
 
-namespace SmartBudget.Core.Dialogs
+namespace SmartBudget.Core.Extensions
 {
     public static class IDialogServiceExtensions
     {

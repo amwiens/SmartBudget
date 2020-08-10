@@ -5,7 +5,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 
 using SmartBudget.Core;
-using SmartBudget.Core.Dialogs;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Services;
 
 using System.Linq;
