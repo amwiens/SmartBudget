@@ -24,8 +24,7 @@ namespace SmartBudget.Core.Behaviors
 
         private static void OnSelectAllTextOnFocusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var textBox = d as TextBox;
-            if (textBox == null) return;
+            if (!(d is TextBox textBox)) return;
 
             if (e.NewValue is bool == false) return;
 
@@ -43,15 +42,13 @@ namespace SmartBudget.Core.Behaviors
 
         private static void SelectAll(object sender, RoutedEventArgs e)
         {
-            var textBox = e.OriginalSource as TextBox;
-            if (textBox == null) return;
+            if (!(e.OriginalSource is TextBox textBox)) return;
             textBox.SelectAll();
         }
 
         private static void IgnoreMouseButton(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            var textBox = sender as TextBox;
-            if (textBox == null || (!textBox.IsReadOnly && textBox.IsKeyboardFocusWithin)) return;
+            if (!(sender is TextBox textBox) || (!textBox.IsReadOnly && textBox.IsKeyboardFocusWithin)) return;
 
             e.Handled = true;
             textBox.Focus();

@@ -77,22 +77,5 @@ namespace SmartBudget.Main.ViewModels
                 _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
             }
         }
-
-        private void Navigate(string navigatePath, NavigationParameters navigationParameters)
-        {
-            if (navigatePath != null)
-            {
-                if (navigationParameters.ContainsKey("account"))
-                {
-                    _regionManager.RequestNavigate(RegionNames.AccountsContent, "Account", navigationParameters);
-                    _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
-                }
-                if (navigationParameters.ContainsKey("page"))
-                {
-                    _regionManager.RequestNavigate(RegionNames.AccountsContent, "AddAccount");
-                    _eventAggregator.GetEvent<NavigationEvent>().Publish(navigatePath);
-                }
-            }
-        }
     }
 }
