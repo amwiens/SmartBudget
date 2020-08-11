@@ -82,7 +82,6 @@ namespace SmartBudget.Main.ViewModels
 
         private void FavoriteAccountsLoaded()
         {
-
         }
 
         private void FavoriteAccountsLoadedError(Exception ex)

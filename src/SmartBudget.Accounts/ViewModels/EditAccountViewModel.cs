@@ -1,6 +1,4 @@
-﻿using MaterialDesignThemes.Wpf;
-
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -50,7 +48,7 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator = eventAggregator;
             _accountService = accountService;
 
-            UpdateAccountCommand = new DelegateCommand(async ()=> await UpdateAccount());
+            UpdateAccountCommand = new DelegateCommand(async () => await UpdateAccount());
             CancelCommand = new DelegateCommand(CancelAccount);
         }
 
@@ -99,15 +97,6 @@ namespace SmartBudget.Accounts.ViewModels
         }
 
         private void AccountLoadedError(Exception ex)
-        {
-            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
-        }
-
-        private void AccountUpdated()
-        {
-        }
-
-        private void AccountUpdatedError(Exception ex)
         {
             _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
         }

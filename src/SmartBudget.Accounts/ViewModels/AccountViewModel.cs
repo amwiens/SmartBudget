@@ -45,10 +45,10 @@ namespace SmartBudget.Accounts.ViewModels
             _dialogService = dialogService;
             _accountService = accountService;
 
-            EditAccountCommand = new DelegateCommand(async ()=> await EditAccount());
+            EditAccountCommand = new DelegateCommand(async () => await EditAccount());
             DeleteAccountCommand = new DelegateCommand(DeleteAccount);
             AddTransactionCommand = new DelegateCommand(AddTransaction);
-            ImportTransactionsCommand = new DelegateCommand(async ()=> await ImportTransactions());
+            ImportTransactionsCommand = new DelegateCommand(async () => await ImportTransactions());
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

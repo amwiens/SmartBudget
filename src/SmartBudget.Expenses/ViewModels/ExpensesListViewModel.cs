@@ -86,7 +86,6 @@ namespace SmartBudget.Expenses.ViewModels
 
         private void ExpensesLoaded()
         {
-
         }
 
         private void ExpensesLoadedError(Exception ex)

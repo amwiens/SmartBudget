@@ -8,6 +8,7 @@ using SmartBudget.Core;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Services;
+
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,7 +65,6 @@ namespace SmartBudget.Expenses.ViewModels
 
         private void ExpensesLoaded()
         {
-
         }
 
         private void ExpensesLoadedError(Exception ex)
