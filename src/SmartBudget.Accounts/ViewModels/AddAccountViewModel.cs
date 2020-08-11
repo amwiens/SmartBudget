@@ -67,9 +67,9 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _startDate, value); }
         }
 
-        private DateTime _endDate = DateTime.Now;
+        private DateTime? _endDate;
 
-        public DateTime EndDate
+        public DateTime? EndDate
         {
             get { return _endDate; }
             set { SetProperty(ref _endDate, value); }

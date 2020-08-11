@@ -30,7 +30,7 @@ namespace SmartBudget.Core.Models
 
         public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public decimal StartingAmount { get; set; }
 

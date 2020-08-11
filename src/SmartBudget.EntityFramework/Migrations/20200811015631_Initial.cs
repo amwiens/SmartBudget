@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SmartBudget.EntityFramework.Migrations
 {
@@ -21,13 +20,31 @@ namespace SmartBudget.EntityFramework.Migrations
                     CardNumber = table.Column<string>(nullable: true),
                     Rate = table.Column<decimal>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    EndDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: true),
                     StartingAmount = table.Column<decimal>(nullable: false),
                     PaidAmount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Expenses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: true),
+                    IsEndless = table.Column<bool>(nullable: false),
+                    Amount = table.Column<decimal>(nullable: false),
+                    Recurrence = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Expenses", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -112,6 +129,9 @@ namespace SmartBudget.EntityFramework.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Expenses");
+
             migrationBuilder.DropTable(
                 name: "Transactions");
 

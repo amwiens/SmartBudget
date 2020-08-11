@@ -31,7 +31,7 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Favorite")

@@ -4,7 +4,23 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:controls="clr-namespace:SmartBudget.Accounts.Controls">
+             xmlns:local="clr-namespace:SmartBudget.Accounts.Views"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
+             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <UserControl.Resources>
+        <converters:IncomeExpenseConverter x:Key="IncomeExpenseConverter" />
+
+        <Style x:Key="AmountTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H4PrimaryDark}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsIncome}" Value="True">
+                    <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary2}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsTransferIncome}" Value="True">
+                    <Setter Property="TextBlock.Foreground" Value="{StaticResource BrushSecondary2}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <ListView x:Name="_listOfCardAccounts"
                   Grid.Row="2"
@@ -23,7 +39,85 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:Transactions />
+                    <Grid Background="{StaticResource BrushPrimary2}">
+                        <Grid Margin="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Rectangle Grid.Column="0"
+                                       Width="80"
+                                       Height="40"
+                                       Fill="{StaticResource BrushBackground3}"
+                                       Margin="10"
+                                       Cursor="Hand">
+                                <Rectangle.InputBindings>
+                                    <MouseBinding Command="{Binding AddCardAccountCommand}"
+                                  MouseAction="LeftClick" />
+                                </Rectangle.InputBindings>
+                            </Rectangle>
+
+                            <StackPanel Grid.Column="1"
+                                        Orientation="Vertical"
+                                        Margin="10">
+                                <TextBlock Text="{Binding Payee.Name}"
+                                           Style="{StaticResource H4PrimaryDark}" />
+                                <TextBlock Text="{Binding Note}"
+                                           Style="{StaticResource H5SecondaryDark1}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Vertical"
+                                        Margin="10">
+                                <TextBlock HorizontalAlignment="Right"
+                                           Style="{StaticResource AmountTextBlock}">
+                                    <TextBlock.Text>
+                                        <MultiBinding Converter="{StaticResource IncomeExpenseConverter}">
+                                            <Binding Path="TransactionType" />
+                                            <Binding Path="Amount" />
+                                            <Binding Path="WorkingAccountId" />
+                                            <Binding Path="TargetAccountId" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Text="{Binding Date, StringFormat={}{0:M/d/yyyy}}"
+                                           HorizontalAlignment="Right"
+                                           Style="{StaticResource H5SecondaryDark1}" />
+                            </StackPanel>
+
+                            <materialdesign:PopupBox PlacementMode="BottomAndAlignLeftEdges"
+                                                     VerticalAlignment="Center"
+                                                     Grid.Column="3">
+                                <materialdesign:PopupBox.ToggleContent>
+                                    <materialdesign:PackIcon Kind="DotsHorizontal" />
+                                </materialdesign:PopupBox.ToggleContent>
+                                <StackPanel Orientation="Vertical"
+                                            Background="{StaticResource BrushPrimary2}">
+                                    <TextBlock Text="EDIT"
+                                               Padding="3"
+                                               Cursor="Hand">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding EditTransactionCommand}"
+                                                          CommandParameter="{Binding Id}"
+                                                          MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                    <TextBlock Text="DELETE"
+                                               Padding="3"
+                                               Cursor="Hand">
+                                        <TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding DeleteTransactionCommand}"
+                                                          CommandParameter="{Binding Id}"
+                                                          MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>
+                                    </TextBlock>
+                                </StackPanel>
+                            </materialdesign:PopupBox>
+                        </Grid>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

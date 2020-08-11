@@ -3,12 +3,14 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-
+using SmartBudget.Core;
+using SmartBudget.Core.Dialogs;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -30,8 +32,9 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _transactions, value); }
         }
 
-        public DelegateCommand AddAccountCommand { get; private set; }
         public DelegateCommand<Transaction> TransactionSelectedCommand { get; private set; }
+        public DelegateCommand<int?> EditTransactionCommand { get; private set; }
+        public DelegateCommand<int?> DeleteTransactionCommand { get; private set; }
 
         public TransactionsListViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
@@ -45,8 +48,37 @@ namespace SmartBudget.Accounts.ViewModels
 
             Transactions = new ObservableCollection<Transaction>();
 
-            AddAccountCommand = new DelegateCommand(AddAccount);
             TransactionSelectedCommand = new DelegateCommand<Transaction>(TransactionSelected);
+            EditTransactionCommand = new DelegateCommand<int?>(EditTransaction);
+            DeleteTransactionCommand = new DelegateCommand<int?>(DeleteTransaction);
+        }
+
+        private void EditTransaction(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeleteTransaction(int? id)
+        {
+            if (id == null)
+                return;
+
+            _dialogService.ShowConfirmDialog("Are you sure you want to delete the transaction?", async result =>
+            {
+                if (result.Result == ButtonResult.Yes)
+                {
+                    var success = await _transactionService.Delete(int.Parse(id.ToString()));
+
+                    var p = new NavigationParameters
+                    {
+                        { "page", "Account" },
+                        { "account", _accountId }
+                    };
+
+                    _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
+                }
+            });
         }
 
         private void TransactionSelected(Transaction transaction)
@@ -58,12 +90,6 @@ namespace SmartBudget.Accounts.ViewModels
                     GetTransactions(_accountId);
                 }
             });
-        }
-
-        private void AddAccount()
-        {
-            _regionManager.RequestNavigate("AccountsContent", "AddAccount");
-            _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)

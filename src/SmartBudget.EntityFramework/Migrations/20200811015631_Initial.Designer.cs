@@ -9,7 +9,7 @@ using SmartBudget.EntityFramework;
 namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200805170746_Initial")]
+    [Migration("20200811015631_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,7 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.Property<string>("CardNumber")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Favorite")
@@ -58,6 +58,35 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Accounts");
+                });
+
+            modelBuilder.Entity("SmartBudget.Core.Models.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsEndless")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Recurrence")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("SmartBudget.Core.Models.Payee", b =>
