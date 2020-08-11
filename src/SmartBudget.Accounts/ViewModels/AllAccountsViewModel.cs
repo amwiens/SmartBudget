@@ -8,6 +8,7 @@ using Prism.Regions;
 
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -153,13 +154,13 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetAccounts();
+            GetAccounts().Await(AccountsLoaded, AccountsLoadedError);
             if (CardAccounts.Count > 0)
-                GetCardsBalance();
+                GetCardsBalance().Await(BalanceCalculated, BalanceCalculatedError);
             if (BankAccounts.Count > 0)
-                GetBankBalance();
+                GetBankBalance().Await(BalanceCalculated, BalanceCalculatedError);
             if (CreditAccounts.Count > 0)
-                GetCreditBalance();
+                GetCreditBalance().Await(BalanceCalculated, BalanceCalculatedError);
 
             for (int i = 30; i > 0; i--)
             {
@@ -168,7 +169,25 @@ namespace SmartBudget.Accounts.ViewModels
             }
         }
 
-        private async void GetCardsBalance()
+        private void AccountsLoaded()
+        {
+        }
+
+        private void AccountsLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private void BalanceCalculated()
+        {
+        }
+
+        private void BalanceCalculatedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetCardsBalance()
         {
             CardsBalanceCollection = new SeriesCollection
             {
@@ -185,7 +204,7 @@ namespace SmartBudget.Accounts.ViewModels
             CardsBalance = CardAccounts.Sum(a => a.Balance);
         }
 
-        private async void GetBankBalance()
+        private async Task GetBankBalance()
         {
             DepositBalanceCollection = new SeriesCollection
             {
@@ -202,7 +221,7 @@ namespace SmartBudget.Accounts.ViewModels
             DepositBalance = BankAccounts.Sum(a => a.Balance);
         }
 
-        private async void GetCreditBalance()
+        private async Task GetCreditBalance()
         {
             CreditBalanceCollection = new SeriesCollection
             {
@@ -219,7 +238,7 @@ namespace SmartBudget.Accounts.ViewModels
             CreditBalance = CreditAccounts.Sum(a => a.Balance);
         }
 
-        private async void GetAccounts()
+        private async Task GetAccounts()
         {
             var accounts = await _accountService.GetAllWithTransactions();
 

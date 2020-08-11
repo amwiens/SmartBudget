@@ -1,14 +1,18 @@
 ﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 
+using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Accounts.ViewModels
 {
@@ -16,6 +20,7 @@ namespace SmartBudget.Accounts.ViewModels
     {
         private readonly IDialogService _dialogService;
         private readonly ITransactionService _transactionService;
+        private readonly IEventAggregator _eventAggregator;
         private int _accountId;
 
         private ObservableCollection<Transaction> _transactions;
@@ -29,9 +34,11 @@ namespace SmartBudget.Accounts.ViewModels
         public DelegateCommand<Transaction> TransactionSelectedCommand { get; private set; }
 
         public TransactionsListViewModel(IDialogService dialogService,
+            IEventAggregator eventAggregator,
             ITransactionService transactionService)
         {
             _dialogService = dialogService;
+            _eventAggregator = eventAggregator;
             _transactionService = transactionService;
 
             Transactions = new ObservableCollection<Transaction>();
@@ -45,7 +52,7 @@ namespace SmartBudget.Accounts.ViewModels
             {
                 if (result.Result == ButtonResult.OK)
                 {
-                    GetTransactions(_accountId);
+                    GetTransactions(_accountId).Await(TransactionsLoaded, TransactionsLoadedError);
                 }
             });
         }
@@ -55,7 +62,7 @@ namespace SmartBudget.Accounts.ViewModels
             if (navigationContext.Parameters.ContainsKey("accountid"))
                 _accountId = navigationContext.Parameters.GetValue<int>("accountid");
 
-            GetTransactions(_accountId);
+            GetTransactions(_accountId).Await(TransactionsLoaded, TransactionsLoadedError);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -67,7 +74,16 @@ namespace SmartBudget.Accounts.ViewModels
         {
         }
 
-        private async void GetTransactions(int accountId)
+        private void TransactionsLoaded()
+        {
+        }
+
+        private void TransactionsLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetTransactions(int accountId)
         {
             var transactions = await _transactionService.GetByAccountId(accountId);
             foreach (var transaction in transactions.OrderByDescending(t => t.Id).OrderByDescending(t => t.Date))

@@ -161,7 +161,6 @@
                                 </TextBlock.Style>
                                 <TextBlock.InputBindings>
                                     <MouseBinding Command="{Binding ImportTransactionsCommand}"
-                                                  CommandParameter="{Binding Account.Id}"
                                                   MouseAction="LeftClick" />
                                 </TextBlock.InputBindings>
                             </TextBlock>
@@ -179,7 +178,6 @@
                                 </TextBlock.Style>
                                 <TextBlock.InputBindings>
                                     <MouseBinding Command="{Binding EditAccountCommand}"
-                                                  CommandParameter="{Binding Account.Id}"
                                                   MouseAction="LeftClick" />
                                 </TextBlock.InputBindings>
                             </TextBlock>
@@ -197,7 +195,6 @@
                                 </TextBlock.Style>
                                 <TextBlock.InputBindings>
                                     <MouseBinding Command="{Binding DeleteAccountCommand}"
-                                                  CommandParameter="{Binding Account.Id}"
                                                   MouseAction="LeftClick" />
                                 </TextBlock.InputBindings>
                             </TextBlock>
@@ -239,7 +236,6 @@
                            Cursor="Hand">
                         <Image.InputBindings>
                             <MouseBinding Command="{Binding AddTransactionCommand}"
-                                          CommandParameter="{Binding Account.Id}"
                                           MouseAction="LeftClick" />
                         </Image.InputBindings>
                     </Image>

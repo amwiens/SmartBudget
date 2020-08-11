@@ -25,6 +25,12 @@ namespace SmartBudget.ViewModels
             _toastViewModel = new ToastViewModel();
 
             eventAggregator.GetEvent<ExceptionEvent>().Subscribe(OnErrorReceived);
+            eventAggregator.GetEvent<MessageEvent>().Subscribe(OnMessageReceived);
+        }
+
+        private void OnMessageReceived(string message)
+        {
+            _toastViewModel.ShowSuccess(message);
         }
 
         private void OnErrorReceived(Exception ex)

@@ -1,14 +1,19 @@
-﻿using Prism.Commands;
+﻿using MaterialDesignThemes.Wpf;
+
+using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Accounts.ViewModels
 {
@@ -45,13 +50,13 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator = eventAggregator;
             _accountService = accountService;
 
-            UpdateAccountCommand = new DelegateCommand(UpdateAccount);
+            UpdateAccountCommand = new DelegateCommand(async ()=> await UpdateAccount());
             CancelCommand = new DelegateCommand(CancelAccount);
         }
 
-        private async void UpdateAccount()
+        private async Task UpdateAccount()
         {
-            var newAccount = await _accountService.Update(Account.Id, Account);
+            var newAccount = await UpdateAccount(Account.Id, Account);
 
             var p = new NavigationParameters
             {
@@ -61,6 +66,7 @@ namespace SmartBudget.Accounts.ViewModels
 
             _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
+            _eventAggregator.GetEvent<MessageEvent>().Publish("Account updated");
         }
 
         private void CancelAccount()
@@ -78,14 +84,43 @@ namespace SmartBudget.Accounts.ViewModels
         {
         }
 
-        public async void OnNavigatedTo(NavigationContext navigationContext)
+        public void OnNavigatedTo(NavigationContext navigationContext)
         {
             var account = new Account();
 
             if (navigationContext.Parameters.ContainsKey("account"))
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
-            Account = await _accountService.Get(account.Id);
+            GetAccount(account.Id).Await(AccountLoaded, AccountLoadedError);
+        }
+
+        private void AccountLoaded()
+        {
+        }
+
+        private void AccountLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private void AccountUpdated()
+        {
+        }
+
+        private void AccountUpdatedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        public async Task GetAccount(int id)
+        {
+            Account = await _accountService.Get(id);
+        }
+
+        public async Task<Account> UpdateAccount(int accountId, Account account)
+        {
+            var newAccount = await _accountService.Update(accountId, account);
+            return newAccount;
         }
     }
 }

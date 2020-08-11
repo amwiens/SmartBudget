@@ -10,6 +10,7 @@ using SmartBudget.Core.Services;
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Accounts.ViewModels
 {
@@ -94,11 +95,11 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator = eventAggregator;
             _accountService = accountService;
 
-            SaveAccountCommand = new DelegateCommand(SaveAccount);
+            SaveAccountCommand = new DelegateCommand(async () => await SaveAccount());
             CancelCommand = new DelegateCommand(CancelAddAccount);
         }
 
-        private async void SaveAccount()
+        private async Task SaveAccount()
         {
             var account = new Account
             {
@@ -111,7 +112,7 @@ namespace SmartBudget.Accounts.ViewModels
                 StartingAmount = StartingAmount
             };
 
-            var newAccount = await _accountService.Create(account);
+            var newAccount = await CreateAccount(account);
 
             var p = new NavigationParameters
             {
@@ -121,6 +122,7 @@ namespace SmartBudget.Accounts.ViewModels
 
             _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
+            _eventAggregator.GetEvent<MessageEvent>().Publish("Account created");
         }
 
         private void CancelAddAccount()
@@ -140,6 +142,12 @@ namespace SmartBudget.Accounts.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+        }
+
+        private async Task<Account> CreateAccount(Account account)
+        {
+            var newAccount = await _accountService.Create(account);
+            return newAccount;
         }
     }
 }

@@ -4,11 +4,14 @@ using Prism.Regions;
 
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Accounts.ViewModels
 {
@@ -96,7 +99,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void ShowAllAccounts()
         {
-            GetAccounts();
+            GetAccounts().Await(AccountsLoaded, AccountsLoadedError);
 
             if (CardAccounts.Count > 0 || BankAccounts.Count > 0 || CreditAccounts.Count > 0)
             {
@@ -110,7 +113,16 @@ namespace SmartBudget.Accounts.ViewModels
             }
         }
 
-        private async void GetAccounts()
+        private void AccountsLoaded()
+        {
+        }
+
+        private void AccountsLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetAccounts()
         {
             var accounts = await _accountService.GetAllWithTransactions();
 
