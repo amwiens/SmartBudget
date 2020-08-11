@@ -5,10 +5,12 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 
 using SmartBudget.Core;
+using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Services;
-
+using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Expenses.ViewModels
 {
@@ -40,7 +42,7 @@ namespace SmartBudget.Expenses.ViewModels
             {
                 if (result.Result == ButtonResult.OK)
                 {
-                    GetExpenses();
+                    GetExpenses().Await(ExpensesLoaded, ExpensesLoadedError);
                 }
             });
         }
@@ -57,10 +59,20 @@ namespace SmartBudget.Expenses.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetExpenses();
+            GetExpenses().Await(ExpensesLoaded, ExpensesLoadedError);
         }
 
-        private async void GetExpenses()
+        private void ExpensesLoaded()
+        {
+
+        }
+
+        private void ExpensesLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetExpenses()
         {
             var expenses = await _expenseService.GetAll();
 
