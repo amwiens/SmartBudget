@@ -3,11 +3,11 @@
 namespace SmartBudget.Accounts.Views
 {
     /// <summary>
-    /// Interaction logic for TransactionsView.xaml
+    /// Interaction logic for TransactionsListView.xaml
     /// </summary>
-    public partial class TransactionsView : UserControl
+    public partial class TransactionsListView : UserControl
     {
-        public TransactionsView()
+        public TransactionsListView()
         {
             InitializeComponent();
         }

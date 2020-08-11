@@ -14,7 +14,7 @@ using System.Linq;
 
 namespace SmartBudget.Accounts.ViewModels
 {
-    public class TransactionsViewModel : BindableBase, INavigationAware
+    public class TransactionsListViewModel : BindableBase, INavigationAware
     {
         private readonly IRegionManager _regionManager;
         private readonly IEventAggregator _eventAggregator;
@@ -33,7 +33,7 @@ namespace SmartBudget.Accounts.ViewModels
         public DelegateCommand AddAccountCommand { get; private set; }
         public DelegateCommand<Transaction> TransactionSelectedCommand { get; private set; }
 
-        public TransactionsViewModel(IRegionManager regionManager,
+        public TransactionsListViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
             IDialogService dialogService,
             ITransactionService transactionService)
