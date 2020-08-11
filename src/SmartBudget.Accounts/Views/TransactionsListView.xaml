@@ -4,9 +4,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:local="clr-namespace:SmartBudget.Accounts.Views"
-             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
-             xmlns:materialdesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:IncomeExpenseConverter x:Key="IncomeExpenseConverter" />
 
@@ -45,7 +43,6 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="2*" />
                                 <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
                             <Rectangle Grid.Column="0"
@@ -87,35 +84,6 @@
                                            HorizontalAlignment="Right"
                                            Style="{StaticResource H5SecondaryDark1}" />
                             </StackPanel>
-
-                            <materialdesign:PopupBox PlacementMode="BottomAndAlignLeftEdges"
-                                                     VerticalAlignment="Center"
-                                                     Grid.Column="3">
-                                <materialdesign:PopupBox.ToggleContent>
-                                    <materialdesign:PackIcon Kind="DotsHorizontal" />
-                                </materialdesign:PopupBox.ToggleContent>
-                                <StackPanel Orientation="Vertical"
-                                            Background="{StaticResource BrushPrimary2}">
-                                    <TextBlock Text="EDIT"
-                                               Padding="3"
-                                               Cursor="Hand">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding EditTransactionCommand}"
-                                                          CommandParameter="{Binding Id}"
-                                                          MouseAction="LeftClick" />
-                                        </TextBlock.InputBindings>
-                                    </TextBlock>
-                                    <TextBlock Text="DELETE"
-                                               Padding="3"
-                                               Cursor="Hand">
-                                        <TextBlock.InputBindings>
-                                            <MouseBinding Command="{Binding DeleteTransactionCommand}"
-                                                          CommandParameter="{Binding Id}"
-                                                          MouseAction="LeftClick" />
-                                        </TextBlock.InputBindings>
-                                    </TextBlock>
-                                </StackPanel>
-                            </materialdesign:PopupBox>
                         </Grid>
                     </Grid>
                 </DataTemplate>
