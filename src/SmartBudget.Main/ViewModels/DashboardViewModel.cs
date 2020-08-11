@@ -5,11 +5,14 @@ using Prism.Regions;
 
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -67,7 +70,7 @@ namespace SmartBudget.Main.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
-            GetFavoriteAccounts();
+            GetFavoriteAccounts().Await(FavoriteAccountsLoaded, FavoriteAccountsLoadedError);
 
             _regionManager.RequestNavigate(RegionNames.DashboardStatistics, "BlankStatistics");
             _regionManager.RequestNavigate(RegionNames.DashboardTransactions, "BlankTransactions");
@@ -77,7 +80,17 @@ namespace SmartBudget.Main.ViewModels
                 _regionManager.RequestNavigate(RegionNames.DashboardFavoriteAccounts, "BlankAccounts");
         }
 
-        private async void GetFavoriteAccounts()
+        private void FavoriteAccountsLoaded()
+        {
+
+        }
+
+        private void FavoriteAccountsLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetFavoriteAccounts()
         {
             var favoriteAccounts = new ObservableCollection<Account>();
             var accounts = await _accountService.GetAll();

@@ -3,6 +3,8 @@ using Prism.Mvvm;
 
 using SmartBudget.Core.Events;
 
+using System;
+
 namespace SmartBudget.ViewModels
 {
     public class ShellWindowViewModel : BindableBase
@@ -22,13 +24,12 @@ namespace SmartBudget.ViewModels
             _eventAggregator = eventAggregator;
             _toastViewModel = new ToastViewModel();
 
-            eventAggregator.GetEvent<NavigationEvent>().Subscribe(OnNavigationReceived);
+            eventAggregator.GetEvent<ExceptionEvent>().Subscribe(OnErrorReceived);
         }
 
-        private void OnNavigationReceived(string obj)
+        private void OnErrorReceived(Exception ex)
         {
-            if (obj != "Dashboard")
-                _toastViewModel.ShowInformation("Test");
+            _toastViewModel.ShowError(ex.Message);
         }
     }
 }
