@@ -27,8 +27,6 @@ namespace SmartBudget.Main.ViewModels
         }
 
         public DelegateCommand<Account> AccountSelectedCommand { get; private set; }
-        public DelegateCommand EditAccountCommand { get; private set; }
-        public DelegateCommand<Account> DeleteAccountCommand { get; private set; }
 
         public FavoriteAccountsViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
@@ -39,8 +37,6 @@ namespace SmartBudget.Main.ViewModels
             _accountService = accountService;
 
             AccountSelectedCommand = new DelegateCommand<Account>(AccountSelected);
-            EditAccountCommand = new DelegateCommand(EditAccount);
-            DeleteAccountCommand = new DelegateCommand<Account>(DeleteAccount);
         }
 
         private void AccountSelected(Account account)
@@ -56,35 +52,6 @@ namespace SmartBudget.Main.ViewModels
 
             _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
-        }
-
-        private void EditAccount()
-        {
-            //if (account == null)
-            //    return;
-
-            var p = new NavigationParameters
-            {
-                { "page", "EditAccount" },
-                //{ "account", account }
-            };
-
-            _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
-            _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
-        }
-
-        private void DeleteAccount(Account account)
-        {
-            //if (account == null)
-            //    return;
-
-            //var p = new NavigationParameters
-            //{
-            //    { "area", "Accounts" },
-            //    { "account", account }
-            //};
-
-            //_regionManager.RequestNavigate(RegionNames.Sidebar, "Menu", p);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
