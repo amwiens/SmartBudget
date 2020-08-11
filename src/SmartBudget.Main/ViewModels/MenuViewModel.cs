@@ -52,6 +52,7 @@ namespace SmartBudget.Main.ViewModels
         {
             DashboardChecked = false;
             AccountsChecked = false;
+            ExpensesChecked = false;
 
             switch (message)
             {
