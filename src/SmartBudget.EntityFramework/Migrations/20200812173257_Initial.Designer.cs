@@ -9,14 +9,14 @@ using SmartBudget.EntityFramework;
 namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    [Migration("20200811015631_Initial")]
+    [Migration("20200812173257_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6");
+                .HasAnnotation("ProductVersion", "3.1.7");
 
             modelBuilder.Entity("SmartBudget.Core.Models.Account", b =>
                 {
@@ -36,14 +36,14 @@ namespace SmartBudget.EntityFramework.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ExpirationDate")
+                        .HasColumnType("TEXT");
+
                     b.Property<bool>("Favorite")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<decimal>("PaidAmount")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("Rate")

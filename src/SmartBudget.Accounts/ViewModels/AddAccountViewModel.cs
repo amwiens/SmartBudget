@@ -20,7 +20,7 @@ namespace SmartBudget.Accounts.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IAccountService _accountService;
 
-        private AccountType _accountType;
+        private AccountType _accountType = AccountType.Bank;
 
         public AccountType AccountType
         {
@@ -36,52 +36,12 @@ namespace SmartBudget.Accounts.ViewModels
                 { AccountType.Credit, "Credit Account" }
             };
 
-        private string _name;
+        private Account _account;
 
-        public string Name
+        public Account Account
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-
-        private string _accountNumber;
-
-        public string AccountNumber
-        {
-            get { return _accountNumber; }
-            set { SetProperty(ref _accountNumber, value); }
-        }
-
-        private decimal _rate;
-
-        public decimal Rate
-        {
-            get { return _rate; }
-            set { SetProperty(ref _rate, value); }
-        }
-
-        private DateTime _startDate = DateTime.Now;
-
-        public DateTime StartDate
-        {
-            get { return _startDate; }
-            set { SetProperty(ref _startDate, value); }
-        }
-
-        private DateTime? _endDate;
-
-        public DateTime? EndDate
-        {
-            get { return _endDate; }
-            set { SetProperty(ref _endDate, value); }
-        }
-
-        private decimal _startingAmount;
-
-        public decimal StartingAmount
-        {
-            get { return _startingAmount; }
-            set { SetProperty(ref _startingAmount, value); }
+            get { return _account; }
+            set { SetProperty(ref _account, value); }
         }
 
         public DelegateCommand SaveAccountCommand { get; private set; }
@@ -95,24 +55,19 @@ namespace SmartBudget.Accounts.ViewModels
             _eventAggregator = eventAggregator;
             _accountService = accountService;
 
+            Account = new Account
+            {
+                StartDate = DateTime.Now
+            };
+
             SaveAccountCommand = new DelegateCommand(async () => await SaveAccount());
             CancelCommand = new DelegateCommand(CancelAddAccount);
         }
 
         private async Task SaveAccount()
         {
-            var account = new Account
-            {
-                AccountType = AccountType,
-                Name = Name,
-                AccountNumber = AccountNumber,
-                Rate = Rate,
-                StartDate = StartDate,
-                EndDate = EndDate,
-                StartingAmount = StartingAmount
-            };
-
-            var newAccount = await CreateAccount(account);
+            Account.AccountType = AccountType;
+            var newAccount = await CreateAccount(Account);
 
             var p = new NavigationParameters
             {

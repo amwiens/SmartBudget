@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBudget.EntityFramework;
 
 namespace SmartBudget.EntityFramework.Migrations
 {
     [DbContext(typeof(SmartBudgetDbContext))]
-    partial class SmartBudgetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200812180606_AddedAvailableAmount")]
+    partial class AddedAvailableAmount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

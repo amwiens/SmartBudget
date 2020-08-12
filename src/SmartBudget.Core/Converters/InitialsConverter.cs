@@ -21,7 +21,10 @@ namespace SmartBudget.Core.Converters
                 }
             }
 
-            return i.Substring(0, 2);
+            if (i.Length > 2)
+                return i.Substring(0, 2);
+
+            return i;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

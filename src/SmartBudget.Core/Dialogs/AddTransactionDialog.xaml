@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors">
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors"
+             xmlns:models="clr-namespace:SmartBudget.Core.Models">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
@@ -29,9 +30,9 @@
             </Grid>
         </DataTemplate>
 
-        <Style x:Key="TransferTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H5PrimaryDark}">
+        <!--<Style x:Key="TransferTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H5PrimaryDark}">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="2">
+                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="{x:Static models:TransactionType.Transfer}">
                     <Setter Property="TextBlock.Visibility" Value="Visible" />
                 </DataTrigger>
             </Style.Triggers>
@@ -39,11 +40,11 @@
 
         <Style x:Key="TransferComboBox" TargetType="ComboBox">
             <Style.Triggers>
-                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="2">
+                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="{x:Static models:TransactionType.Transfer}">
                     <Setter Property="ComboBox.Visibility" Value="Visible" />
                 </DataTrigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
     </UserControl.Resources>
     <Border CornerRadius="5"
             Background="{StaticResource BrushBackground2}">

@@ -22,8 +22,8 @@ namespace SmartBudget.EntityFramework.Migrations
                     Rate = table.Column<decimal>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
-                    StartingAmount = table.Column<decimal>(nullable: false),
-                    PaidAmount = table.Column<decimal>(nullable: false)
+                    ExpirationDate = table.Column<string>(nullable: true),
+                    StartingAmount = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {

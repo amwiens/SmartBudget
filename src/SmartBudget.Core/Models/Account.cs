@@ -32,8 +32,13 @@ namespace SmartBudget.Core.Models
 
         public DateTime? EndDate { get; set; }
 
+        public string ExpirationDate { get; set; }
+
         public decimal StartingAmount { get; set; }
 
+        public decimal AvailableAmount { get; set; }
+
+        [NotMapped]
         public decimal PaidAmount { get; set; }
 
         [InverseProperty(nameof(Transaction.Account))]
@@ -50,9 +55,6 @@ namespace SmartBudget.Core.Models
 
         [NotMapped]
         public decimal BlockedAmount { get; set; }
-
-        [NotMapped]
-        public string ExpirationDate { get; set; }
 
         [NotMapped]
         public decimal Amount { get; set; }

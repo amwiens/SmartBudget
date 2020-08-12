@@ -7,7 +7,7 @@
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="Image2">
         <StackPanel Grid.Row="1"
                     Orientation="Vertical"
                     VerticalAlignment="Center">

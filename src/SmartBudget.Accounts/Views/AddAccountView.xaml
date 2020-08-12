@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core"
+             xmlns:models="clr-namespace:SmartBudget.Core.Models;assembly=SmartBudget.Core"
              xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:GreaterThanMultiConverter x:Key="GreaterThanMultiConverter" />
@@ -20,6 +21,10 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -66,6 +71,21 @@
 
             <Grid Grid.Row="3"
                   Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -75,22 +95,37 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
-                         Text="{Binding Name}"
+                         Text="{Binding Account.Name}"
                          Width="200" />
             </Grid>
 
             <Grid Grid.Row="4"
                   Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
-                           Text="Account number"
+                           Text="Card name"
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
-                         Text="{Binding AccountNumber}"
+                         Text="{Binding Account.Name}"
                          Width="200" />
             </Grid>
 
@@ -101,18 +136,93 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"
+                           Text="Account number"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource H5SecondaryDark2}" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding Account.AccountNumber}"
+                         Width="200" />
+            </Grid>
+
+            <Grid Grid.Row="6"
+                  Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Card number"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource H5SecondaryDark2}" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding Account.CardNumber}"
+                         Width="200" />
+            </Grid>
+
+            <Grid Grid.Row="7"
+                  Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
                            Text="Rate"
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
-                         Text="{Binding Rate}"
+                         Text="{Binding Account.Rate}"
                          Width="200"
                          TextAlignment="Right"
                          behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
-            <Grid Grid.Row="6"
+            <Grid Grid.Row="8"
                   Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -122,12 +232,27 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <DatePicker Grid.Column="1"
-                            SelectedDate="{Binding StartDate, Mode=TwoWay}"
+                            SelectedDate="{Binding Account.StartDate, Mode=TwoWay}"
                             Width="200" />
             </Grid>
 
-            <Grid Grid.Row="7"
+            <Grid Grid.Row="9"
                   Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -137,12 +262,57 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <DatePicker Grid.Column="1"
-                            SelectedDate="{Binding EndDate, Mode=TwoWay}"
+                            SelectedDate="{Binding Account.EndDate, Mode=TwoWay}"
                             Width="200" />
             </Grid>
 
-            <Grid Grid.Row="8"
+            <Grid Grid.Row="10"
                   Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Expiration date"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource H5SecondaryDark2}" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding Account.ExpirationDate}"
+                         Width="200" />
+            </Grid>
+
+            <Grid Grid.Row="11"
+                  Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -152,13 +322,45 @@
                            VerticalAlignment="Center"
                            Style="{StaticResource H5SecondaryDark2}" />
                 <TextBox Grid.Column="1"
-                         Text="{Binding StartingAmount}"
+                         Text="{Binding Account.StartingAmount}"
                          Width="200"
                          TextAlignment="Right"
                          behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
             </Grid>
 
-            <Grid Grid.Row="9"
+            <Grid Grid.Row="12"
+                  Margin="10">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Card}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Bank}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding AccountType}" Value="{x:Static models:AccountType.Credit}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0"
+                           Text="Available amount"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource H5SecondaryDark2}" />
+                <TextBox Grid.Column="1"
+                         Text="{Binding Account.AvailableAmount}"
+                         Width="200"
+                         TextAlignment="Right"
+                         behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
+            </Grid>
+
+            <Grid Grid.Row="13"
                   Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
