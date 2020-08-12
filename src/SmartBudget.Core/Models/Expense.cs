@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
 {
@@ -29,5 +30,8 @@ namespace SmartBudget.Core.Models
         public decimal Amount { get; set; }
 
         public ExpenseRecurrence Recurrence { get; set; }
+
+        [NotMapped]
+        public string Note { get; set; }
     }
 }

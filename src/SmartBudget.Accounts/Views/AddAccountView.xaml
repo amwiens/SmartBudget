@@ -177,7 +177,8 @@
             </Grid>
         </Grid>
 
-        <Grid Grid.Column="1"
+        <Grid x:Name="Image2"
+              Grid.Column="1"
               Margin="10"
               Background="{StaticResource BrushPrimary2}">
             <Grid.RowDefinitions>

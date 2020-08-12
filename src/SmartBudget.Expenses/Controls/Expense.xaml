@@ -28,12 +28,7 @@
                        Height="40"
                        Fill="{StaticResource BrushBackground3}"
                        Margin="10"
-                       Cursor="Hand">
-                <Rectangle.InputBindings>
-                    <MouseBinding Command="{Binding AddCardAccountCommand}"
-                                  MouseAction="LeftClick" />
-                </Rectangle.InputBindings>
-            </Rectangle>
+                       Cursor="Hand" />
 
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"

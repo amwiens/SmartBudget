@@ -43,6 +43,21 @@ namespace SmartBudget.Core.Models
         public virtual ICollection<Transaction> TargetTransactions { get; set; }
 
         [NotMapped]
+        public string Accured { get; set; }
+
+        [NotMapped]
+        public string Status { get; set; }
+
+        [NotMapped]
+        public decimal BlockedAmount { get; set; }
+
+        [NotMapped]
+        public string ExpirationDate { get; set; }
+
+        [NotMapped]
+        public decimal Amount { get; set; }
+
+        [NotMapped]
         public decimal Balance
         {
             get

@@ -60,6 +60,8 @@ namespace SmartBudget.Core.Dialogs
         {
             _expenseService = expenseService;
 
+            Expense.StartDate = DateTime.Now;
+
             SaveDialogCommand = new DelegateCommand(async () => await SaveDialog());
             CancelDialogCommand = new DelegateCommand(CancelDialog);
         }

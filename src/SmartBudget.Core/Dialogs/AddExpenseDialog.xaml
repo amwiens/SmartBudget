@@ -27,17 +27,6 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/cancel_white.png"
-                   Height="20"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Right"
-                   Cursor="Hand">
-                <Image.InputBindings>
-                    <MouseBinding Command="{Binding CloseDialogCommand}"
-                              MouseAction="LeftClick" />
-                </Image.InputBindings>
-            </Image>
-
             <TextBlock Grid.Row="2"
                        Text="{Binding Expense.Name}"
                        HorizontalAlignment="Center"
