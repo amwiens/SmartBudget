@@ -29,6 +29,14 @@ namespace SmartBudget.Accounts.ViewModels
             set { SetProperty(ref _account, value); }
         }
 
+        private AccountType _accountType;
+
+        public AccountType AccountType
+        {
+            get { return _accountType; }
+            set { SetProperty(ref _accountType, value); }
+        }
+
         public Dictionary<AccountType, string> AccountTypeCaptions { get; } =
             new Dictionary<AccountType, string>()
             {
@@ -54,6 +62,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private async Task UpdateAccount()
         {
+            Account.AccountType = AccountType;
             var newAccount = await UpdateAccount(Account.Id, Account);
 
             var p = new NavigationParameters
@@ -90,6 +99,7 @@ namespace SmartBudget.Accounts.ViewModels
                 account = navigationContext.Parameters.GetValue<Account>("account");
 
             GetAccount(account.Id).Await(AccountLoaded, AccountLoadedError);
+            AccountType = Account.AccountType;
         }
 
         private void AccountLoaded()
