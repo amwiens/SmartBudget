@@ -4,6 +4,8 @@
              xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:IncomeExpenseConverter x:Key="IncomeExpenseConverter" />
+        <converters:InitialsConverter x:Key="InitialsConverter" />
+
         <Style x:Key="AmountTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H4PrimaryDark}">
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsIncome}" Value="True">
@@ -23,12 +25,18 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Rectangle Grid.Column="0"
-                       Width="80"
-                       Height="40"
-                       Fill="{StaticResource BrushBackground3}"
-                       Margin="10"
-                       Cursor="Hand" />
+            <Border Grid.Column="0"
+                    Width="40"
+                    Height="40"
+                    CornerRadius="25"
+                    Background="{StaticResource BrushBackground3}"
+                    BorderBrush="{StaticResource BrushBackground3}"
+                    BorderThickness="0.6">
+                <TextBlock Text="{Binding Name, Converter={StaticResource InitialsConverter}}"
+                           Style="{StaticResource H4PrimaryDark}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+            </Border>
 
             <StackPanel Grid.Column="1"
                         Orientation="Vertical"

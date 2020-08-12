@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:SmartBudget.Core.Converters;assembly=SmartBudget.Core">
     <UserControl.Resources>
         <converters:IncomeExpenseConverter x:Key="IncomeExpenseConverter" />
+        <converters:InitialsConverter x:Key="InitialsConverter" />
 
         <Style x:Key="AmountTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H4PrimaryDark}">
             <Style.Triggers>
@@ -45,12 +46,24 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <Rectangle Grid.Column="0"
-                                       Width="80"
+                            <Border Grid.Column="0"
+                                    Width="40"
+                                    Height="40"
+                                    CornerRadius="25"
+                                    Background="{StaticResource BrushBackground3}"
+                                    BorderBrush="{StaticResource BrushBackground3}"
+                                    BorderThickness="0.6">
+                                <TextBlock Text="{Binding Payee.Name, Converter={StaticResource InitialsConverter}}"
+                                           Style="{StaticResource H4PrimaryDark}"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center" />
+                            </Border>
+                            <!--<Rectangle Grid.Column="0"
+                                       Width="40"
                                        Height="40"
                                        Fill="{StaticResource BrushBackground3}"
                                        Margin="10"
-                                       Cursor="Hand" />
+                                       Cursor="Hand" />-->
 
                             <StackPanel Grid.Column="1"
                                         Orientation="Vertical"
