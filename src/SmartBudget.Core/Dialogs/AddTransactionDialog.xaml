@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors"
-             xmlns:models="clr-namespace:SmartBudget.Core.Models">
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters"
+             xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
@@ -17,6 +17,7 @@
     </prism:Dialog.WindowStyle>
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:InitialsConverter x:Key="InitialsConverter" />
 
         <DataTemplate x:Key="PayeeTemplate">
             <Grid>
@@ -25,172 +26,182 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0" Text="{Binding Id}" />
-                <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                <TextBlock Grid.Column="1" Text="{Binding City}" />
             </Grid>
         </DataTemplate>
-
-        <!--<Style x:Key="TransferTextBlock" TargetType="TextBlock" BasedOn="{StaticResource H5PrimaryDark}">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="{x:Static models:TransactionType.Transfer}">
-                    <Setter Property="TextBlock.Visibility" Value="Visible" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="TransferComboBox" TargetType="ComboBox">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Transaction.TransactionType}" Value="{x:Static models:TransactionType.Transfer}">
-                    <Setter Property="ComboBox.Visibility" Value="Visible" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>-->
     </UserControl.Resources>
     <Border CornerRadius="5"
             Background="{StaticResource BrushBackground2}">
-        <Grid Margin="10">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="2"
-                       Text="{Binding Payee.Name}"
-                       HorizontalAlignment="Center"
-                       Style="{StaticResource H4PrimaryDark}" />
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border CornerRadius="5 5 0 0"
+                        Height="150"
+                        Background="{StaticResource BrushSecondary1}"
+                        VerticalAlignment="Top">
+                </Border>
 
-            <TextBlock Grid.Row="3"
-                       Text="Paid"
-                       HorizontalAlignment="Center"
-                       Style="{StaticResource H5Primary}"
-                       Foreground="{StaticResource BrushSecondary2}" />
+                <Border Grid.Row="1"
+                        Margin="0 -30 0 0"
+                        Width="60"
+                        Height="60"
+                        CornerRadius="30"
+                        Background="{StaticResource BrushBackground3}"
+                        BorderBrush="{StaticResource BrushPrimary2}"
+                        BorderThickness="2">
+                    <TextBlock Text="{Binding Payee.Name, Converter={StaticResource InitialsConverter}}"
+                               Style="{StaticResource H4PrimaryDark}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+            </Grid>
 
-            <Border Grid.Row="4"
-                    BorderBrush="{StaticResource BrushOutline}"
-                    BorderThickness="0 1 0 1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0"
-                               Text="Account"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                <TextBlock Grid.Row="0"
+                           Padding="10"
+                           Text="{Binding Payee.Name}"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource H3PrimaryDark}" />
 
-                    <TextBlock Grid.Row="0" Grid.Column="1"
-                               Margin="5"
-                               Text="{Binding Account.Name}"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                <Border Grid.Row="1"
+                        BorderBrush="{StaticResource BrushOutline}"
+                        BorderThickness="0 1 0 1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="Transaction type"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Margin="0 10 0 0"
+                                   Text="Account"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <ComboBox Grid.Row="1" Grid.Column="1"
-                              Margin="5"
-                              ItemsSource="{Binding Path=TransactionTypeCaptions}"
-                              DisplayMemberPath="Value"
-                              SelectedValuePath="Key"
-                              SelectedValue="{Binding TransactionType, Mode=TwoWay}"
-                              Width="200" />
+                        <TextBlock Grid.Row="0" Grid.Column="1"
+                                   Margin="20 10 0 0"
+                                   Text="{Binding Account.Name}"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0"
-                               Text="Transfer account"
-                               VerticalAlignment="Center"
-                               Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="Transaction type"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <ComboBox Grid.Row="2" Grid.Column="1"
-                              Margin="5"
-                              Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
-                              ItemsSource="{Binding Path=AccountCaptions}"
-                              DisplayMemberPath="Value"
-                              SelectedValuePath="Key"
-                              SelectedValue="{Binding Transaction.TargetAccountId, Mode=TwoWay}"
-                              Width="200" />
+                        <ComboBox Grid.Row="1" Grid.Column="1"
+                                  Margin="5"
+                                  ItemsSource="{Binding Path=TransactionTypeCaptions}"
+                                  DisplayMemberPath="Value"
+                                  SelectedValuePath="Key"
+                                  SelectedValue="{Binding TransactionType, Mode=TwoWay}"
+                                  Width="200" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0"
-                               Text="Date"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="Transfer account"
+                                   VerticalAlignment="Center"
+                                   Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <DatePicker Grid.Row="3" Grid.Column="1"
-                                Margin="5"
-                                SelectedDate="{Binding Transaction.Date}"
-                                Width="200" />
+                        <ComboBox Grid.Row="2" Grid.Column="1"
+                                  Margin="5"
+                                  Visibility="{Binding IsTransfer, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  ItemsSource="{Binding Path=AccountCaptions}"
+                                  DisplayMemberPath="Value"
+                                  SelectedValuePath="Key"
+                                  SelectedValue="{Binding Transaction.TargetAccountId, Mode=TwoWay}"
+                                  Width="200" />
 
-                    <TextBlock Grid.Row="4" Grid.Column="0"
-                               Text="Payee"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Text="Date"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <ComboBox Grid.Row="4" Grid.Column="1"
-                              IsEditable="True"
-                              IsTextSearchEnabled="True"
-                              IsTextSearchCaseSensitive="False"
-                              StaysOpenOnEdit="True"
-                              TextSearch.TextPath="Name"
-                              Text="{Binding NewPayee, Mode=TwoWay}"
-                              ItemsSource="{Binding Payees}"
-                              SelectedItem="{Binding Payee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                              ItemTemplate="{StaticResource PayeeTemplate}"
-                              Width="200" />
+                        <DatePicker Grid.Row="3" Grid.Column="1"
+                                    Margin="5"
+                                    SelectedDate="{Binding Transaction.Date}"
+                                    Width="200" />
 
-                    <TextBlock Grid.Row="5" Grid.Column="0"
-                               Text="Amount"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                                   Text="Payee"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <TextBox Grid.Row="5" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Transaction.Amount}"
-                             Width="200"
-                             HorizontalContentAlignment="Right"
-                             behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
+                        <ComboBox Grid.Row="4" Grid.Column="1"
+                                  IsEditable="True"
+                                  IsTextSearchEnabled="True"
+                                  IsTextSearchCaseSensitive="False"
+                                  StaysOpenOnEdit="True"
+                                  TextSearch.TextPath="Name"
+                                  Text="{Binding NewPayee, Mode=TwoWay}"
+                                  ItemsSource="{Binding Payees}"
+                                  SelectedItem="{Binding Payee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  ItemTemplate="{StaticResource PayeeTemplate}"
+                                  Width="200" />
 
-                    <TextBlock Grid.Row="6" Grid.Column="0"
-                               Text="Note"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="5" Grid.Column="0"
+                                   Text="Amount"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <TextBox Grid.Row="6" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Transaction.Note}"
-                             Width="200" />
-                </Grid>
-            </Border>
+                        <TextBox Grid.Row="5" Grid.Column="1"
+                                 Margin="5"
+                                 Text="{Binding Transaction.Amount}"
+                                 Width="200"
+                                 HorizontalContentAlignment="Right"
+                                 behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
 
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="5"
-                        HorizontalAlignment="Right"
-                        Margin="0 10 0 0">
-                <Button Content="SAVE"
-                        Command="{Binding SaveDialogCommand}"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource PrimaryButton}" />
-                <Button Content="CANCEL"
-                        Command="{Binding CancelDialogCommand}"
-                        Margin="10 0 0 0"
-                        HorizontalAlignment="Right" />
-            </StackPanel>
+                        <TextBlock Grid.Row="6" Grid.Column="0"
+                                   Text="Note"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
+
+                        <TextBox Grid.Row="6" Grid.Column="1"
+                                 Margin="5"
+                                 Text="{Binding Transaction.Note}"
+                                 Width="200" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Margin="0 10 0 0">
+                    <Button Content="SAVE"
+                            Command="{Binding SaveDialogCommand}"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource PrimaryButton}" />
+                    <Button Content="CANCEL"
+                            Command="{Binding CancelDialogCommand}"
+                            Margin="10 0 0 0"
+                            HorizontalAlignment="Right" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
