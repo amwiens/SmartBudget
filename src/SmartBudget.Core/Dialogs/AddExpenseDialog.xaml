@@ -3,150 +3,178 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:SmartBudget.Core.Converters"
              xmlns:behaviors="clr-namespace:SmartBudget.Core.Behaviors">
     <prism:Dialog.WindowStyle>
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="500" />
-            <Setter Property="Height" Value="500" />
+            <Setter Property="Height" Value="550" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="ShowInTaskbar" Value="False" />
         </Style>
     </prism:Dialog.WindowStyle>
+    <UserControl.Resources>
+        <converters:InitialsConverter x:Key="InitialsConverter" />
+    </UserControl.Resources>
     <Border CornerRadius="5"
             Background="{StaticResource BrushBackground2}">
-        <Grid Margin="10">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="2"
-                       Text="{Binding Expense.Name}"
-                       HorizontalAlignment="Center"
-                       Style="{StaticResource H4PrimaryDark}" />
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border CornerRadius="5 5 0 0"
+                        Height="150"
+                        Background="{StaticResource BrushSecondary1}"
+                        VerticalAlignment="Top">
+                </Border>
 
-            <TextBlock Grid.Row="3"
-                       Text="Paid"
-                       HorizontalAlignment="Center"
-                       Style="{StaticResource H5Primary}"
-                       Foreground="{StaticResource BrushSecondary2}" />
+                <Border Grid.Row="1"
+                        Margin="0 -30 0 0"
+                        Width="60"
+                        Height="60"
+                        CornerRadius="30"
+                        Background="{StaticResource BrushBackground3}"
+                        BorderBrush="{StaticResource BrushPrimary2}"
+                        BorderThickness="2">
+                    <TextBlock Text="{Binding Expense.Name, Converter={StaticResource InitialsConverter}}"
+                               Style="{StaticResource H4PrimaryDark}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center" />
+                </Border>
+            </Grid>
 
-            <Border Grid.Row="4"
-                    BorderBrush="{StaticResource BrushOutline}"
-                    BorderThickness="0 1 0 1">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" Grid.Column="0"
-                               Text="Payee"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                <TextBlock Grid.Row="0"
+                           Text="{Binding Expense.Name}"
+                           HorizontalAlignment="Center"
+                           Style="{StaticResource H4PrimaryDark}" />
 
-                    <TextBox Grid.Row="0" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Expense.Name}"
-                             VerticalAlignment="Center"
-                             Width="200" />
+                <Border Grid.Row="1"
+                        BorderBrush="{StaticResource BrushOutline}"
+                        BorderThickness="0 1 0 1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Grid.Row="1" Grid.Column="0"
-                               Text="Recurrence"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="Payee"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <ComboBox Grid.Row="1" Grid.Column="1"
-                              Margin="5"
-                              ItemsSource="{Binding Path=ExpenseRecurrenceCaptions}"
-                              DisplayMemberPath="Value"
-                              SelectedValuePath="Key"
-                              SelectedValue="{Binding Expense.Recurrence, Mode=TwoWay}"
-                              Width="200" />
+                        <TextBox Grid.Row="0" Grid.Column="1"
+                                 Margin="5"
+                                 Text="{Binding Expense.Name}"
+                                 VerticalAlignment="Center"
+                                 Width="200" />
 
-                    <TextBlock Grid.Row="2" Grid.Column="0"
-                               Text="Start date"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="1" Grid.Column="0"
+                                   Text="Recurrence"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <DatePicker Grid.Row="2" Grid.Column="1"
-                                Margin="5"
-                                SelectedDate="{Binding Expense.StartDate}"
-                                Width="200" />
+                        <ComboBox Grid.Row="1" Grid.Column="1"
+                                  Margin="5"
+                                  ItemsSource="{Binding Path=ExpenseRecurrenceCaptions}"
+                                  DisplayMemberPath="Value"
+                                  SelectedValuePath="Key"
+                                  SelectedValue="{Binding Expense.Recurrence, Mode=TwoWay}"
+                                  Width="200" />
 
-                    <TextBlock Grid.Row="3" Grid.Column="0"
-                               Text="End date"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Text="Start date"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <DatePicker Grid.Row="3" Grid.Column="1"
-                                Margin="5"
-                                SelectedDate="{Binding Expense.EndDate}"
-                                Width="200" />
+                        <DatePicker Grid.Row="2" Grid.Column="1"
+                                    Margin="5"
+                                    SelectedDate="{Binding Expense.StartDate}"
+                                    Width="200" />
 
-                    <TextBlock Grid.Row="4" Grid.Column="0"
-                               Text="Amount"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="3" Grid.Column="0"
+                                   Text="End date"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <TextBox Grid.Row="4" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Expense.Amount}"
-                             Width="200"
-                             HorizontalContentAlignment="Right"
-                             behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
+                        <DatePicker Grid.Row="3" Grid.Column="1"
+                                    Margin="5"
+                                    SelectedDate="{Binding Expense.EndDate}"
+                                    Width="200" />
 
-                    <TextBlock Grid.Row="5" Grid.Column="0"
-                               Text="Is endless"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="4" Grid.Column="0"
+                                   Text="Amount"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <!--<CheckBox Grid.Row="5" Grid.Column="1"
-                              Margin="5"
-                              Checked="{Binding Expense.IsEndless}"
-                              Width="200" />-->
+                        <TextBox Grid.Row="4" Grid.Column="1"
+                                 Margin="5"
+                                 Text="{Binding Expense.Amount}"
+                                 Width="200"
+                                 HorizontalContentAlignment="Right"
+                                 behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
 
-                    <TextBlock Grid.Row="6" Grid.Column="0"
-                               Text="Note"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource H5PrimaryDark}" />
+                        <TextBlock Grid.Row="5" Grid.Column="0"
+                                   Text="Is endless"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
 
-                    <!--<TextBox Grid.Row="6" Grid.Column="1"
-                             Margin="5"
-                             Text="{Binding Expense.Note}"
-                             Width="200" />-->
-                </Grid>
-            </Border>
+                        <CheckBox Grid.Row="5" Grid.Column="1"
+                                  Margin="5"
+                                  Checked="{Binding Expense.IsEndless, Mode=TwoWay}"
+                                  Width="200" />
 
-            <StackPanel Orientation="Horizontal"
-                        Grid.Row="5"
-                        HorizontalAlignment="Right"
-                        Margin="0 10 0 0">
-                <Button Content="SAVE"
-                        Command="{Binding SaveDialogCommand}"
-                        HorizontalAlignment="Right"
-                        Style="{StaticResource PrimaryButton}" />
-                <Button Content="CANCEL"
-                        Command="{Binding CancelDialogCommand}"
-                        Margin="10 0 0 0"
-                        HorizontalAlignment="Right" />
-            </StackPanel>
+                        <TextBlock Grid.Row="6" Grid.Column="0"
+                                   Text="Note"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
+
+                        <TextBox Grid.Row="6" Grid.Column="1"
+                                 Margin="5"
+                                 Text="{Binding Expense.Note}"
+                                 Width="200" />
+                    </Grid>
+                </Border>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="2"
+                            HorizontalAlignment="Right"
+                            Margin="0 10 0 0">
+                    <Button Content="SAVE"
+                            Command="{Binding SaveDialogCommand}"
+                            HorizontalAlignment="Right"
+                            Style="{StaticResource PrimaryButton}" />
+                    <Button Content="CANCEL"
+                            Command="{Binding CancelDialogCommand}"
+                            Margin="10 0 0 0"
+                            HorizontalAlignment="Right" />
+                </StackPanel>
+            </Grid>
         </Grid>
     </Border>
 </UserControl>

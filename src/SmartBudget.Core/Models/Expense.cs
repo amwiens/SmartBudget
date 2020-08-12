@@ -31,7 +31,6 @@ namespace SmartBudget.Core.Models
 
         public ExpenseRecurrence Recurrence { get; set; }
 
-        [NotMapped]
         public string Note { get; set; }
     }
 }
