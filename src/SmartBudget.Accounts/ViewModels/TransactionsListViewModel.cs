@@ -4,6 +4,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 
+using SmartBudget.Core;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
@@ -18,7 +19,9 @@ namespace SmartBudget.Accounts.ViewModels
 {
     public class TransactionsListViewModel : BindableBase, INavigationAware
     {
+        private readonly IRegionManager _regionManager;
         private readonly IDialogService _dialogService;
+        private readonly IAccountService _accountService;
         private readonly ITransactionService _transactionService;
         private readonly IEventAggregator _eventAggregator;
         private int _accountId;
@@ -33,12 +36,16 @@ namespace SmartBudget.Accounts.ViewModels
 
         public DelegateCommand<Transaction> TransactionSelectedCommand { get; private set; }
 
-        public TransactionsListViewModel(IDialogService dialogService,
+        public TransactionsListViewModel(IRegionManager regionManager,
+            IDialogService dialogService,
             IEventAggregator eventAggregator,
+            IAccountService accountService,
             ITransactionService transactionService)
         {
+            _regionManager = regionManager;
             _dialogService = dialogService;
             _eventAggregator = eventAggregator;
+            _accountService = accountService;
             _transactionService = transactionService;
 
             Transactions = new ObservableCollection<Transaction>();
@@ -52,7 +59,16 @@ namespace SmartBudget.Accounts.ViewModels
             {
                 if (result.Result == ButtonResult.OK)
                 {
-                    GetTransactions(_accountId).Await(TransactionsLoaded, TransactionsLoadedError);
+                    var account = _accountService.Get(_accountId).Result;
+
+                    var p = new NavigationParameters
+                    {
+                        { "page", "Account" },
+                        { "account", account }
+                    };
+
+                    _regionManager.RequestNavigate(RegionNames.Content, "Accounts", p);
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                 }
             });
         }
@@ -85,6 +101,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private async Task GetTransactions(int accountId)
         {
+            Transactions.Clear();
             var transactions = await _transactionService.GetByAccountId(accountId);
             foreach (var transaction in transactions.OrderByDescending(t => t.Id).OrderByDescending(t => t.Date))
             {
