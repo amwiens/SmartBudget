@@ -107,7 +107,8 @@ namespace SmartBudget.Expenses.ViewModels
                     StartDate = expense.StartDate,
                     EndDate = expense.EndDate,
                     IsEndless = expense.IsEndless,
-                    Recurrence = expense.Recurrence
+                    Recurrence = expense.Recurrence,
+                    Note = expense.Note
                 });
             }
 
@@ -121,7 +122,8 @@ namespace SmartBudget.Expenses.ViewModels
                     StartDate = expense.StartDate,
                     EndDate = expense.EndDate,
                     IsEndless = expense.IsEndless,
-                    Recurrence = expense.Recurrence
+                    Recurrence = expense.Recurrence,
+                    Note = expense.Note
                 });
             }
 
@@ -135,7 +137,8 @@ namespace SmartBudget.Expenses.ViewModels
                     StartDate = expense.StartDate,
                     EndDate = expense.EndDate,
                     IsEndless = expense.IsEndless,
-                    Recurrence = expense.Recurrence
+                    Recurrence = expense.Recurrence,
+                    Note = expense.Note
                 });
             }
         }

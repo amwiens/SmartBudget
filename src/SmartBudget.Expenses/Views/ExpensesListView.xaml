@@ -21,8 +21,7 @@
         <ListView x:Name="_listOfMonthlyExpenses"
                   Grid.Row="1"
                   ItemsSource="{Binding MonthlyExpenses}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding ExpenseSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfMonthlyExpenses}" />
@@ -46,8 +45,7 @@
         <ListView x:Name="_listOfYearlyExpenses"
                   Grid.Row="3"
                   ItemsSource="{Binding YearlyExpenses}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding ExpenseSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfYearlyExpenses}" />
@@ -71,8 +69,7 @@
         <ListView x:Name="_listOfExpenses"
                   Grid.Row="5"
                   ItemsSource="{Binding OtherExpenses}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding ExpenseSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfExpenses}" />
