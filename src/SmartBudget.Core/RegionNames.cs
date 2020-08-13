@@ -22,5 +22,8 @@
 
         // Expenses view
         public static string ExpensesContent = "ExpensesContent";
+
+        // Settings view
+        public static string SettingsContent = "SettingsContent";
     }
 }

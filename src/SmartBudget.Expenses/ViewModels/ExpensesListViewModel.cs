@@ -3,6 +3,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+
 using SmartBudget.Core;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;

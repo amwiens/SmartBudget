@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartBudget.Core.Models
@@ -36,6 +37,9 @@ namespace SmartBudget.Core.Models
         public int? TargetAccountId { get; set; }
 
         public virtual Account? TargetAccount { get; set; }
+
+        [InverseProperty(nameof(TransactionCategory.Transaction))]
+        public virtual ICollection<TransactionCategory> TransactionCategories { get; set; }
 
         [NotMapped]
         public bool IsIncome => TransactionType == TransactionType.Income;
