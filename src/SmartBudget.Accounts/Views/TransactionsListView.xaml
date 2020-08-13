@@ -38,7 +38,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{StaticResource BrushPrimary2}">
-                        <Grid Margin="10">
+                        <Grid Margin="10 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="2*" />
@@ -57,12 +57,6 @@
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center" />
                             </Border>
-                            <!--<Rectangle Grid.Column="0"
-                                       Width="40"
-                                       Height="40"
-                                       Fill="{StaticResource BrushBackground3}"
-                                       Margin="10"
-                                       Cursor="Hand" />-->
 
                             <StackPanel Grid.Column="1"
                                         Orientation="Vertical"
