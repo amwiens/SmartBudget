@@ -9,7 +9,7 @@
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="500" />
-            <Setter Property="Height" Value="500" />
+            <Setter Property="Height" Value="550" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="ShowInTaskbar" Value="False" />
