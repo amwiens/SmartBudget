@@ -144,10 +144,10 @@
                                    VerticalAlignment="Center"
                                    Style="{StaticResource H5PrimaryDark}" />
 
-                        <CheckBox Grid.Row="5" Grid.Column="1"
+                        <!--<CheckBox Grid.Row="5" Grid.Column="1"
                                   Margin="5"
                                   Checked="{Binding Expense.IsEndless, Mode=TwoWay}"
-                                  Width="200" />
+                                  Width="200" />-->
 
                         <TextBlock Grid.Row="6" Grid.Column="0"
                                    Text="Note"
