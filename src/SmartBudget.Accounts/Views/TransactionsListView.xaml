@@ -24,8 +24,7 @@
         <ListView x:Name="_listOfCardAccounts"
                   Grid.Row="2"
                   ItemsSource="{Binding Transactions}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding TransactionSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfCardAccounts}" />

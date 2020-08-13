@@ -164,8 +164,7 @@
         <ListView x:Name="_listOfCardAccounts"
                   Grid.Row="2"
                   ItemsSource="{Binding CardAccounts}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfCardAccounts}" />
@@ -190,8 +189,7 @@
         <ListView x:Name="_listOfDepositAccounts"
                   Grid.Row="4"
                   ItemsSource="{Binding BankAccounts}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfDepositAccounts}" />
@@ -216,8 +214,7 @@
         <ListView x:Name="_listOfCreditAccounts"
                   Grid.Row="6"
                   ItemsSource="{Binding CreditAccounts}"
-                  BorderThickness="0"
-                  Margin="0 10 0 10">
+                  BorderThickness="0">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <prism:InvokeCommandAction Command="{Binding AccountSelectedCommand}" CommandParameter="{Binding SelectedItem, ElementName=_listOfCreditAccounts}" />

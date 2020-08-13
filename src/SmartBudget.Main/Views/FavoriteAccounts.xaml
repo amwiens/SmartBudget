@@ -22,7 +22,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="{StaticResource BrushPrimary2}">
-                        <Grid Margin="10">
+                        <Grid Margin="10 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="2*" />
