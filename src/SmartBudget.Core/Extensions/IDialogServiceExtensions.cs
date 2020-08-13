@@ -39,6 +39,17 @@ namespace SmartBudget.Core.Extensions
             dialogService.ShowDialog("AddTransactionDialog", p, callBack);
         }
 
+        public static void ShowExpenseDialog(this IDialogService dialogService,
+            int expenseId, Action<IDialogResult> callBack)
+        {
+            var p = new DialogParameters
+            {
+                { "expenseid", expenseId }
+            };
+
+            dialogService.ShowDialog("ExpenseDialog", p, callBack);
+        }
+
         public static void ShowAddExpenseDialog(this IDialogService dialogService,
             Action<IDialogResult> callBack)
         {

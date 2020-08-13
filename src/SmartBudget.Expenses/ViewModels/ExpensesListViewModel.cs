@@ -3,7 +3,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
-
+using SmartBudget.Core;
 using SmartBudget.Core.Events;
 using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
@@ -66,8 +66,16 @@ namespace SmartBudget.Expenses.ViewModels
             ExpenseSelectedCommand = new DelegateCommand<Expense>(ExpenseSelected);
         }
 
-        private void ExpenseSelected(Expense obj)
+        private void ExpenseSelected(Expense expense)
         {
+            _dialogService.ShowExpenseDialog(expense.Id, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                    _regionManager.RequestNavigate(RegionNames.Content, "Expenses");
+                    _eventAggregator.GetEvent<NavigationEvent>().Publish("Expenses");
+                }
+            });
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
