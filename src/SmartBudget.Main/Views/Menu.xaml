@@ -104,6 +104,19 @@
                         </StackPanel>
                     </RadioButton.Content>
                 </RadioButton>
+                <RadioButton IsChecked="{Binding SettingsChecked}" Command="{Binding NavigateCommand}" CommandParameter="Settings">
+                    <RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/settings.png"
+                                   Height="20"
+                                   VerticalAlignment="Center"
+                                   ToolTip="Settings" />
+                            <TextBlock Padding="10 5"
+                                       Style="{StaticResource H3PrimaryDark}"
+                                       Text="SETTINGS" />
+                        </StackPanel>
+                    </RadioButton.Content>
+                </RadioButton>
             </StackPanel>
         </Grid>
     </StackPanel>

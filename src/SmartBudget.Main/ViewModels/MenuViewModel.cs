@@ -37,6 +37,14 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _expensesChecked, value); }
         }
 
+        private bool _settingsChecked = false;
+
+        public bool SettingsChecked
+        {
+            get { return _settingsChecked; }
+            set { SetProperty(ref _settingsChecked, value); }
+        }
+
         public DelegateCommand<string> NavigateCommand { get; private set; }
 
         public MenuViewModel(IRegionManager regionManager,
@@ -53,6 +61,7 @@ namespace SmartBudget.Main.ViewModels
             DashboardChecked = false;
             AccountsChecked = false;
             ExpensesChecked = false;
+            SettingsChecked = false;
 
             switch (message)
             {
@@ -66,6 +75,10 @@ namespace SmartBudget.Main.ViewModels
 
                 case "Expenses":
                     ExpensesChecked = true;
+                    break;
+
+                case "Settings":
+                    SettingsChecked = true;
                     break;
             }
         }

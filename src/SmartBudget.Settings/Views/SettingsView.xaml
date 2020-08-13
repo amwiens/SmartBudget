@@ -1,0 +1,10 @@
+﻿<UserControl x:Class="SmartBudget.Settings.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:SmartBudget.Core;assembly=SmartBudget.Core"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid Background="{StaticResource BrushBackground2}">
+        <TextBlock Text="Settings" />
+    </Grid>
+</UserControl>

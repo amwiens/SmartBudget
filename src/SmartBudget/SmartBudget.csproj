@@ -22,6 +22,7 @@
     <ProjectReference Include="..\SmartBudget.EntityFramework\SmartBudget.EntityFramework.csproj" />
     <ProjectReference Include="..\SmartBudget.Expenses\SmartBudget.Expenses.csproj" />
     <ProjectReference Include="..\SmartBudget.Main\SmartBudget.Main.csproj" />
+    <ProjectReference Include="..\SmartBudget.Settings\SmartBudget.Settings.csproj" />
     <ProjectReference Include="..\SmartBudget.YelpAPI\SmartBudget.YelpAPI.csproj" />
   </ItemGroup>
 
