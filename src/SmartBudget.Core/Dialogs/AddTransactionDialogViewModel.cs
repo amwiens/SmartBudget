@@ -2,6 +2,7 @@
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 
+using SmartBudget.Core.Extensions;
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
 
@@ -17,6 +18,7 @@ namespace SmartBudget.Core.Dialogs
         private readonly ITransactionService _transactionService;
         private readonly IAccountService _accountService;
         private readonly IPayeeService _payeeService;
+        private readonly IDialogService _dialogService;
 
         private ObservableCollection<Payee> _payees;
 
@@ -88,6 +90,9 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _newPayee, value); }
         }
 
+        public DelegateCommand AddCategoryCommand { get; }
+        public DelegateCommand EditCategoryCommand { get; }
+        public DelegateCommand DeleteCategoryCommand { get; }
         public DelegateCommand SaveDialogCommand { get; }
         public DelegateCommand CancelDialogCommand { get; }
 
@@ -97,11 +102,13 @@ namespace SmartBudget.Core.Dialogs
 
         public AddTransactionDialogViewModel(ITransactionService transactionService,
             IAccountService accountService,
-            IPayeeService payeeService)
+            IPayeeService payeeService,
+            IDialogService dialogService)
         {
             _transactionService = transactionService;
             _accountService = accountService;
             _payeeService = payeeService;
+            _dialogService = dialogService;
 
             Payees = new ObservableCollection<Payee>();
             GetPayees();
@@ -111,11 +118,35 @@ namespace SmartBudget.Core.Dialogs
             Transaction = new Transaction
             {
                 Payee = new Payee(),
+                TransactionCategories = new ObservableCollection<TransactionCategory>(),
                 Date = DateTime.Now
             };
 
+            AddCategoryCommand = new DelegateCommand(AddCategory);
+            EditCategoryCommand = new DelegateCommand(EditCategory);
+            DeleteCategoryCommand = new DelegateCommand(DeleteCategory);
             SaveDialogCommand = new DelegateCommand(async () => await SaveDialog());
             CancelDialogCommand = new DelegateCommand(CancelDialog);
+        }
+
+        private void AddCategory()
+        {
+            _dialogService.ShowConfirmDialog("This is a test", result =>
+            {
+                if (result.Result == ButtonResult.Yes)
+                {
+                }
+            });
+        }
+
+        private void EditCategory()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void DeleteCategory()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task SaveDialog()

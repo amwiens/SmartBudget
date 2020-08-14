@@ -9,7 +9,7 @@
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="500" />
-            <Setter Property="Height" Value="550" />
+            <Setter Property="Height" Value="600" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="ShowInTaskbar" Value="False" />
@@ -36,7 +36,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -69,7 +69,7 @@
                   Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
@@ -81,7 +81,7 @@
 
                 <Border Grid.Row="1"
                         BorderBrush="{StaticResource BrushOutline}"
-                        BorderThickness="0 1 0 1">
+                        BorderThickness="0 1">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -91,6 +91,8 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -185,6 +187,72 @@
                                  Margin="5"
                                  Text="{Binding Transaction.Note}"
                                  Width="200" />
+
+                        <TextBlock Grid.Row="7" Grid.Column="0"
+                                   Text="Categories"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource H5PrimaryDark}" />
+
+                        <StackPanel Grid.Row="7" Grid.Column="1"
+                                    Orientation="Horizontal"
+                                    HorizontalAlignment="Right">
+                            <Image Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/add_primary.png"
+                                   Height="20"
+                                   Margin="10"
+                                   VerticalAlignment="Center"
+                                   Cursor="Hand">
+                                <Image.InputBindings>
+                                    <MouseBinding Command="{Binding AddCategoryCommand}"
+                                                  CommandParameter="{Binding Transaction.Id}"
+                                                  MouseAction="LeftClick" />
+                                </Image.InputBindings>
+                            </Image>
+
+                            <TextBlock Grid.Column="0"
+                                       Text="NEW CATEGORY"
+                                       Style="{StaticResource TextLinkSecondaryDark2}"
+                                       VerticalAlignment="Center"
+                                       Cursor="Hand">
+                                <TextBlock.InputBindings>
+                                    <MouseBinding Command="{Binding AddCategoryCommand}"
+                                          CommandParameter="{Binding Transaction.Id}"
+                                          MouseAction="LeftClick" />
+                                </TextBlock.InputBindings>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <ListView Grid.Row="8" Grid.Column="0"
+                                  Grid.ColumnSpan="2"
+                                  ItemsSource="{Binding Transaction.TransactionCategories}"
+                                  BorderThickness="0">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Background="{StaticResource BrushPrimary2}">
+                                        <Grid Margin="10 0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding Category.Name}" />
+
+                                            <TextBlock Grid.Column="1"
+                                                       Text="{Binding Amount, StringFormat={}{0:C}}"
+                                                       HorizontalAlignment="Right" />
+
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
                     </Grid>
                 </Border>
 

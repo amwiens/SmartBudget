@@ -39,6 +39,7 @@ namespace SmartBudget.EntityFramework.Services
                     .Include(t => t.Account)
                     .Include(t => t.Payee)
                     .Include(t => t.TransactionCategories)
+                    .ThenInclude(t => t.Category)
                     .FirstOrDefaultAsync(e => e.Id == id);
                 return entity;
             }
