@@ -29,14 +29,27 @@ namespace SmartBudget.Core.Extensions
         }
 
         public static void ShowAddTransactionDialog(this IDialogService dialogService,
-            int accountId, Action<IDialogResult> callBack)
+            int accountId, int transactionId, Action<IDialogResult> callBack)
         {
             var p = new DialogParameters
             {
-                { "accountid", accountId }
+                { "accountid", accountId },
+                { "transactionid", transactionId }
             };
 
             dialogService.ShowDialog("AddTransactionDialog", p, callBack);
+        }
+
+        public static void ShowAddEditCategoryToTransactionDialog(this IDialogService dialogService,
+            int categoryId, decimal amount, Action<IDialogResult> callBack)
+        {
+            var p = new DialogParameters
+            {
+                { "categoryid", categoryId },
+                { "amount", amount }
+            };
+
+            dialogService.ShowDialog("AddEditCategoryToTransaction", p, callBack);
         }
 
         public static void ShowExpenseDialog(this IDialogService dialogService,

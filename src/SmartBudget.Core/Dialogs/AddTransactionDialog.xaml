@@ -9,7 +9,7 @@
         <Style TargetType="Window">
             <Setter Property="ResizeMode" Value="NoResize" />
             <Setter Property="Width" Value="500" />
-            <Setter Property="Height" Value="600" />
+            <Setter Property="Height" Value="650" />
             <Setter Property="WindowStyle" Value="None" />
             <Setter Property="AllowsTransparency" Value="True" />
             <Setter Property="ShowInTaskbar" Value="False" />
@@ -84,6 +84,7 @@
                         BorderThickness="0 1">
                     <Grid>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -173,7 +174,7 @@
 
                         <TextBox Grid.Row="5" Grid.Column="1"
                                  Margin="5"
-                                 Text="{Binding Transaction.Amount}"
+                                 Text="{Binding Amount}"
                                  Width="200"
                                  HorizontalContentAlignment="Right"
                                  behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
@@ -221,7 +222,13 @@
                             </TextBlock>
                         </StackPanel>
 
-                        <ListView Grid.Row="8" Grid.Column="0"
+                        <TextBlock Grid.Row="8"
+                                   Grid.ColumnSpan="2"
+                                   Text="{Binding CategoriesMessage}"
+                                   Foreground="{StaticResource BrushSecondary3}"
+                                   Style="{StaticResource CaptionPrimaryDark}" />
+
+                        <ListView Grid.Row="9" Grid.Column="0"
                                   Grid.ColumnSpan="2"
                                   ItemsSource="{Binding Transaction.TransactionCategories}"
                                   BorderThickness="0">

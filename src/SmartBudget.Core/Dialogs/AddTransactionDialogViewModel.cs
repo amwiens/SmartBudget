@@ -9,6 +9,7 @@ using SmartBudget.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SmartBudget.Core.Dialogs
@@ -19,6 +20,7 @@ namespace SmartBudget.Core.Dialogs
         private readonly IAccountService _accountService;
         private readonly IPayeeService _payeeService;
         private readonly IDialogService _dialogService;
+        private readonly ICategoryService _categoryService;
 
         private ObservableCollection<Payee> _payees;
 
@@ -36,12 +38,40 @@ namespace SmartBudget.Core.Dialogs
             set { SetProperty(ref _transaction, value); }
         }
 
+        private string _categoriesMessage;
+
+        public string CategoriesMessage
+        {
+            get { return _categoriesMessage; }
+            set { SetProperty(ref _categoriesMessage, value); }
+        }
+
         private bool _isTransfer = false;
 
         public bool IsTransfer
         {
             get { return _isTransfer; }
             set { SetProperty(ref _isTransfer, value); }
+        }
+
+        private decimal _amount = 0.0M;
+
+        public decimal Amount
+        {
+            get { return _amount; }
+            set
+            {
+                SetProperty(ref _amount, value);
+
+                var splitSum = Transaction.TransactionCategories.Sum(x => x.Amount);
+
+                if (splitSum < Amount)
+                    CategoriesMessage = "You have uncategorized amounts";
+                else if (splitSum > Amount)
+                    CategoriesMessage = "Your categorized amount is greater than your total";
+                else
+                    CategoriesMessage = string.Empty;
+            }
         }
 
         private TransactionType _transactionType = TransactionType.Expense;
@@ -103,12 +133,14 @@ namespace SmartBudget.Core.Dialogs
         public AddTransactionDialogViewModel(ITransactionService transactionService,
             IAccountService accountService,
             IPayeeService payeeService,
-            IDialogService dialogService)
+            IDialogService dialogService,
+            ICategoryService categoryService)
         {
             _transactionService = transactionService;
             _accountService = accountService;
             _payeeService = payeeService;
             _dialogService = dialogService;
+            _categoryService = categoryService;
 
             Payees = new ObservableCollection<Payee>();
             GetPayees();
@@ -131,17 +163,35 @@ namespace SmartBudget.Core.Dialogs
 
         private void AddCategory()
         {
-            _dialogService.ShowConfirmDialog("This is a test", result =>
+            var splitSum = Transaction.TransactionCategories.Sum(x => x.Amount);
+            var difference = Amount - splitSum;
+
+            _dialogService.ShowAddEditCategoryToTransactionDialog(0, difference, async result =>
             {
-                if (result.Result == ButtonResult.Yes)
+                if (result.Result == ButtonResult.OK)
                 {
+                    var categoryId = result.Parameters.GetValue<int>("categoryid");
+                    var amount = result.Parameters.GetValue<decimal>("amount");
+
+                    var transactionCategory = new TransactionCategory
+                    {
+                        Transaction = Transaction,
+                        Category = await _categoryService.Get(categoryId),
+                        Amount = amount
+                    };
+                    Transaction.TransactionCategories.Add(transactionCategory);
                 }
             });
         }
 
         private void EditCategory()
         {
-            throw new NotImplementedException();
+            _dialogService.ShowAddEditCategoryToTransactionDialog(0, 0, result =>
+            {
+                if (result.Result == ButtonResult.OK)
+                {
+                }
+            });
         }
 
         private void DeleteCategory()
@@ -151,6 +201,7 @@ namespace SmartBudget.Core.Dialogs
 
         private async Task SaveDialog()
         {
+            Transaction transaction;
             var result = ButtonResult.OK;
             Payee payee;
 
@@ -169,9 +220,13 @@ namespace SmartBudget.Core.Dialogs
 
             Transaction.AccountId = Account.Id;
             Transaction.TransactionType = TransactionType;
+            Transaction.Amount = Amount;
             Transaction.Payee = null;
             Transaction.PayeeId = payee.Id;
-            var transaction = await _transactionService.Create(Transaction);
+            if (Transaction.Id == 0)
+                transaction = await _transactionService.Create(Transaction);
+            else
+                transaction = await _transactionService.Update(Transaction.Id, Transaction);
 
             RequestClose?.Invoke(new DialogResult(result));
         }
@@ -195,7 +250,17 @@ namespace SmartBudget.Core.Dialogs
         public async void OnDialogOpened(IDialogParameters parameters)
         {
             var accountId = parameters.GetValue<int>("accountid");
+            var transactionId = parameters.GetValue<int>("transactionid");
+
             Account = await _accountService.Get(accountId);
+
+            if (transactionId != 0)
+            {
+                Transaction = await _transactionService.Get(transactionId);
+                Amount = Transaction.Amount;
+                Payee = Transaction.Payee;
+                NewPayee = Transaction.Payee.Name;
+            }
 
             await GetAccounts();
         }

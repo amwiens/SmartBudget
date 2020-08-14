@@ -34,6 +34,7 @@ namespace SmartBudget
             containerRegistry.RegisterSingleton<IPayeeService, PayeeDataService>();
             containerRegistry.RegisterSingleton<IBusinessService, BusinessService>();
             containerRegistry.RegisterSingleton<IExpenseService, ExpenseDataService>();
+            containerRegistry.RegisterSingleton<ICategoryService, CategoryDataService>();
 
             // Dialogs
             containerRegistry.RegisterDialog<ConfirmDialog, ConfirmDialogViewModel>();
@@ -41,6 +42,7 @@ namespace SmartBudget
             containerRegistry.RegisterDialog<AddTransactionDialog, AddTransactionDialogViewModel>();
             containerRegistry.RegisterDialog<ExpenseDialog, ExpenseDialogViewModel>();
             containerRegistry.RegisterDialog<AddExpenseDialog, AddExpenseDialogViewModel>();
+            containerRegistry.RegisterDialog<AddEditCategoryToTransaction, AddEditCategoryToTransactionViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

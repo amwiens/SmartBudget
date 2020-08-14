@@ -81,7 +81,7 @@ namespace SmartBudget.Accounts.ViewModels
 
         private void AddTransaction()
         {
-            _dialogService.ShowAddTransactionDialog(Account.Id, result =>
+            _dialogService.ShowAddTransactionDialog(Account.Id, 0, result =>
             {
                 if (result.Result == ButtonResult.OK)
                 {
