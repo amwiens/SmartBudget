@@ -21,6 +21,7 @@ namespace SmartBudget.Core.Dialogs
         private readonly IPayeeService _payeeService;
         private readonly IDialogService _dialogService;
         private readonly ICategoryService _categoryService;
+        private readonly ITransactionCategoryService _transactionCategoryService;
 
         private ObservableCollection<Payee> _payees;
 
@@ -59,19 +60,7 @@ namespace SmartBudget.Core.Dialogs
         public decimal Amount
         {
             get { return _amount; }
-            set
-            {
-                SetProperty(ref _amount, value);
-
-                var splitSum = Transaction.TransactionCategories.Sum(x => x.Amount);
-
-                if (splitSum < Amount)
-                    CategoriesMessage = "You have uncategorized amounts";
-                else if (splitSum > Amount)
-                    CategoriesMessage = "Your categorized amount is greater than your total";
-                else
-                    CategoriesMessage = string.Empty;
-            }
+            set { SetProperty(ref _amount, value); }
         }
 
         private TransactionType _transactionType = TransactionType.Expense;
@@ -84,6 +73,14 @@ namespace SmartBudget.Core.Dialogs
                 SetProperty(ref _transactionType, value);
                 IsTransfer = TransactionType == TransactionType.Transfer;
             }
+        }
+
+        private ObservableCollection<TransactionCategory> _transactionCategories;
+
+        public ObservableCollection<TransactionCategory> TransactionCategories
+        {
+            get { return _transactionCategories; }
+            set { SetProperty(ref _transactionCategories, value); }
         }
 
         public Dictionary<TransactionType, string> TransactionTypeCaptions { get; } =
@@ -134,14 +131,17 @@ namespace SmartBudget.Core.Dialogs
             IAccountService accountService,
             IPayeeService payeeService,
             IDialogService dialogService,
-            ICategoryService categoryService)
+            ICategoryService categoryService,
+            ITransactionCategoryService transactionCategoryService)
         {
             _transactionService = transactionService;
             _accountService = accountService;
             _payeeService = payeeService;
             _dialogService = dialogService;
             _categoryService = categoryService;
+            _transactionCategoryService = transactionCategoryService;
 
+            TransactionCategories = new ObservableCollection<TransactionCategory>();
             Payees = new ObservableCollection<Payee>();
             GetPayees();
 
@@ -173,13 +173,14 @@ namespace SmartBudget.Core.Dialogs
                     var categoryId = result.Parameters.GetValue<int>("categoryid");
                     var amount = result.Parameters.GetValue<decimal>("amount");
 
-                    var transactionCategory = new TransactionCategory
+                    TransactionCategories.Add(new TransactionCategory
                     {
                         Transaction = Transaction,
                         Category = await _categoryService.Get(categoryId),
                         Amount = amount
-                    };
-                    Transaction.TransactionCategories.Add(transactionCategory);
+                    });
+
+                    CheckCategoryBalance();
                 }
             });
         }
@@ -222,11 +223,28 @@ namespace SmartBudget.Core.Dialogs
             Transaction.TransactionType = TransactionType;
             Transaction.Amount = Amount;
             Transaction.Payee = null;
+            Transaction.TransactionCategories = null;
             Transaction.PayeeId = payee.Id;
             if (Transaction.Id == 0)
                 transaction = await _transactionService.Create(Transaction);
             else
                 transaction = await _transactionService.Update(Transaction.Id, Transaction);
+
+            if (TransactionCategories.Count > 0)
+            {
+                var success = await _transactionCategoryService.DeleteByTransactionId(transaction.Id);
+                if (success)
+                {
+                    foreach (var transactionCategory in TransactionCategories)
+                    {
+                        transactionCategory.CategoryId = transactionCategory.Category.Id;
+                        transactionCategory.TransactionId = transactionCategory.Transaction.Id;
+                        transactionCategory.Category = null;
+                        transactionCategory.Transaction = null;
+                        await _transactionCategoryService.Create(transactionCategory);
+                    }
+                }
+            }
 
             RequestClose?.Invoke(new DialogResult(result));
         }
@@ -260,8 +278,10 @@ namespace SmartBudget.Core.Dialogs
                 Amount = Transaction.Amount;
                 Payee = Transaction.Payee;
                 NewPayee = Transaction.Payee.Name;
+                TransactionCategories = new ObservableCollection<TransactionCategory>(Transaction.TransactionCategories);
             }
 
+            CheckCategoryBalance();
             await GetAccounts();
         }
 
@@ -283,6 +303,18 @@ namespace SmartBudget.Core.Dialogs
             {
                 Payees.Add(payee);
             }
+        }
+
+        private void CheckCategoryBalance()
+        {
+            var splitSum = TransactionCategories.Sum(x => x.Amount);
+
+            if (splitSum < Amount)
+                CategoriesMessage = "You have uncategorized amounts";
+            else if (splitSum > Amount)
+                CategoriesMessage = "Your categorized amount is greater than your total";
+            else
+                CategoriesMessage = string.Empty;
         }
     }
 }

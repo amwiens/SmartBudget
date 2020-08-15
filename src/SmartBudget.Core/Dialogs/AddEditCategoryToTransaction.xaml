@@ -96,7 +96,6 @@
                                  Width="200"
                                  HorizontalContentAlignment="Right"
                                  behaviors:TextBoxBehavior.SelectAllTextOnFocus="True" />
-
                     </Grid>
                 </Border>
 

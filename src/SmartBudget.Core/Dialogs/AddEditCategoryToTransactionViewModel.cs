@@ -1,12 +1,12 @@
 ﻿using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
+
 using SmartBudget.Core.Models;
 using SmartBudget.Core.Services;
+
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SmartBudget.Core.Dialogs
@@ -63,7 +63,7 @@ namespace SmartBudget.Core.Dialogs
 
             var p = new DialogParameters
             {
-                { "categoryId", Category.Id },
+                { "categoryid", Category.Id },
                 { "amount", Amount }
             };
 
@@ -84,7 +84,6 @@ namespace SmartBudget.Core.Dialogs
 
         public void OnDialogClosed()
         {
-
         }
 
         public async void OnDialogOpened(IDialogParameters parameters)

@@ -50,7 +50,7 @@ namespace SmartBudget.Core.Dialogs
 
         private async Task EditTransaction()
         {
-            _dialogService.ShowAddTransactionDialog(Transaction.AccountId, Transaction.Id, async  result =>
+            _dialogService.ShowAddTransactionDialog(Transaction.AccountId, Transaction.Id, async result =>
             {
                 if (result.Result == ButtonResult.OK)
                 {

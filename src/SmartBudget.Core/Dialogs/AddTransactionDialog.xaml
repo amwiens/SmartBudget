@@ -30,6 +30,38 @@
                 <TextBlock Grid.Column="1" Text="{Binding City}" />
             </Grid>
         </DataTemplate>
+
+        <DataTemplate x:Key="EditCell" DataType="Content">
+            <Image Grid.Column="2"
+                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/edit.png"
+                   ToolTip="Edit"
+                   Height="20"
+                   Margin="10"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Cursor="Hand">
+                <Image.InputBindings>
+                    <MouseBinding Command="{Binding EditCategoryCommand}"
+                                  MouseAction="LeftClick" />
+                </Image.InputBindings>
+            </Image>
+        </DataTemplate>
+
+        <DataTemplate x:Key="DeleteCell" DataType="Content">
+            <Image Grid.Column="3"
+                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/delete.png"
+                   ToolTip="Delete"
+                   Height="20"
+                   Margin="10"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Cursor="Hand">
+                <Image.InputBindings>
+                    <MouseBinding Command="{Binding DeleteCategoryCommand}"
+                                  MouseAction="LeftClick" />
+                </Image.InputBindings>
+            </Image>
+        </DataTemplate>
     </UserControl.Resources>
     <Border CornerRadius="5"
             Background="{StaticResource BrushBackground2}">
@@ -230,7 +262,7 @@
 
                         <ListView Grid.Row="9" Grid.Column="0"
                                   Grid.ColumnSpan="2"
-                                  ItemsSource="{Binding Transaction.TransactionCategories}"
+                                  ItemsSource="{Binding TransactionCategories}"
                                   BorderThickness="0">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
@@ -249,12 +281,41 @@
                                             </Grid.ColumnDefinitions>
 
                                             <TextBlock Grid.Column="0"
-                                                       Text="{Binding Category.Name}" />
+                                                       Text="{Binding Category.Name}"
+                                                       Style="{StaticResource CaptionPrimaryDark}" />
 
                                             <TextBlock Grid.Column="1"
                                                        Text="{Binding Amount, StringFormat={}{0:C}}"
-                                                       HorizontalAlignment="Right" />
+                                                       HorizontalAlignment="Right"
+                                                       Style="{StaticResource CaptionPrimaryDark}" />
 
+                                            <!--<Image Grid.Column="2"
+                                                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/edit.png"
+                                                   ToolTip="Edit"
+                                                   Height="20"
+                                                   Margin="10"
+                                                   VerticalAlignment="Top"
+                                                   HorizontalAlignment="Right"
+                                                   Cursor="Hand">
+                                                <Image.InputBindings>
+                                                    <MouseBinding Command="{Binding EditCategoryCommand}"
+                                                                  MouseAction="LeftClick" />
+                                                </Image.InputBindings>
+                                            </Image>-->
+
+                                            <!--<Image Grid.Column="3"
+                                                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/delete.png"
+                                                   ToolTip="Delete"
+                                                   Height="20"
+                                                   Margin="10"
+                                                   VerticalAlignment="Top"
+                                                   HorizontalAlignment="Right"
+                                                   Cursor="Hand">
+                                                <Image.InputBindings>
+                                                    <MouseBinding Command="{Binding DeleteCategoryCommand}"
+                                                                  MouseAction="LeftClick" />
+                                                </Image.InputBindings>
+                                            </Image>-->
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
