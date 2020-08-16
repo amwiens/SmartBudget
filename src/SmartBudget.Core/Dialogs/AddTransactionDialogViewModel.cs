@@ -118,8 +118,8 @@ namespace SmartBudget.Core.Dialogs
         }
 
         public DelegateCommand AddCategoryCommand { get; }
-        public DelegateCommand EditCategoryCommand { get; }
-        public DelegateCommand DeleteCategoryCommand { get; }
+        public DelegateCommand<int?> EditCategoryCommand { get; }
+        public DelegateCommand<int?> DeleteCategoryCommand { get; }
         public DelegateCommand SaveDialogCommand { get; }
         public DelegateCommand CancelDialogCommand { get; }
 
@@ -155,8 +155,8 @@ namespace SmartBudget.Core.Dialogs
             };
 
             AddCategoryCommand = new DelegateCommand(AddCategory);
-            EditCategoryCommand = new DelegateCommand(EditCategory);
-            DeleteCategoryCommand = new DelegateCommand(DeleteCategory);
+            EditCategoryCommand = new DelegateCommand<int?>(EditCategory);
+            DeleteCategoryCommand = new DelegateCommand<int?>(DeleteCategory);
             SaveDialogCommand = new DelegateCommand(async () => await SaveDialog());
             CancelDialogCommand = new DelegateCommand(CancelDialog);
         }
@@ -185,19 +185,47 @@ namespace SmartBudget.Core.Dialogs
             });
         }
 
-        private void EditCategory()
+        private void EditCategory(int? categoryId)
         {
-            _dialogService.ShowAddEditCategoryToTransactionDialog(0, 0, result =>
+            if (categoryId is null)
+                return;
+
+            var originalCategoryId = (int)categoryId;
+            var amount = TransactionCategories.Where(x => x.Category.Id == originalCategoryId).FirstOrDefault().Amount;
+
+            _dialogService.ShowAddEditCategoryToTransactionDialog(originalCategoryId, amount, async result =>
             {
                 if (result.Result == ButtonResult.OK)
                 {
+                    var categoryId = result.Parameters.GetValue<int>("categoryid");
+                    var amount = result.Parameters.GetValue<decimal>("amount");
+                    TransactionCategories.Remove(TransactionCategories.Where(x => x.Category.Id == originalCategoryId).FirstOrDefault());
+
+                    TransactionCategories.Add(new TransactionCategory
+                    {
+                        Transaction = Transaction,
+                        Category = await _categoryService.Get(categoryId),
+                        Amount = amount
+                    });
+
+                    CheckCategoryBalance();
                 }
             });
         }
 
-        private void DeleteCategory()
+        private void DeleteCategory(int? categoryId)
         {
-            throw new NotImplementedException();
+            if (categoryId is null)
+                return;
+
+            TransactionCategories.Remove(TransactionCategories.Where(x => x.Category.Id == categoryId).FirstOrDefault());
+            //foreach (var transactionCategory in TransactionCategories)
+            //{
+            //    if (transactionCategory.Category.Id == categoryId)
+            //    {
+            //        TransactionCategories.Remove(transactionCategory);
+            //    }
+            //}
         }
 
         private async Task SaveDialog()

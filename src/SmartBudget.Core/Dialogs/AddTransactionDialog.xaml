@@ -262,6 +262,7 @@
 
                         <ListView Grid.Row="9" Grid.Column="0"
                                   Grid.ColumnSpan="2"
+                                  x:Name="myListView"
                                   ItemsSource="{Binding TransactionCategories}"
                                   BorderThickness="0">
                             <ListView.ItemContainerStyle>
@@ -282,13 +283,32 @@
 
                                             <TextBlock Grid.Column="0"
                                                        Text="{Binding Category.Name}"
+                                                       VerticalAlignment="Center"
                                                        Style="{StaticResource CaptionPrimaryDark}" />
 
                                             <TextBlock Grid.Column="1"
                                                        Text="{Binding Amount, StringFormat={}{0:C}}"
+                                                       VerticalAlignment="Center"
                                                        HorizontalAlignment="Right"
                                                        Style="{StaticResource CaptionPrimaryDark}" />
 
+                                            <Button Grid.Column="2"
+                                                    Command="{Binding DataContext.EditCategoryCommand, ElementName=myListView}"
+                                                    CommandParameter="{Binding Category.Id}"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Padding="5 0">
+                                                <Button.Content>
+                                                    <Image Grid.Column="2"
+                                                           Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/edit.png"
+                                                           ToolTip="Edit"
+                                                           Height="12"
+                                                           Width="12"
+                                                           VerticalAlignment="Top"
+                                                           HorizontalAlignment="Right"
+                                                           Cursor="Hand" />
+                                                </Button.Content>
+                                            </Button>
                                             <!--<Image Grid.Column="2"
                                                    Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/edit.png"
                                                    ToolTip="Edit"
@@ -303,6 +323,23 @@
                                                 </Image.InputBindings>
                                             </Image>-->
 
+                                            <Button Grid.Column="3"
+                                                    Command="{Binding DataContext.DeleteCategoryCommand, ElementName=myListView}"
+                                                    CommandParameter="{Binding Category.Id}"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Padding="5 0">
+                                                <Button.Content>
+                                                    <Image Grid.Column="2"
+                                                           Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/delete.png"
+                                                           ToolTip="Delete"
+                                                           Width="12"
+                                                           Height="12"
+                                                           VerticalAlignment="Top"
+                                                           HorizontalAlignment="Right"
+                                                           Cursor="Hand" />
+                                                </Button.Content>
+                                            </Button>
                                             <!--<Image Grid.Column="3"
                                                    Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/delete.png"
                                                    ToolTip="Delete"

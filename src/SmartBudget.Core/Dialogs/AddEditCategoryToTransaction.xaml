@@ -80,7 +80,8 @@
                                   Margin="5"
                                   ItemsSource="{Binding Path=Categories}"
                                   DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Category, Mode=TwoWay}"
+                                  SelectedValuePath="Id"
+                                  SelectedValue="{Binding Category.Id, Mode=TwoWay}"
                                   Width="200" />
 
                         <TextBlock Grid.Row="1" Grid.Column="0"
