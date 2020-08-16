@@ -219,13 +219,6 @@ namespace SmartBudget.Core.Dialogs
                 return;
 
             TransactionCategories.Remove(TransactionCategories.Where(x => x.Category.Id == categoryId).FirstOrDefault());
-            //foreach (var transactionCategory in TransactionCategories)
-            //{
-            //    if (transactionCategory.Category.Id == categoryId)
-            //    {
-            //        TransactionCategories.Remove(transactionCategory);
-            //    }
-            //}
         }
 
         private async Task SaveDialog()

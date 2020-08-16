@@ -309,19 +309,6 @@
                                                            Cursor="Hand" />
                                                 </Button.Content>
                                             </Button>
-                                            <!--<Image Grid.Column="2"
-                                                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/edit.png"
-                                                   ToolTip="Edit"
-                                                   Height="20"
-                                                   Margin="10"
-                                                   VerticalAlignment="Top"
-                                                   HorizontalAlignment="Right"
-                                                   Cursor="Hand">
-                                                <Image.InputBindings>
-                                                    <MouseBinding Command="{Binding EditCategoryCommand}"
-                                                                  MouseAction="LeftClick" />
-                                                </Image.InputBindings>
-                                            </Image>-->
 
                                             <Button Grid.Column="3"
                                                     Command="{Binding DataContext.DeleteCategoryCommand, ElementName=myListView}"
@@ -340,19 +327,6 @@
                                                            Cursor="Hand" />
                                                 </Button.Content>
                                             </Button>
-                                            <!--<Image Grid.Column="3"
-                                                   Source="pack://application:,,,/SmartBudget.Main;component/Resources/Icons/delete.png"
-                                                   ToolTip="Delete"
-                                                   Height="20"
-                                                   Margin="10"
-                                                   VerticalAlignment="Top"
-                                                   HorizontalAlignment="Right"
-                                                   Cursor="Hand">
-                                                <Image.InputBindings>
-                                                    <MouseBinding Command="{Binding DeleteCategoryCommand}"
-                                                                  MouseAction="LeftClick" />
-                                                </Image.InputBindings>
-                                            </Image>-->
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
