@@ -77,6 +77,7 @@ namespace SmartBudget.Main.ViewModels
             _regionManager.Regions.Remove(RegionNames.DashboardFavoriteAccounts);
             _regionManager.Regions.Remove(RegionNames.DashboardStatistics);
             _regionManager.Regions.Remove(RegionNames.DashboardTransactions);
+            _regionManager.Regions.Remove(RegionNames.StatisticsMonthlyIncomeExpense);
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
