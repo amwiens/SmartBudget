@@ -52,12 +52,6 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!--<TextBlock Grid.Row="0"
-                           Padding="10"
-                           Text="{Binding Payee.Name}"
-                           HorizontalAlignment="Center"
-                           Style="{StaticResource H3PrimaryDark}" />-->
-
                 <Border Grid.Row="1"
                         BorderBrush="{StaticResource BrushOutline}"
                         BorderThickness="0 1">
@@ -81,7 +75,7 @@
                                   ItemsSource="{Binding Path=Categories}"
                                   DisplayMemberPath="Name"
                                   SelectedValuePath="Id"
-                                  SelectedValue="{Binding Category.Id, Mode=TwoWay}"
+                                  SelectedValue="{Binding CategoryId, Mode=TwoWay}"
                                   Width="200" />
 
                         <TextBlock Grid.Row="1" Grid.Column="0"

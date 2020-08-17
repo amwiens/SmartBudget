@@ -15,12 +15,12 @@ namespace SmartBudget.Core.Dialogs
     {
         private readonly ICategoryService _categoryService;
 
-        private Category _category;
+        private int _categoryId;
 
-        public Category Category
+        public int CategoryId
         {
-            get { return _category; }
-            set { SetProperty(ref _category, value); }
+            get { return _categoryId; }
+            set { SetProperty(ref _categoryId, value); }
         }
 
         private decimal _amount;
@@ -50,7 +50,6 @@ namespace SmartBudget.Core.Dialogs
         {
             _categoryService = categoryService;
 
-            Category = new Category();
             Categories = new ObservableCollection<Category>();
 
             SaveDialogCommand = new DelegateCommand(SaveDialog);
@@ -63,7 +62,7 @@ namespace SmartBudget.Core.Dialogs
 
             var p = new DialogParameters
             {
-                { "categoryid", Category.Id },
+                { "categoryid", CategoryId },
                 { "amount", Amount }
             };
 
@@ -91,7 +90,7 @@ namespace SmartBudget.Core.Dialogs
             var categoryId = parameters.GetValue<int>("categoryid");
             var amount = parameters.GetValue<decimal>("amount");
 
-            await GetCategory(categoryId);
+            CategoryId = categoryId;
             await GetCategories();
             Amount = amount;
         }
@@ -104,11 +103,6 @@ namespace SmartBudget.Core.Dialogs
             {
                 Categories.Add(category);
             }
-        }
-
-        public async Task GetCategory(int categoryId)
-        {
-            Category = await _categoryService.Get(categoryId);
         }
     }
 }
