@@ -75,14 +75,17 @@ namespace SmartBudget.Accounts.ViewModels
                 {
                     case "Account":
                         _regionManager.RequestNavigate(RegionNames.AccountsContent, "Account", navigationContext.Parameters);
+                        _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                         break;
 
                     case "AddAccount":
                         _regionManager.RequestNavigate(RegionNames.AccountsContent, "AddAccount", navigationContext.Parameters);
+                        _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                         break;
 
                     case "EditAccount":
                         _regionManager.RequestNavigate(RegionNames.AccountsContent, "EditAccount", navigationContext.Parameters);
+                        _eventAggregator.GetEvent<NavigationEvent>().Publish("Accounts");
                         break;
 
                     case "AllAccounts":

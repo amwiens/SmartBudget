@@ -35,6 +35,7 @@ namespace SmartBudget.Main
             containerRegistry.RegisterForNavigation<BlankAccounts>();
             containerRegistry.RegisterForNavigation<BlankStatistics>();
             containerRegistry.RegisterForNavigation<FavoriteAccounts>();
+            containerRegistry.RegisterForNavigation<StatisticsView>();
 
             _regionManager.RequestNavigate(RegionNames.Content, "Dashboard");
             _eventAggregator.GetEvent<NavigationEvent>().Publish("Dashboard");
