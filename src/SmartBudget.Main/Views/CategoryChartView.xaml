@@ -6,7 +6,29 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf">
     <Grid Margin="0 0 5 0"
           Background="{StaticResource BrushPrimary2}">
-        <lvc:PieChart LegendLocation="Bottom" Series="{Binding MonthlyCategoryInformation}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0"
+                       Text="Categorized Expenses"
+                       Padding="10"
+                       Style="{StaticResource H5SecondaryDark2}" />
+
+            <ComboBox Grid.Column="1"
+                      ItemsSource="{Binding Dates}" />
+        </Grid>
+
+        <lvc:PieChart Grid.Row="1"
+                      LegendLocation="Bottom"
+                      Series="{Binding MonthlyCategoryInformation}">
         </lvc:PieChart>
     </Grid>
 </UserControl>

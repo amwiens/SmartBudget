@@ -26,10 +26,14 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical"
+            <Grid Grid.Column="0"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"
+                            Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
                                Text="{Binding CardsBalance, StringFormat={}{0:C}}"
@@ -37,8 +41,8 @@
                     <TextBlock Style="{StaticResource ButtonLabelSecondaryDark2}"
                                Text="Cards balance" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding CardsBalanceCollection}"
-                                    Width="400">
+                <lvc:CartesianChart Grid.Column="1"
+                                    Series="{Binding CardsBalanceCollection}">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                   ShowLabels="False">
@@ -56,12 +60,16 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
-            </StackPanel>
+            </Grid>
 
-            <StackPanel Grid.Column="2"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical"
+            <Grid Grid.Column="2"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"
+                            Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
                                Text="{Binding DepositBalance, StringFormat={}{0:C}}"
@@ -70,8 +78,8 @@
                                Text="Deposit"
                                HorizontalAlignment="Center" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding DepositBalanceCollection}"
-                                    Width="400">
+                <lvc:CartesianChart Grid.Column="1"
+                                    Series="{Binding DepositBalanceCollection}">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                       ShowLabels="False">
@@ -89,12 +97,16 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
-            </StackPanel>
+            </Grid>
 
-            <StackPanel Grid.Column="4"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <StackPanel Orientation="Vertical"
+            <Grid Grid.Column="4"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"
+                            Orientation="Vertical"
                             Margin="10">
                     <TextBlock Style="{StaticResource H4PrimaryDark}"
                                Text="{Binding CreditBalance, StringFormat={}{0:C}}"
@@ -103,8 +115,8 @@
                                Text="Pending credit"
                                HorizontalAlignment="Center" />
                 </StackPanel>
-                <lvc:CartesianChart Series="{Binding CreditBalanceCollection}"
-                                    Width="400">
+                <lvc:CartesianChart Grid.Column="1"
+                                    Series="{Binding CreditBalanceCollection}">
                     <lvc:CartesianChart.AxisY>
                         <lvc:Axis MinValue="0"
                                   ShowLabels="False">
@@ -122,7 +134,7 @@
                         </lvc:Axis>
                     </lvc:CartesianChart.AxisX>
                 </lvc:CartesianChart>
-            </StackPanel>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1">

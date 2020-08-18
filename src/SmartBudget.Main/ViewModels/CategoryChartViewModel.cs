@@ -41,8 +41,13 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _transactionCategories, value); }
         }
 
-        public string[] Labels { get; set; }
-        public Func<decimal, string> Formatter { get; set; }
+        private ObservableCollection<string> _dates = new ObservableCollection<string>();
+
+        public ObservableCollection<string> Dates
+        {
+            get { return _dates; }
+            set { SetProperty(ref _dates, value); }
+        }
 
         public CategoryChartViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
@@ -65,7 +70,10 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetCategories().Await(CategoriesLoaded, CategoriesLoadedError);
-            GetChartData(DateTime.Now.AddMonths(-1));
+
+            AddDatesToDropdown();
+
+            GetChartData(DateTime.Now);
         }
 
         private void CategoriesLoaded()
@@ -104,6 +112,16 @@ namespace SmartBudget.Main.ViewModels
                     Values = new ChartValues<decimal> { data.Amount }
                 };
                 MonthlyCategoryInformation.Add(pieSeries);
+            }
+        }
+
+        private void AddDatesToDropdown()
+        {
+            foreach (var transactionCategory in TransactionCategories.Where(x => x.Transaction.TransactionType == TransactionType.Expense).OrderByDescending(x => x.Transaction.Date))
+            {
+                var dateString = $"{transactionCategory.Transaction.Date:MMMM} {transactionCategory.Transaction.Date.Year}";
+                if (!Dates.Contains(dateString))
+                    Dates.Add(dateString);
             }
         }
     }
