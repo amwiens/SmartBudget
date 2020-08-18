@@ -23,7 +23,8 @@
                        Style="{StaticResource H5SecondaryDark2}" />
 
             <ComboBox Grid.Column="1"
-                      ItemsSource="{Binding Dates}" />
+                      ItemsSource="{Binding Dates}"
+                      SelectedItem="{Binding SelectedDate}" />
         </Grid>
 
         <lvc:PieChart Grid.Row="1"

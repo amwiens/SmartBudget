@@ -15,7 +15,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 
 namespace SmartBudget.Main.ViewModels
 {
@@ -49,6 +48,18 @@ namespace SmartBudget.Main.ViewModels
             set { SetProperty(ref _dates, value); }
         }
 
+        private string _selectedDate;
+
+        public string SelectedDate
+        {
+            get { return _selectedDate; }
+            set
+            {
+                SetProperty(ref _selectedDate, value);
+                UpdateChart(value);
+            }
+        }
+
         public CategoryChartViewModel(IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITransactionCategoryService transactionCategoryService)
@@ -72,8 +83,7 @@ namespace SmartBudget.Main.ViewModels
             GetCategories().Await(CategoriesLoaded, CategoriesLoadedError);
 
             AddDatesToDropdown();
-
-            GetChartData(DateTime.Now);
+            SelectedDate = Dates.FirstOrDefault();
         }
 
         private void CategoriesLoaded()
@@ -93,6 +103,8 @@ namespace SmartBudget.Main.ViewModels
 
         private void GetChartData(DateTime date)
         {
+            MonthlyCategoryInformation.Clear();
+
             List<ChartData> chartData = TransactionCategories
                 .Where(x => x.Transaction.TransactionType == TransactionType.Expense)
                 .Where(x => x.Transaction.Date.Month == date.Month)
@@ -122,6 +134,62 @@ namespace SmartBudget.Main.ViewModels
                 var dateString = $"{transactionCategory.Transaction.Date:MMMM} {transactionCategory.Transaction.Date.Year}";
                 if (!Dates.Contains(dateString))
                     Dates.Add(dateString);
+            }
+        }
+
+        private void UpdateChart(string value)
+        {
+            string[] splitString = value.Split(" ");
+
+            switch (splitString[0])
+            {
+                case "January":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 1, 1));
+                    break;
+
+                case "February":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 2, 1));
+                    break;
+
+                case "March":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 3, 1));
+                    break;
+
+                case "April":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 4, 1));
+                    break;
+
+                case "May":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 5, 1));
+                    break;
+
+                case "June":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 6, 1));
+                    break;
+
+                case "July":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 7, 1));
+                    break;
+
+                case "August":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 8, 1));
+                    break;
+
+                case "September":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 9, 1));
+                    break;
+
+                case "October":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 10, 1));
+                    break;
+
+                case "November":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 11, 1));
+                    break;
+
+                case "December":
+                    GetChartData(new DateTime(int.Parse(splitString[1]), 12, 1));
+                    break;
             }
         }
     }
