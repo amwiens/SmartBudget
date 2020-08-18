@@ -10,8 +10,8 @@
 
         // Dashboard view
         public static string DashboardStatistics = "DashboardStatistics";
-
         public static string StatisticsMonthlyIncomeExpense = "StatisticsMonthlyIncomeExpense";
+        public static string StatisticsTransactionCategories = "StatisticsTransactionCategories";
         public static string DashboardTransactions = "DashboardTransactions";
         public static string DashboardFavoriteAccounts = "DashboardFavoriteAccounts";
 
