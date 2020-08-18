@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:core="clr-namespace:SmartBudget.Core;assembly=SmartBudget.Core">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,7 +14,7 @@
                         Margin="0 0 5 0"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.StatisticsMonthlyIncomeExpense}" />
 
-        <ContentControl Grid.Column="0"
+        <ContentControl Grid.Column="1"
                         Margin="5 0 0 0"
                         prism:RegionManager.RegionName="{x:Static core:RegionNames.StatisticsTransactionCategories}" />
     </Grid>

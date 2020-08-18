@@ -70,12 +70,12 @@ namespace SmartBudget.Main.ViewModels
                 Title = "Income",
                 Values = new ChartValues<decimal>
                 {
-                    GetMonthlyIncome(DateTime.Now.AddMonths(-5).Month),
-                    GetMonthlyIncome(DateTime.Now.AddMonths(-4).Month),
-                    GetMonthlyIncome(DateTime.Now.AddMonths(-3).Month),
-                    GetMonthlyIncome(DateTime.Now.AddMonths(-2).Month),
-                    GetMonthlyIncome(DateTime.Now.AddMonths(-1).Month),
-                    GetMonthlyIncome(DateTime.Now.Month),
+                    GetMonthlyIncome(DateTime.Now.AddMonths(-5)),
+                    GetMonthlyIncome(DateTime.Now.AddMonths(-4)),
+                    GetMonthlyIncome(DateTime.Now.AddMonths(-3)),
+                    GetMonthlyIncome(DateTime.Now.AddMonths(-2)),
+                    GetMonthlyIncome(DateTime.Now.AddMonths(-1)),
+                    GetMonthlyIncome(DateTime.Now),
                 },
                 Fill = new SolidColorBrush(Color.FromRgb(223, 245, 210))
             });
@@ -85,12 +85,12 @@ namespace SmartBudget.Main.ViewModels
                 Title = "Expenses",
                 Values = new ChartValues<decimal>
                 {
-                    GetMonthlyExpenses(DateTime.Now.AddMonths(-5).Month),
-                    GetMonthlyExpenses(DateTime.Now.AddMonths(-4).Month),
-                    GetMonthlyExpenses(DateTime.Now.AddMonths(-3).Month),
-                    GetMonthlyExpenses(DateTime.Now.AddMonths(-2).Month),
-                    GetMonthlyExpenses(DateTime.Now.AddMonths(-1).Month),
-                    GetMonthlyExpenses(DateTime.Now.Month),
+                    GetMonthlyExpenses(DateTime.Now.AddMonths(-5)),
+                    GetMonthlyExpenses(DateTime.Now.AddMonths(-4)),
+                    GetMonthlyExpenses(DateTime.Now.AddMonths(-3)),
+                    GetMonthlyExpenses(DateTime.Now.AddMonths(-2)),
+                    GetMonthlyExpenses(DateTime.Now.AddMonths(-1)),
+                    GetMonthlyExpenses(DateTime.Now),
                 },
                 Fill = new SolidColorBrush(Color.FromRgb(255, 239, 215))
             });
@@ -122,19 +122,21 @@ namespace SmartBudget.Main.ViewModels
             Transactions = new ObservableCollection<Transaction>(transactions);
         }
 
-        private decimal GetMonthlyIncome(int month)
+        private decimal GetMonthlyIncome(DateTime date)
         {
             var incomeTransactions = Transactions
                 .Where(x => x.TransactionType == TransactionType.Income)
-                .Where(x => x.Date.Month == month);
+                .Where(x => x.Date.Month == date.Month)
+                .Where(x => x.Date.Year == date.Year);
             return incomeTransactions.Sum(x => x.Amount);
         }
 
-        private decimal GetMonthlyExpenses(int month)
+        private decimal GetMonthlyExpenses(DateTime date)
         {
             var incomeTransactions = Transactions
                 .Where(x => x.TransactionType == TransactionType.Expense)
-                .Where(x => x.Date.Month == month);
+                .Where(x => x.Date.Month == date.Month)
+                .Where(x => x.Date.Year == date.Year);
             return incomeTransactions.Sum(x => x.Amount);
         }
     }

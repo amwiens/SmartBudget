@@ -26,6 +26,7 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             _regionManager.RequestNavigate(RegionNames.StatisticsMonthlyIncomeExpense, "MonthlyIncomeExpenseChartView");
+            _regionManager.RequestNavigate(RegionNames.StatisticsTransactionCategories, "CategoryChartView");
         }
     }
 }

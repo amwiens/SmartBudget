@@ -75,6 +75,8 @@ namespace SmartBudget.EntityFramework.Services
             using (SmartBudgetDbContext context = _contextFactory.CreateDbContext())
             {
                 IEnumerable<TransactionCategory> entities = await context.TransactionCategories
+                    .Include(x => x.Category)
+                    .Include(x => x.Transaction)
                     .ToListAsync();
                 return entities;
             }
