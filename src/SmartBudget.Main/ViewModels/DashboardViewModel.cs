@@ -87,7 +87,10 @@ namespace SmartBudget.Main.ViewModels
 
             // Load statistics view
             if (Transactions.Count > 0)
+            {
                 _regionManager.RequestNavigate(RegionNames.DashboardStatistics, "StatisticsView");
+                _eventAggregator.GetEvent<RefreshChartEvent>().Publish("Refresh");
+            }
             else
                 _regionManager.RequestNavigate(RegionNames.DashboardStatistics, "BlankStatistics");
 

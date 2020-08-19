@@ -49,6 +49,14 @@ namespace SmartBudget.Main.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _transactionService = transactionService;
+
+            eventAggregator.GetEvent<RefreshChartEvent>().Subscribe(OnRefreshChartReceived);
+        }
+
+        private void OnRefreshChartReceived(string message)
+        {
+            if (message == "Refresh")
+                GetTransactions().Await(TransactionsLoaded, TransactionsLoadedError);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -63,7 +71,27 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetTransactions().Await(TransactionsLoaded, TransactionsLoadedError);
+        }
 
+        private void TransactionsLoaded()
+        {
+        }
+
+        private void TransactionsLoadedError(Exception ex)
+        {
+            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
+        }
+
+        private async Task GetTransactions()
+        {
+            var transactions = await _transactionService.GetAll();
+            Transactions = new ObservableCollection<Transaction>(transactions);
+
+            GetChartData();
+        }
+
+        private void GetChartData()
+        {
             MonthlyTransactionInformation = new SeriesCollection();
             MonthlyTransactionInformation.Add(new ColumnSeries
             {
@@ -105,21 +133,6 @@ namespace SmartBudget.Main.ViewModels
                 DateTime.Now.ToString("MMM")
             };
             Formatter = value => value.ToString("C");
-        }
-
-        private void TransactionsLoaded()
-        {
-        }
-
-        private void TransactionsLoadedError(Exception ex)
-        {
-            _eventAggregator.GetEvent<ExceptionEvent>().Publish(ex);
-        }
-
-        private async Task GetTransactions()
-        {
-            var transactions = await _transactionService.GetAll();
-            Transactions = new ObservableCollection<Transaction>(transactions);
         }
 
         private decimal GetMonthlyIncome(DateTime date)

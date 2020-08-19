@@ -67,6 +67,14 @@ namespace SmartBudget.Main.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _transactionCategoryService = transactionCategoryService;
+
+            eventAggregator.GetEvent<RefreshChartEvent>().Subscribe(OnRefreshChartReceived);
+        }
+
+        private void OnRefreshChartReceived(string message)
+        {
+            if (message == "Refresh")
+                GetCategories().Await(CategoriesLoaded, CategoriesLoadedError);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
@@ -81,13 +89,12 @@ namespace SmartBudget.Main.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             GetCategories().Await(CategoriesLoaded, CategoriesLoadedError);
-
-            AddDatesToDropdown();
-            SelectedDate = Dates.FirstOrDefault();
         }
 
         private void CategoriesLoaded()
         {
+            AddDatesToDropdown();
+            SelectedDate = Dates.FirstOrDefault();
         }
 
         private void CategoriesLoadedError(Exception ex)
