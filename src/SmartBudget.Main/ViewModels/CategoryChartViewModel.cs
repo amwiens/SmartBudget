@@ -136,6 +136,7 @@ namespace SmartBudget.Main.ViewModels
 
         private void AddDatesToDropdown()
         {
+            Dates.Clear();
             foreach (var transactionCategory in TransactionCategories.Where(x => x.Transaction.TransactionType == TransactionType.Expense).OrderByDescending(x => x.Transaction.Date))
             {
                 var dateString = $"{transactionCategory.Transaction.Date:MMMM} {transactionCategory.Transaction.Date.Year}";
@@ -146,6 +147,9 @@ namespace SmartBudget.Main.ViewModels
 
         private void UpdateChart(string value)
         {
+            if (value is null)
+                return;
+
             string[] splitString = value.Split(" ");
 
             switch (splitString[0])
